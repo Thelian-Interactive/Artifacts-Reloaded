@@ -1,5 +1,13 @@
 package artifreload.common.util.damage;
 
-public class SourceSword {
+import net.minecraft.util.DamageSource;
 
+
+public class SourceSword extends DamageSource{
+
+public static DamageSource instance;
+
+public SourceSword(String name) {
+	super(name);
+}
 }

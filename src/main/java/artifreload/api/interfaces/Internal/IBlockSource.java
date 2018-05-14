@@ -1,37 +1,26 @@
 package artifreload.api.interfaces.Internal;
 
 
+import net.minecraft.dispenser.ILocatableSource;
+import net.minecraft.tileentity.TileEntity;
 
 
+public interface IBlockSource extends ILocatableSource {
 
+	double getX();
 
+	double getY();
 
+	double getZ();
 
+	int getXInt();
 
+	int getYInt();
 
+	int getZInt();
 
+	int getBlockMetadata();
 
-
-
-
-
-
-
-public interface IBlockSource {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	TileEntity getBlockTileEntity();
 }
+

@@ -7,7 +7,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 
-import net.minecraftforge.common.ForgeHooks.LootTableContext;
 
 /**
 	* This class is exposed to aid mod developers adding artifacts to their loot chests in a more detailed manner.<br/>
@@ -30,9 +29,9 @@ public WeightedRandomArtifact(ItemStack par1ItemStack, int minNumberPerStack, in
 @Override
 protected ItemStack[] generateChestContent(Random random, IInventory newInventory)
 {
-	ItemStack[] a = ForgeHooks.generateStacks(random, theItemId, theMinimumChanceToGenerateItem, theMaximumChanceToGenerateItem);
+	ItemStack[] a = ChestGenHooks.loottable(random, theItemId, theMinimumChanceToGenerateItem, theMaximumChanceToGenerateItem);
 	for(int i=a.length-1; i>=0; --i) {
-		a[i] = ArtifactsAPI.artifacts.applyRandomEffects(a[i]);
+		a[i] = ArtifactAPI.artifacts.applyRandomEffects(a[i]);
 	}
 	return a;
 }

@@ -17,44 +17,51 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import artifreload.api.ArtifactAPI;
+import artifreload.api.interfaces.IArtifactComp;
+import artifreload.common.DragonArtifacts;
+import artifreload.common.components.effects.CBreathing;
 import com.google.common.collect.Multimap;
 
 
-public class ArtifactArmour extends ItemA {
+public class ArtifactArmour extends ItemArmor {
 
-public static ArtifactArmor hcloth;
-public static ArtifactArmor hchain;
-public static ArtifactArmor hiron;
-public static ArtifactArmor hgold;
-public static ArtifactArmor hdiamond;
-public static ArtifactArmor ccloth;
-public static ArtifactArmor cchain;
-public static ArtifactArmor ciron;
-public static ArtifactArmor cgold;
-public static ArtifactArmor cdiamond;
-public static ArtifactArmor lcloth;
-public static ArtifactArmor lchain;
-public static ArtifactArmor liron;
-public static ArtifactArmor lgold;
-public static ArtifactArmor ldiamond;
-public static ArtifactArmor bcloth;
-public static ArtifactArmor bchain;
-public static ArtifactArmor biron;
-public static ArtifactArmor bgold;
-public static ArtifactArmor bdiamond;
+public static ArtifactArmour hleather;
+public static ArtifactArmour hchain;
+public static ArtifactArmour hiron;
+public static ArtifactArmour hgold;
+public static ArtifactArmour hdiamond;
+public static ArtifactArmour cleather;
+public static ArtifactArmour cchain;
+public static ArtifactArmour ciron;
+public static ArtifactArmour cgold;
+public static ArtifactArmour cdiamond;
+public static ArtifactArmour lleather;
+public static ArtifactArmour lchain;
+public static ArtifactArmour liron;
+public static ArtifactArmour lgold;
+public static ArtifactArmour ldiamond;
+public static ArtifactArmour bleather;
+public static ArtifactArmour bchain;
+public static ArtifactArmour biron;
+public static ArtifactArmour bgold;
+public static ArtifactArmour bdiamond;
 
 public static boolean doEnchName = true;
 public static boolean doMatName = true;
 public static boolean doAdjName = true;
 private int iconn;
 
-public static Item[] clothArray;// = {hcloth, ccloth, lcloth, bcloth};
+public static Item[] leatherArray;// = {hleather, cleather, lleather, bleather};
 public static Item[] chainArray;// = {hchain, cchain, lchain, bchain};
 public static Item[] ironArray;// = {hiron, ciron, liron, biron};
 public static Item[] goldArray;// = {hgold, cgold, lgold, bgold};
 public static Item[] diamondArray;// = {hdiamond, cdiamond, ldiamond, bdiamond};
 
-public ItemArtifactArmor(ItemArmor.ArmorMaterial armorMaterial, int renderID, int iconNum, int damageIndex) {
+public ArtifactArmour(ItemArmor.ArmorMaterial armorMaterial, int renderID, int iconNum, int damageIndex) {
 	super(armorMaterial, renderID, damageIndex);
 	iconn = iconNum;
 	this.setCreativeTab(DragonArtifacts.tabArtifacts);
@@ -66,20 +73,20 @@ public ItemArtifactArmor(ItemArmor.ArmorMaterial armorMaterial, int renderID, in
 	* returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
 	*/
 @SideOnly(Side.CLIENT)
-@Override
+
 public void getSubItems(Item item, CreativeTabs tabs, List list)
 {
 	if(this.iconn == 4) {
 		list.add(new ItemStack(item));
 		for (int i = 0; i < 8; ++i)
 		{
-			list.add(ArtifactsAPI.artifacts.applyRandomEffects(new ItemStack(item)));
+			list.add(ArtifactAPI.artifacts.applyRandomEffects(new ItemStack(item)));
 		}
 	}
 }
 
 public static void setupArrays() {
-	clothArray = new Item[]{hcloth, ccloth, lcloth, bcloth};
+	leatherArray = new Item[]{hleather, cleather, lleather, bleather};
 	chainArray = new Item[]{hchain, cchain, lchain, bchain};
 	ironArray = new Item[]{hiron, ciron, liron, biron};
 	goldArray = new Item[]{hgold, cgold, lgold, bgold};
@@ -92,7 +99,7 @@ public void registerIcons(IIconRegister iconReg)
 	itemIcon = iconReg.registerIcon("artifacts:artifact"+iconn);
 }
 
-@Override
+
 public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 
 	//The default texture (in case there is no given texture).
@@ -106,7 +113,7 @@ public String getArmorTexture(ItemStack stack, Entity entity, int slot, String t
 		return texture;
 	}
 	//Get the armor model texture map holding the textures mapped to the item's icon.
-	HashMap<ItemArmor.ArmorMaterial, String> modelMap = ArtifactsAPI.itemicons.armorModels.get( (type == null ? "color_" : "") + stack.stackTagCompound.getString("icon").toLowerCase());
+	HashMap<ItemArmor.ArmorMaterial, String> modelMap = ArtifactAPI.itemicons.armorModels.get( (type == null ? "color_" : "") + stack.stackTagCompound.getString("icon").toLowerCase());
 	if(modelMap == null) {
 		return texture;
 	}
@@ -123,12 +130,12 @@ public String getArmorTexture(ItemStack stack, Entity entity, int slot, String t
 	return texture;
 }
 
-@Override
+
 public boolean requiresMultipleRenderPasses() {
 	return true;
 }
 
-@Override
+
 public IIcon getIcon(ItemStack stack, int pass)
 {
 	IIcon i = itemIcon;
@@ -136,18 +143,18 @@ public IIcon getIcon(ItemStack stack, int pass)
 		if(stack.stackTagCompound == null) {
 			return itemIcon;
 		}
-		i = (IIcon) ArtifactsAPI.itemicons.icons.get(stack.stackTagCompound.getString("icon").toLowerCase());
+		i = (IIcon) ArtifactAPI.itemicons.icons.get(stack.stackTagCompound.getString("icon").toLowerCase());
 		if(i == null) {
 			i = itemIcon;
 		}
 	}
 	else {
 		if(stack.stackTagCompound == null) {
-			return (IIcon) ArtifactsAPI.itemicons.icons.get("overlay_artifact1");
+			return (IIcon) ArtifactAPI.itemicons.icons.get("overlay_artifact1");
 		}
-		i = (IIcon) ArtifactsAPI.itemicons.icons.get("overlay_"+stack.stackTagCompound.getString("icon").toLowerCase());
+		i = (IIcon) ArtifactAPI.itemicons.icons.get("overlay_"+stack.stackTagCompound.getString("icon").toLowerCase());
 		if(i == null) {
-			i = (IIcon) ArtifactsAPI.itemicons.icons.get("overlay_artifact1");
+			i = (IIcon) ArtifactAPI.itemicons.icons.get("overlay_artifact1");
 		}
 	}
 	return i;
@@ -174,19 +181,19 @@ public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
 	if(data != null) {
 		effectID = data.getInteger("onDroppedByPlayer");
 		if(effectID != 0) {
-			IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+			IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				return c.onDroppedByPlayer(item, player);
 		}
 		effectID = data.getInteger("onArmorTickUpdate");
 		if(effectID != 0) {
-			IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+			IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				return c.onDroppedByPlayer(item, player);
 		}
 		effectID = data.getInteger("onArmorTickUpdate2");
 		if(effectID != 0) {
-			IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+			IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				return c.onDroppedByPlayer(item, player);
 		}
@@ -201,33 +208,33 @@ public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
 	int effectID = 0;
 	if(data != null) {
 		if(!world.isRemote) {
-			IArtifactComponent c;
+			IArtifactComp c;
 			effectID = data.getInteger("onArmorTickUpdate");
 			if(effectID != 0) {
-				c = ArtifactsAPI.artifacts.getComponent(effectID);
+				c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onArmorTickUpdate(world, player, itemStack, true);
 			}
 			effectID = data.getInteger("onArmorTickUpdate2");
 			if(effectID != 0) {
-				c = ArtifactsAPI.artifacts.getComponent(effectID);
+				c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onArmorTickUpdate(world, player, itemStack, true);
 			}
 			effectID = data.getInteger("onTakeDamage");
 			if(effectID != 0) {
-				c = ArtifactsAPI.artifacts.getComponent(effectID);
-				if(c != null && !(c instanceof ComponentBreathing))
+				c = ArtifactAPI.artifacts.getComponent(effectID);
+				if(c != null && !(c instanceof CBreathing))
 					c.onArmorTickUpdate(world, player, itemStack, true);
 			}
 			effectID = data.getInteger("onDeath");
 			if(effectID != 0) {
-				c = ArtifactsAPI.artifacts.getComponent(effectID);
+				c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onArmorTickUpdate(world, player, itemStack, true);
 			}
 		}
-		ArrayList<String> keys = ArtifactsAPI.artifacts.getNBTKeys();
+		ArrayList<String> keys = ArtifactAPI.artifacts.getNBTKeys();
 		String kk = "";
 		int n = 0;
 		for(int k = keys.size() - 1; k >= 0; k--) {
@@ -241,11 +248,11 @@ public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
 		}
 	}
 	else if(!world.isRemote) {
-		ItemStack newStack = ArtifactsAPI.artifacts.applyRandomEffects(new ItemStack(this));
+		ItemStack newStack = ArtifactAPI.artifacts.applyRandomEffects(new ItemStack(this));
 
 		for(int i = 0; i < player.inventory.armorInventory.length; i++) {
-			if(player.inventory.armorInventory[i] == itemStack) {
-				player.inventory.armorInventory[i] = newStack;
+			if(player.inventory.armorInventory.get(i) == itemStack) {
+				player.inventory.armorInventory.set(i, newStack);
 			}
 		}
 	}
@@ -298,17 +305,17 @@ public boolean onEntityItemUpdate(EntityItem entityItem) {
 	NBTTagCompound data = stack.stackTagCompound;
 	World par2World = entityItem.worldObj;
 	int effectID = 0;
-	if(data != null && entityItem.age % 15 == 0) {
+	if(data != null && entityItem.getAge() % 15 == 0) {
 		if(!par2World.isRemote) {
 			effectID = data.getInteger("onUpdate");
 			if(effectID != 0) {
-				IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+				IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onEntityItemUpdate(entityItem,"onUpdate");
 			}
 			effectID = data.getInteger("onEntityItemUpdate");
 			if(effectID != 0) {
-				IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+				IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onEntityItemUpdate(entityItem,"onEntityItemUpdate");
 			}
@@ -316,25 +323,25 @@ public boolean onEntityItemUpdate(EntityItem entityItem) {
 			if(effectID != 0) {
 				int del = data.getInteger("droppedDelay");
 				if(del <= entityItem.age) {
-					IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+					IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onEntityItemUpdate(entityItem,"onDropped");
 				}
 			}
 			effectID = data.getInteger("onArmorTickUpdate");
 			if(effectID != 0) {
-				IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+				IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onEntityItemUpdate(entityItem,"onUpdate");
 			}
 			effectID = data.getInteger("onArmorTickUpdate2");
 			if(effectID != 0) {
-				IArtifactComponent c = ArtifactsAPI.artifacts.getComponent(effectID);
+				IArtifactComp c = ArtifactAPI.artifacts.getComponent(effectID);
 				if(c != null)
 					c.onEntityItemUpdate(entityItem,"onUpdate");
 			}
 		}
-		ArrayList<String> keys = ArtifactsAPI.artifacts.getNBTKeys();
+		ArrayList<String> keys = ArtifactAPI.artifacts.getNBTKeys();
 		String kk = "";
 		int n = 0;
 		for(int k = keys.size() - 1; k >= 0; k--) {
@@ -361,45 +368,45 @@ public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, 
 					itemStack.stackTagCompound = null;//ArtifactsAPI.artifacts.applyRandomEffects(par1ItemStack.copy()).stackTagCompound;
 					return;
 				}
-				IArtifactComponent c;
+				IArtifactComp c;
 				effectID = data.getInteger("onUpdate");
 				if(effectID != 0) {
-					c = ArtifactsAPI.artifacts.getComponent(effectID);
+					c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onUpdate(itemStack, world, player, slot, held);
 				}
 				effectID = data.getInteger("onArmorTickUpdate");
 				if(effectID != 0) {
-					c = ArtifactsAPI.artifacts.getComponent(effectID);
+					c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onArmorTickUpdate(world, player, itemStack, false);
 				}
 				effectID = data.getInteger("onArmorTickUpdate2");
 				if(effectID != 0) {
-					c = ArtifactsAPI.artifacts.getComponent(effectID);
+					c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onArmorTickUpdate(world, player, itemStack, false);
 				}
 				effectID = data.getInteger("onTakeDamage");
 				if(effectID != 0) {
-					c = ArtifactsAPI.artifacts.getComponent(effectID);
+					c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onArmorTickUpdate(world, player, itemStack, false);
 				}
 				effectID = data.getInteger("onDeath");
 				if(effectID != 0) {
-					c = ArtifactsAPI.artifacts.getComponent(effectID);
+					c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onArmorTickUpdate(world, player, itemStack, false);
 				}
 				effectID = data.getInteger("onHeld");
 				if(effectID != 0 && held) {
-					c = ArtifactsAPI.artifacts.getComponent(effectID);
+					c = ArtifactAPI.artifacts.getComponent(effectID);
 					if(c != null)
 						c.onHeld(itemStack, world, entity, slot, held);
 				}
 			}
-			ArrayList<String> keys = ArtifactsAPI.artifacts.getNBTKeys();
+			ArrayList<String> keys = ArtifactAPI.artifacts.getNBTKeys();
 			String kk = "";
 			int n = 0;
 			for(int k = keys.size() - 1; k >= 0; k--) {
@@ -413,7 +420,7 @@ public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, 
 			}
 		}
 		else if(!world.isRemote) {
-			ItemStack newStack = ArtifactsAPI.artifacts.applyRandomEffects(new ItemStack(this));
+			ItemStack newStack = ArtifactAPI.artifacts.applyRandomEffects(new ItemStack(this));
 			player.inventory.mainInventory[slot] = newStack;
 		}
 	}
@@ -437,41 +444,41 @@ public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlaye
 	NBTTagCompound data = par1ItemStack.getTagCompound();
 	int effectID = 0;
 	if(data != null) {
-		IArtifactComponent c;
+		IArtifactComp c;
 
 		effectID = data.getInteger("onArmorTickUpdate");
 		if(effectID != 0) {
-			c = ArtifactsAPI.artifacts.getComponent(effectID);
+			c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				c.addInformation(par1ItemStack, par2EntityPlayer, par3List, "when equipped.", advTooltip);
 		}
 		effectID = data.getInteger("onArmorTickUpdate2");
 		if(effectID != 0) {
-			c = ArtifactsAPI.artifacts.getComponent(effectID);
+			c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				c.addInformation(par1ItemStack, par2EntityPlayer, par3List, "when equipped.", advTooltip);
 		}
 		effectID = data.getInteger("onUpdate");
 		if(effectID != 0) {
-			c = ArtifactsAPI.artifacts.getComponent(effectID);
+			c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				c.addInformation(par1ItemStack, par2EntityPlayer, par3List, "passively.", advTooltip);
 		}
 		effectID = data.getInteger("onTakeDamage");
 		if(effectID != 0) {
-			c = ArtifactsAPI.artifacts.getComponent(effectID);
+			c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				c.addInformation(par1ItemStack, par2EntityPlayer, par3List, "after taking damage.", advTooltip);
 		}
 		effectID = data.getInteger("onDeath");
 		if(effectID != 0) {
-			c = ArtifactsAPI.artifacts.getComponent(effectID);
+			c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				c.addInformation(par1ItemStack, par2EntityPlayer, par3List, "after taking lethal damage.", advTooltip);
 		}
 		effectID = data.getInteger("onHeld");
 		if(effectID != 0) {
-			c = ArtifactsAPI.artifacts.getComponent(effectID);
+			c = ArtifactAPI.artifacts.getComponent(effectID);
 			if(c != null)
 				c.addInformation(par1ItemStack, par2EntityPlayer, par3List, "when held.", advTooltip);
 		}

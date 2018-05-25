@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 import artifreload.common.DragonArtifacts;
-import artifreload.common.block.IInvisibleBlock;
+import artifreload.common.block.baseBlock.IInvisibleBlock;
 
 
 public class IInvisBlock extends IInvisibleBlock {

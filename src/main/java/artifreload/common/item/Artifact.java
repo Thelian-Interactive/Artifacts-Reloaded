@@ -21,11 +21,13 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 
 import artifreload.api.ArtifactAPI;
+import artifreload.common.DragonArtifacts;
+import artifreload.common.item.ItemBase.BaseItem;
 import com.google.common.collect.Multimap;
 import io.netty.buffer.Unpooled;
 
 
-public class Artifact extends Item implements IBauble {
+public class Artifact extends BaseItem implements IBauble {
 
 public static Item instance;
 private float weaponDamage;
@@ -35,7 +37,7 @@ public static boolean doEnchName = true;
 public static boolean doMatName = true;
 public static boolean doAdjName = true;
 
-public ItemArtifact() {
+public Artifact() {
 	super();
 	this.setHasSubtypes(true);
 	setMaxStackSize(1);

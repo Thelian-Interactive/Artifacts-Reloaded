@@ -12,8 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class IQuicksand extends Block {
+
+public class IQuicksand extends BlockBase {
 
 public static Block instance;
 public int renderType = 0;

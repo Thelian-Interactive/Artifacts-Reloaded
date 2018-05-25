@@ -13,13 +13,13 @@ public static Item gold;
 public static Item diamond;
 private String regString;
 
-public ItemFakeSwordRenderable(Item.ToolMaterial toolMaterial, String str) {
+public FakeSword(Item.ToolMaterial toolMaterial, String str) {
 	super(toolMaterial);
 	regString = str;
 	this.setCreativeTab(null);
 }
 
-@Override
+
 public void registerIcons(IIconRegister iconReg)
 {
 	itemIcon = iconReg.registerIcon(regString);

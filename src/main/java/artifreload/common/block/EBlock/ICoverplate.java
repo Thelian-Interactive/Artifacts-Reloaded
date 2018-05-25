@@ -18,8 +18,10 @@ import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
 import static net.minecraftforge.common.util.ForgeDirection.WEST;
 
 import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.*;
 
-public class ICoverplate extends Block {
+
+public class ICoverplate extends BlockBase {
 
 public static Block instance;
 public int renderType = 0;

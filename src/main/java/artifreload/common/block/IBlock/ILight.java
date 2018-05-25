@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import artifreload.common.block.IInvisibleBlock;
+import artifreload.common.block.baseBlock.IInvisibleBlock;
 
 
 public class ILight extends IInvisibleBlock {

@@ -17,6 +17,7 @@ import artifreload.common.DragonArtifacts;
 public class StructureGenerator extends Item {
 
 public static Item structureGenItem;
+public static Item instance;
 
 public ItemStructureGenerator() {
 	super();

@@ -13,9 +13,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.*;
 
 
-public class ILaser extends Block {
+public class ILaser extends BlockBase {
 
 public static Block instance;
 public int renderID;

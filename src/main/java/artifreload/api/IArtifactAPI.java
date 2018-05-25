@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import artifreload.api.interfaces.IArtifactComp;
+
 
 public interface IArtifactAPI {
 
@@ -14,7 +16,7 @@ public interface IArtifactAPI {
 	* @param componentID the ID to get
 	* @author Draco18s
 	* */
-public IArtifactComponent getComponent(int componentID);
+public IArtifactComp getComponent(int componentID);
 
 /**
 	* Returns a randomize artifact, up to 5 effects and randomly applied enchantments.

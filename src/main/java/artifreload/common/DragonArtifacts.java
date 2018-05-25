@@ -11,18 +11,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import artifreload.common.proxy.CommonProxy.CommonProxy;
-import artifreload.common.util.ModInfo;
+import artifreload.api.ArtifactAPI;
+import artifreload.common.block.EBlock.*;
+import artifreload.common.block.IBlock.*;
+import artifreload.common.gui.*;
+import artifreload.common.util.artifact.Factory.*;
+import artifreload.common.item.*;
+import artifreload.common.item.ArtifactArmour;
+import artifreload.common.proxy.CommonProxy;
+import artifreload.common.util.artifact.ModInfo;
 import artifreload.common.world.structure.PlaceTraps;
 
 
@@ -34,7 +45,7 @@ import artifreload.common.world.structure.PlaceTraps;
 		acceptableRemoteVersions = "*"
 )
 public class DragonArtifacts{
-	@Instance Instance("Artifacts")
+	@Instance("Artifacts")
 	public static DragonArtifacts instance;
 	public static SimpleNetworkWrapper artifactNetworkWrapper;
 	public static boolean renderNamesInPedestals = false;
@@ -47,20 +58,20 @@ public class DragonArtifacts{
 	public static boolean baublesLoaded = false;
 	public static boolean baublesMustBeEquipped = true;
 
-	@SidedProxy(clientSide = "com.draco18s.artifacts.client.ClientProxy", serverSide = "com.draco18s.artifacts.CommonProxy")
+	@SidedProxy(clientSide = "artifreload.common.proxy.ClientProxy", serverSide = "artifreload.common.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static CreativeTabs tabGeneral = new CreativeTabs("tabGeneral") {
+	public static CreativeTabs ArtifactBlocksTab = new CreativeTabs("Artifact Blocks") {
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(BlockSpikes.instance);
+		public ItemStack getTabIconItem() {
+			return new ItemStack(StructureGenerator.instance);
 		}
 	};
 
-	public static CreativeTabs tabArtifacts = new CreativeTabs("tabArtifacts") {
+	public static CreativeTabs ArtifactItemTab = new CreativeTabs("Artifact Items") {
 		@Override
-		public Item getTabIconItem() {
-			return ItemArtifact.instance;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(Artifact.instance);
 		}
 	};
 
@@ -238,146 +249,146 @@ public class DragonArtifacts{
 		int wizRare = config.get("spawning","WizTowers",10).getInt(10);
 		int procRare = config.get("spawning","crossModTreasureString_ProceeduralGeneration",5).getInt(5);
 		config.save();
-		ArtifactsAPI.artifacts = new FactoryArtifact();
-		ArtifactsAPI.itemicons = new FactoryItemIcons();
-		ArtifactsAPI.traps = new FactoryTrapBehaviors();
+		ArtifactAPI.artifacts = new FactoryArtifact();
+		ArtifactAPI.itemicons = new FactoryItemIcons();
+		ArtifactAPI.traps = new FactoryTrapBehaviors();
 
-		ArtifactsAPI.artifacts.registerUpdateNBTKey("orePingDelay");
-		ArtifactsAPI.artifacts.registerUpdateNBTKey("resCooldown");
-		ArtifactsAPI.artifacts.registerUpdateNBTKey("medkitDelay");
-		ArtifactsAPI.artifacts.registerUpdateNBTKey("adrenDelay");
+		ArtifactAPI.artifacts.registerUpdateNBTKey("orePingDelay");
+		ArtifactAPI.artifacts.registerUpdateNBTKey("resCooldown");
+		ArtifactAPI.artifacts.registerUpdateNBTKey("medkitDelay");
+		ArtifactAPI.artifacts.registerUpdateNBTKey("adrenDelay");
 
-		ItemArtifact.instance = new ItemArtifact().setUnlocalizedName(artifactID);
-		ItemArtifactArmor.hcloth = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CLOTH, 0, 2, 0).setUnlocalizedName(armorIDh1);
-		ItemArtifactArmor.hchain = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CHAIN, 1, 2, 0).setUnlocalizedName(armorIDh2);
-		ItemArtifactArmor.hiron = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.IRON, 2, 2, 0).setUnlocalizedName(armorIDh3);
-		ItemArtifactArmor.hgold = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.GOLD, 4, 2, 0).setUnlocalizedName(armorIDh4);
-		ItemArtifactArmor.hdiamond = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.DIAMOND, 3, 2, 0).setUnlocalizedName(armorIDh5);
-		ItemArtifactArmor.bcloth = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CLOTH, 0, 3, 3).setUnlocalizedName(armorIDb1);
-		ItemArtifactArmor.bchain = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CHAIN, 1, 3, 3).setUnlocalizedName(armorIDb2);
-		ItemArtifactArmor.biron = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.IRON, 2, 3, 3).setUnlocalizedName(armorIDb3);
-		ItemArtifactArmor.bgold = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.GOLD, 4, 3, 3).setUnlocalizedName(armorIDb4);
-		ItemArtifactArmor.bdiamond = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.DIAMOND, 3, 3, 3).setUnlocalizedName(armorIDb5);
-		ItemArtifactArmor.ccloth = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CLOTH, 0, 4, 1).setUnlocalizedName(armorIDc1);
-		ItemArtifactArmor.cchain = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CHAIN, 1, 4, 1).setUnlocalizedName(armorIDc2);
-		ItemArtifactArmor.ciron = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.IRON, 2, 4, 1).setUnlocalizedName(armorIDc3);
-		ItemArtifactArmor.cgold = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.GOLD, 4, 4, 1).setUnlocalizedName(armorIDc4);
-		ItemArtifactArmor.cdiamond = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.DIAMOND, 3, 4, 1).setUnlocalizedName(armorIDc5);
-		ItemArtifactArmor.lcloth = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CLOTH, 0, 5, 2).setUnlocalizedName(armorIDl1);
-		ItemArtifactArmor.lchain = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.CHAIN, 1, 5, 2).setUnlocalizedName(armorIDl2);
-		ItemArtifactArmor.liron = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.IRON, 2, 5, 2).setUnlocalizedName(armorIDl3);
-		ItemArtifactArmor.lgold = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.GOLD, 4, 5, 2).setUnlocalizedName(armorIDl4);
-		ItemArtifactArmor.ldiamond = (ItemArtifactArmor) new ItemArtifactArmor(ItemArmor.ArmorMaterial.DIAMOND, 3, 5, 2).setUnlocalizedName(armorIDl5);
-		ItemOrichalcumDust.instance = new ItemOrichalcumDust().setUnlocalizedName(orichalcumID);
-		ItemCalendar.instance = new ItemCalendar().setUnlocalizedName(calendarID);
+		Artifact.instance = new Artifact().setUnlocalizedName(artifactID);
+		ArtifactArmour.hleather = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.LEATHER, 0, 2, 0).setUnlocalizedName(armorIDh1);
+		ArtifactArmour.hchain = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.CHAIN, 1, 2, 0).setUnlocalizedName(armorIDh2);
+		ArtifactArmour.hiron = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.IRON, 2, 2, 0).setUnlocalizedName(armorIDh3);
+		ArtifactArmour.hgold = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.GOLD, 4, 2, 0).setUnlocalizedName(armorIDh4);
+		ArtifactArmour.hdiamond = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.DIAMOND, 3, 2, 0).setUnlocalizedName(armorIDh5);
+		ArtifactArmour.bleather = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.LEATHER, 0, 3, 3).setUnlocalizedName(armorIDb1);
+		ArtifactArmour.bchain = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.CHAIN, 1, 3, 3).setUnlocalizedName(armorIDb2);
+		ArtifactArmour.biron = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.IRON, 2, 3, 3).setUnlocalizedName(armorIDb3);
+		ArtifactArmour.bgold = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.GOLD, 4, 3, 3).setUnlocalizedName(armorIDb4);
+		ArtifactArmour.bdiamond = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.DIAMOND, 3, 3, 3).setUnlocalizedName(armorIDb5);
+		ArtifactArmour.cleather = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.LEATHER, 0, 4, 1).setUnlocalizedName(armorIDc1);
+		ArtifactArmour.cchain = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.CHAIN, 1, 4, 1).setUnlocalizedName(armorIDc2);
+		ArtifactArmour.ciron = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.IRON, 2, 4, 1).setUnlocalizedName(armorIDc3);
+		ArtifactArmour.cgold = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.GOLD, 4, 4, 1).setUnlocalizedName(armorIDc4);
+		ArtifactArmour.cdiamond = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.DIAMOND, 3, 4, 1).setUnlocalizedName(armorIDc5);
+		ArtifactArmour.lleather = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.LEATHER, 0, 5, 2).setUnlocalizedName(armorIDl1);
+		ArtifactArmour.lchain = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.CHAIN, 1, 5, 2).setUnlocalizedName(armorIDl2);
+		ArtifactArmour.liron = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.IRON, 2, 5, 2).setUnlocalizedName(armorIDl3);
+		ArtifactArmour.lgold = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.GOLD, 4, 5, 2).setUnlocalizedName(armorIDl4);
+		ArtifactArmour.ldiamond = (ArtifactArmour) new ArtifactArmour(ItemArmor.ArmorMaterial.DIAMOND, 3, 5, 2).setUnlocalizedName(armorIDl5);
+		OrichalcumDust.instance = new OrichalcumDust().setUnlocalizedName(orichalcumID);
+		Calendar.instance = new Calendar().setUnlocalizedName(calendarID);
 
-		ItemArtifactArmor.setupArrays();
+		ArtifactArmour.setupArrays();
 
-		ItemFakeSwordRenderable.wood = new ItemFakeSwordRenderable(Item.ToolMaterial.WOOD, bladePackage+":wood_"+bladeRender).setUnlocalizedName(tb1);
-		ItemFakeSwordRenderable.stone = new ItemFakeSwordRenderable(Item.ToolMaterial.STONE, bladePackage+":stone_"+bladeRender).setUnlocalizedName(tb2);
-		ItemFakeSwordRenderable.iron = new ItemFakeSwordRenderable(Item.ToolMaterial.IRON, bladePackage+":iron_"+bladeRender).setUnlocalizedName(tb3);
-		ItemFakeSwordRenderable.gold = new ItemFakeSwordRenderable(Item.ToolMaterial.GOLD, bladePackage+":gold_"+bladeRender).setUnlocalizedName(tb4);
-		ItemFakeSwordRenderable.diamond = new ItemFakeSwordRenderable(Item.ToolMaterial.EMERALD, bladePackage+":diamond_"+bladeRender).setUnlocalizedName(tb5);
+		FakeSword.wood = new FakeSword(Item.ToolMaterial.WOOD, bladePackage+":wood_"+bladeRender).setUnlocalizedName(tb1);
+		FakeSword.stone = new FakeSword(Item.ToolMaterial.STONE, bladePackage+":stone_"+bladeRender).setUnlocalizedName(tb2);
+		FakeSword.iron = new FakeSword(Item.ToolMaterial.IRON, bladePackage+":iron_"+bladeRender).setUnlocalizedName(tb3);
+		FakeSword.gold = new FakeSword(Item.ToolMaterial.GOLD, bladePackage+":gold_"+bladeRender).setUnlocalizedName(tb4);
+		FakeSword.diamond = new FakeSword(Item.ToolMaterial.DIAMOND, bladePackage+":diamond_"+bladeRender).setUnlocalizedName(tb5);
 
-		ItemArtifactArmor.doEnchName = ItemArtifact.doEnchName = enchName.getBoolean(true);
-		ItemArtifactArmor.doMatName = ItemArtifact.doMatName = matName.getBoolean(true);
-		ItemArtifactArmor.doAdjName = ItemArtifact.doAdjName = adjName.getBoolean(true);
+		ArtifactArmour.doEnchName = Artifact.doEnchName = enchName.getBoolean(true);
+		ArtifactArmour.doMatName = Artifact.doMatName = matName.getBoolean(true);
+		ArtifactArmour.doAdjName = Artifact.doAdjName = adjName.getBoolean(true);
 
-		ItemStructureGenerator.structureGenItem = new ItemStructureGenerator().setUnlocalizedName(structureGenID);
-		ItemPedestalKey.pedestalKeyItem = new ItemPedestalKey().setUnlocalizedName(pedestalKeyID).setCreativeTab(tabGeneral);
+		StructureGenerator.structureGenItem = new StructureGenerator().setUnlocalizedName(structureGenID);
+		PedestalKey.pedestalKeyItem = new PedestalKey().setUnlocalizedName(pedestalKeyID).setCreativeTab(tabGeneral);
 
-		BlockAntibuilder.instance = new BlockAntibuilder().setBlockName(antiID);
-		BlockCoverPlate.instance = new BlockCoverPlate().setBlockName(coverplateID);
-		BlockIllusionary.instance = new BlockIllusionary().setBlockName(fakeID);
-		BlockInvisibleBedrock.instance = new BlockInvisibleBedrock().setBlockName(invis2ID);
-		BlockInvisibleBlock.instance = new BlockInvisibleBlock().setBlockName(invisID);
-		BlockArtifactsPressurePlate.invisStone = new BlockArtifactsPressurePlate("Invisible Pressure Plate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, true, false).setBlockName(invisppID);
-		BlockArtifactsPressurePlate.camoStone = new BlockArtifactsPressurePlate("Camo Pressure Plate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, false, true).setBlockName(cppID);
-		BlockArtifactsPressurePlate.invisObsidian = new BlockArtifactsPressurePlate("Invisible Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, true, false).setBlockName(oinvisppID);
-		BlockArtifactsPressurePlate.obsidian = new BlockArtifactsPressurePlate("Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, false, false).setBlockName(oppID);
-		BlockArtifactsPressurePlate.camoObsidian = new BlockArtifactsPressurePlate("Camo Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, false, true).setBlockName(coppID);
-		BlockArtifactsPressurePlate.camoWood = new BlockArtifactsPressurePlate("Camo Wooden Pressure Plate", Material.circuits, BlockPressurePlate.Sensitivity.everything, false, true).setBlockName(cwppID);
-		BlockLaserBeam.instance = new BlockLaserBeam().setBlockName(laserBeamID);
-		BlockLaserBeamSource.instance = (BlockLaserBeamSource) new BlockLaserBeamSource().setBlockName(laserSourceID);
-		BlockLight.instance = new BlockLight().setBlockName(lightID);
-		BlockPedestal.instance = (BlockPedestal) new BlockPedestal().setBlockName(pedID);
-		BlockQuickSand.instance = new BlockQuickSand().setBlockName(quickID);
-		BlockSolidAir.instance = new BlockSolidAir().setBlockName(floatID);
-		BlockSpikes.instance = new BlockSpikes().setBlockName(spikesID);
-		BlockStoneBrickMovable.instance = new BlockStoneBrickMovable().setBlockName(ignoreID);
-		BlockSword.instance = new BlockSword().setBlockName(teSwordID);
-		BlockTrap.instance = new BlockTrap().setBlockName(arrowSlotID);
-		BlockWallPlate.stone = new BlockWallPlate("Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, false).setBlockName(wallplateID);
-		BlockWallPlate.camoStone = new BlockWallPlate("Camo Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, true).setBlockName(cwallplateID);
-		BlockWallPlate.obsidian = new BlockWallPlate("Wall Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, false).setBlockName(owallplateID);
-		BlockWallPlate.camoObsidian = new BlockWallPlate("Camo Wall Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, true).setBlockName(cowallplateID);
-		BlockWallPlate.wood = new BlockWallPlate("Wood Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.everything, false).setBlockName(wwallplateID);
-		BlockWallPlate.camoWood = new BlockWallPlate("Camo Wood Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.everything, true).setBlockName(cwwallplateID);
-		PseudoBlockIllusionary.instance = new PseudoBlockIllusionary().setBlockName(pseudoFBID);
-		PseudoBlockTrap.instance = new PseudoBlockTrap().setBlockName(pseudoATID);
-		PseudoCoverplate.instance = new PseudoCoverplate().setBlockName(pseudoCPID);
+		IAntibuilder.instance = new IAntibuilder().setBlockName(antiID);
+		ICoverplate.instance = new ICoverplate().setBlockName(coverplateID);
+		IBlockIllusionary.instance = new IBlockIllusionary().setBlockName(fakeID);
+		IInvisBedrock.instance = new IInvisBedrock().setBlockName(invis2ID);
+		IInvisBlock.instance = new IInvisBlock().setBlockName(invisID);
+		IPressureplate.invisStone = new IPressureplate("Invisible Pressure Plate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, true, false).setBlockName(invisppID);
+		IPressureplate.camoStone = new IPressureplate("Camo Pressure Plate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, false, true).setBlockName(cppID);
+		IPressureplate.invisObsidian = new IPressureplate("Invisible Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, true, false).setBlockName(oinvisppID);
+		IPressureplate.obsidian = new IPressureplate("Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, false, false).setBlockName(oppID);
+		IPressureplate.camoObsidian = new IPressureplate("Camo Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, false, true).setBlockName(coppID);
+		IPressureplate.camoWood = new IPressureplate("Camo Wooden Pressure Plate", Material.circuits, BlockPressurePlate.Sensitivity.everything, false, true).setBlockName(cwppID);
+		ILaser.instance = new ILaser().setBlockName(laserBeamID);
+		ILaserSrc.instance = (ILaserSrc) new ILaserSrc().setBlockName(laserSourceID);
+		ILight.instance = new ILight().setBlockName(lightID);
+		IPedestal.instance = (IPedestal) new IPedestal().setBlockName(pedID);
+		IQuicksand.instance = new IQuicksand().setBlockName(quickID);
+		ISolidAir.instance = new ISolidAir().setBlockName(floatID);
+		ISpikes.instance = new ISpikes().setBlockName(spikesID);
+		IBlockMoveable.instance = new IBlockMoveable().setBlockName(ignoreID);
+		ISword.instance = new ISword().setBlockName(teSwordID);
+		ITrap.instance = new ITrap().setBlockName(arrowSlotID);
+		IWallplate.stone = new IWallplate("Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, false).setBlockName(wallplateID);
+		IWallplate.camoStone = new IWallplate("Camo Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.mobs, true).setBlockName(cwallplateID);
+		IWallplate.obsidian = new IWallplate("Wall Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, false).setBlockName(owallplateID);
+		IWallplate.camoObsidian = new IWallplate("Camo Wall Obsidiplate", Material.circuits, BlockPressurePlate.Sensitivity.players, true).setBlockName(cowallplateID);
+		IWallplate.wood = new IWallplate("Wood Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.everything, false).setBlockName(wwallplateID);
+		IWallplate.camoWood = new IWallplate("Camo Wood Wallplate", Material.circuits, BlockPressurePlate.Sensitivity.everything, true).setBlockName(cwwallplateID);
+		IPseudoIllusionary.instance = new IPseudoIllusionary().setBlockName(pseudoFBID);
+		IPseudoTrap.instance = new IPseudoTrap().setBlockName(pseudoATID);
+		IPseudoCoverplate.instance = new IPseudoCoverplate().setBlockName(pseudoCPID);
 
-		GameRegistry.registerBlock(BlockAntibuilder.instance, antiID);
-		GameRegistry.registerBlock(BlockCoverPlate.instance, coverplateID);
-		GameRegistry.registerBlock(BlockIllusionary.instance, fakeID);
-		GameRegistry.registerBlock(BlockInvisibleBedrock.instance, invis2ID);
-		GameRegistry.registerBlock(BlockInvisibleBlock.instance, invisID);
-		GameRegistry.registerBlock(BlockArtifactsPressurePlate.invisStone, invisppID);
-		GameRegistry.registerBlock(BlockArtifactsPressurePlate.invisObsidian, oinvisppID);
-		GameRegistry.registerBlock(BlockArtifactsPressurePlate.obsidian, oppID);
-		GameRegistry.registerBlock(BlockArtifactsPressurePlate.camoWood, cwppID);
-		GameRegistry.registerBlock(BlockArtifactsPressurePlate.camoStone, cppID);
-		GameRegistry.registerBlock(BlockArtifactsPressurePlate.camoObsidian, coppID);
-		GameRegistry.registerBlock(BlockLaserBeam.instance, laserBeamID);
-		GameRegistry.registerBlock(BlockLaserBeamSource.instance, laserSourceID);
-		GameRegistry.registerBlock(BlockLight.instance, lightID);
-		GameRegistry.registerBlock(BlockPedestal.instance, pedID);
-		GameRegistry.registerBlock(BlockQuickSand.instance, quickID);
-		GameRegistry.registerBlock(BlockSolidAir.instance, floatID);
-		GameRegistry.registerBlock(BlockSpikes.instance, spikesID);
-		GameRegistry.registerBlock(BlockStoneBrickMovable.instance, ignoreID);
-		GameRegistry.registerBlock(BlockSword.instance, teSwordID);
-		GameRegistry.registerBlock(BlockTrap.instance, arrowSlotID);
-		GameRegistry.registerBlock(BlockWallPlate.wood, wwallplateID);
-		GameRegistry.registerBlock(BlockWallPlate.stone, wallplateID);
-		GameRegistry.registerBlock(BlockWallPlate.obsidian, owallplateID);
-		GameRegistry.registerBlock(BlockWallPlate.camoWood, cwwallplateID);
-		GameRegistry.registerBlock(BlockWallPlate.camoStone, cwallplateID);
-		GameRegistry.registerBlock(BlockWallPlate.camoObsidian, cowallplateID);
-		GameRegistry.registerBlock(PseudoBlockIllusionary.instance, pseudoFBID);
-		GameRegistry.registerBlock(PseudoBlockTrap.instance, pseudoATID);
-		GameRegistry.registerBlock(PseudoCoverplate.instance, pseudoCPID);
+		GameRegistry.registerBlock(IAntibuilder.instance, antiID);
+		GameRegistry.registerBlock(ICoverplate.instance, coverplateID);
+		GameRegistry.registerBlock(IBlockIllusionary.instance, fakeID);
+		GameRegistry.registerBlock(IInvisBedrock.instance, invis2ID);
+		GameRegistry.registerBlock(IInvisibleBlock.instance, invisID);
+		GameRegistry.registerBlock(IPressureplate.invisStone, invisppID);
+		GameRegistry.registerBlock(IPressureplate.invisObsidian, oinvisppID);
+		GameRegistry.registerBlock(IPressureplate.obsidian, oppID);
+		GameRegistry.registerBlock(IPressureplate.camoWood, cwppID);
+		GameRegistry.registerBlock(IPressureplate.camoStone, cppID);
+		GameRegistry.registerBlock(IPressureplate.camoObsidian, coppID);
+		GameRegistry.registerBlock(ILaser.instance, laserBeamID);
+		GameRegistry.registerBlock(ILaserSrc.instance, laserSourceID);
+		GameRegistry.registerBlock(ILight.instance, lightID);
+		GameRegistry.registerBlock(IPedestal.instance, pedID);
+		GameRegistry.registerBlock(IQuicksand.instance, quickID);
+		GameRegistry.registerBlock(ISolidAir.instance, floatID);
+		GameRegistry.registerBlock(ISpikes.instance, spikesID);
+		GameRegistry.registerBlock(IBlockMoveable.instance, ignoreID);
+		GameRegistry.registerBlock(ISword.instance, teSwordID);
+		GameRegistry.registerBlock(ITrap.instance, arrowSlotID);
+		GameRegistry.registerBlock(IWallplate.wood, wwallplateID);
+		GameRegistry.registerBlock(IWallplate.stone, wallplateID);
+		GameRegistry.registerBlock(IWallplate.obsidian, owallplateID);
+		GameRegistry.registerBlock(IWallplate.camoWood, cwwallplateID);
+		GameRegistry.registerBlock(IWallplate.camoStone, cwallplateID);
+		GameRegistry.registerBlock(IWallplate.camoObsidian, cowallplateID);
+		GameRegistry.registerBlock(IPseudoIllusionary.instance, pseudoFBID);
+		GameRegistry.registerBlock(IPseudoTrap.instance, pseudoATID);
+		GameRegistry.registerBlock(IPseudoCoverplate.instance, pseudoCPID);
 
-		GameRegistry.registerItem(ItemArtifact.instance, artifactID);
-		GameRegistry.registerItem(ItemArtifactArmor.hcloth, armorIDh1);
-		GameRegistry.registerItem(ItemArtifactArmor.hchain, armorIDh2);
-		GameRegistry.registerItem(ItemArtifactArmor.hiron, armorIDh3);
-		GameRegistry.registerItem(ItemArtifactArmor.hgold, armorIDh4);
-		GameRegistry.registerItem(ItemArtifactArmor.hdiamond, armorIDh5);
-		GameRegistry.registerItem(ItemArtifactArmor.ccloth, armorIDc1);
-		GameRegistry.registerItem(ItemArtifactArmor.cchain, armorIDc2);
-		GameRegistry.registerItem(ItemArtifactArmor.ciron, armorIDc3);
-		GameRegistry.registerItem(ItemArtifactArmor.cgold, armorIDc4);
-		GameRegistry.registerItem(ItemArtifactArmor.cdiamond, armorIDc5);
-		GameRegistry.registerItem(ItemArtifactArmor.lcloth, armorIDl1);
-		GameRegistry.registerItem(ItemArtifactArmor.lchain, armorIDl2);
-		GameRegistry.registerItem(ItemArtifactArmor.liron, armorIDl3);
-		GameRegistry.registerItem(ItemArtifactArmor.lgold, armorIDl4);
-		GameRegistry.registerItem(ItemArtifactArmor.ldiamond, armorIDl5);
-		GameRegistry.registerItem(ItemArtifactArmor.bcloth, armorIDb1);
-		GameRegistry.registerItem(ItemArtifactArmor.bchain, armorIDb2);
-		GameRegistry.registerItem(ItemArtifactArmor.biron, armorIDb3);
-		GameRegistry.registerItem(ItemArtifactArmor.bgold, armorIDb4);
-		GameRegistry.registerItem(ItemArtifactArmor.bdiamond, armorIDb5);
-		GameRegistry.registerItem(ItemOrichalcumDust.instance, orichalcumID);
-		GameRegistry.registerItem(ItemCalendar.instance, calendarID);
-		GameRegistry.registerItem(ItemFakeSwordRenderable.wood, tb1);
-		GameRegistry.registerItem(ItemFakeSwordRenderable.stone, tb2);
-		GameRegistry.registerItem(ItemFakeSwordRenderable.iron, tb3);
-		GameRegistry.registerItem(ItemFakeSwordRenderable.gold, tb4);
-		GameRegistry.registerItem(ItemFakeSwordRenderable.diamond, tb5);
-		GameRegistry.registerItem(ItemStructureGenerator.structureGenItem, structureGenID);
-		GameRegistry.registerItem(ItemPedestalKey.pedestalKeyItem, pedestalKeyID);
+		GameRegistry.registerItem(Artifact.instance, artifactID);
+		GameRegistry.registerItem(ArtifactArmour.hleather, armorIDh1);
+		GameRegistry.registerItem(ArtifactArmour.hchain, armorIDh2);
+		GameRegistry.registerItem(ArtifactArmour.hiron, armorIDh3);
+		GameRegistry.registerItem(ArtifactArmour.hgold, armorIDh4);
+		GameRegistry.registerItem(ArtifactArmour.hdiamond, armorIDh5);
+		GameRegistry.registerItem(ArtifactArmour.cleather, armorIDc1);
+		GameRegistry.registerItem(ArtifactArmour.cchain, armorIDc2);
+		GameRegistry.registerItem(ArtifactArmour.ciron, armorIDc3);
+		GameRegistry.registerItem(ArtifactArmour.cgold, armorIDc4);
+		GameRegistry.registerItem(ArtifactArmour.cdiamond, armorIDc5);
+		GameRegistry.registerItem(ArtifactArmour.lleather, armorIDl1);
+		GameRegistry.registerItem(ArtifactArmour.lchain, armorIDl2);
+		GameRegistry.registerItem(ArtifactArmour.liron, armorIDl3);
+		GameRegistry.registerItem(ArtifactArmour.lgold, armorIDl4);
+		GameRegistry.registerItem(ArtifactArmour.ldiamond, armorIDl5);
+		GameRegistry.registerItem(ArtifactArmour.bleather, armorIDb1);
+		GameRegistry.registerItem(ArtifactArmour.bchain, armorIDb2);
+		GameRegistry.registerItem(ArtifactArmour.biron, armorIDb3);
+		GameRegistry.registerItem(ArtifactArmour.bgold, armorIDb4);
+		GameRegistry.registerItem(ArtifactArmour.bdiamond, armorIDb5);
+		GameRegistry.registerItem(OrichalcumDust.instance, orichalcumID);
+		GameRegistry.registerItem(Calendar.instance, calendarID);
+		GameRegistry.registerItem(FakeSword.wood, tb1);
+		GameRegistry.registerItem(FakeSword.stone, tb2);
+		GameRegistry.registerItem(FakeSword.iron, tb3);
+		GameRegistry.registerItem(FakeSword.gold, tb4);
+		GameRegistry.registerItem(FakeSword.diamond, tb5);
+		GameRegistry.registerItem(StructureGenerator.structureGenItem, structureGenID);
+		GameRegistry.registerItem(PedestalKey.pedestalKeyItem, pedestalKeyID);
 
 		worldGen = new PlaceTraps();//pyrm, temp, strn, lib, quik, towers, usewhite, useblack, white, black, useAntibuild);
 		GameRegistry.registerWorldGenerator(worldGen, 10);

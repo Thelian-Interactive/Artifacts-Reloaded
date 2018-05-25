@@ -1,6 +1,9 @@
 package artifreload.common.block.EBlock;
 
 
+
+//TODO Ask Draco18s What the AntiBuilder is and its Functions
+/*
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -18,13 +21,26 @@ import net.minecraft.world.World;
 
 import artifreload.common.DragonArtifacts;
 import artifreload.common.entity.TEAntibuilder;
+*/
 
 
-public class IAntibuilder {
+import net.minecraft.block.material.*;
+
+import artifreload.common.block.baseBlock.*;
+
+
+public class IAntibuilder extends BlockBase {
+
+public IAntibuilder(Material material, String name) {
+
+	super(material, name);
+}
+
+/*
 public static Block instance;
 
-public BlockAntibuilder() {
-	super(Material.rock);
+public IAntibuilder() {
+	super(Material.ROCK);
 	setHardness(1.0F);
 	setResistance(200.0F);
 	setStepSound(Block.soundTypeStone);
@@ -57,5 +73,6 @@ public int quantityDropped(Random par1Random)
             tab.setActive(!flag);
         	//System.out.println("Antibuilder should be active: " + (!flag));
         }
-    }*/
+    }
+    */
 }

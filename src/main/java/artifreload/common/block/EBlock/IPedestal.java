@@ -28,12 +28,12 @@ public static BlockContainer instance;
 
 public BlockPedestal() {
 	super(Material.rock);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+	/*setCreativeTab(DragonArtifacts.tabGeneral);
 	setResistance(10F);
 	setStepSound(Block.soundTypeGlass);
 	setHardness(5.0F);
 	setLightOpacity(0);
-	setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
+	setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);*/
 }
 
 @Override

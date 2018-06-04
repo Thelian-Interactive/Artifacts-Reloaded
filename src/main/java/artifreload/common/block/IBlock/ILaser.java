@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 import java.util.Iterator;
@@ -21,10 +21,17 @@ public class ILaser extends BlockBase {
 public static Block instance;
 public int renderID;
 
-public BlockLaserBeam() {
-	super(Material.circuits);
+public ILaser() {
+	super(Material.CIRCUITS, "ilaser", 0.0F);
+	setUnlocalizedName(name);
+	setRegistryName(name);
 	this.setTickRandomly(true);
-	this.setBlockTextureName("artifacts:laser");
+
+
+
+
+
+//	this.setBlockTextureName("artifacts:laser");
 }
 
 public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
@@ -105,7 +112,7 @@ public void updateTick(World par1World, int par2, int par3, int par4, Random par
 							BlockLaserBeamSource.instance.rebuildLaser(par1World, k1, par3, l1, mm);
 						}
 					}
-					else if (i2 == this.instance || !par1World.getBlock(k1, par3, l1).isOpaqueCube())
+					else if (i2 == instance || !par1World.getBlock(k1, par3, l1).isOpaqueCube())
 					{
 						++j1;
 						continue;
@@ -128,12 +135,12 @@ public void updateTick(World par1World, int par2, int par3, int par4, Random par
 
 private void notifyNeighborOfChange(World par1World, int par2, int par3, int par4)
 {
-	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.instance);
+	par1World.notifyBlocksOfNeighborChange(par2, par3, par4, instance);
 
-	par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.instance);
-	par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.instance);
-	par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.instance);
-	par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.instance);
+	par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, instance);
+	par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, instance);
+	par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, instance);
+	par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, instance);
 }
 
 private boolean updateTripWireState(World par1World, int par2, int par3, int par4)
@@ -177,7 +184,7 @@ private boolean updateTripWireState(World par1World, int par2, int par3, int par
 
 	if (flag1)
 	{
-		par1World.scheduleBlockUpdate(par2, par3, par4, this.instance, this.tickRate(par1World));
+		par1World.scheduleBlockUpdate(par2, par3, par4, instance, this.tickRate(par1World));
 	}
 	return ff;
 }
@@ -206,7 +213,7 @@ private void func_72149_e(World par1World, int par2, int par3, int par4, int par
 					foundSource = true;
 					flag[i1] = true;
 				}
-				else if (i2 == this.instance || !par1World.getBlock(k1, par3, l1).isOpaqueCube())
+				else if (i2 == instance || !par1World.getBlock(k1, par3, l1).isOpaqueCube())
 				{
 					++j1;
 					continue;
@@ -224,7 +231,7 @@ private void func_72149_e(World par1World, int par2, int par3, int par4, int par
 
 public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 {
-	par1World.scheduleBlockUpdate(par2, par3, par4, this.instance, 1);
+	par1World.scheduleBlockUpdate(par2, par3, par4, instance, 1);
 }
 
 public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -249,7 +256,7 @@ public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, 
 				{
 					flag[i1] = true;
 				}
-				else if (i2 == this.instance || !par1IBlockAccess.getBlock(k1, par3, l1).isOpaqueCube())
+				else if (i2 == instance || !par1IBlockAccess.getBlock(k1, par3, l1).isOpaqueCube())
 				{
 					++j1;
 					continue;
@@ -345,7 +352,7 @@ public boolean isBlockReplaceable(World world, int x, int y, int z) {
 					BlockLaserBeamSource.instance.notifyNeighborOfChange(world, k1, y, l1, m);
 					world.scheduleBlockUpdate(k1, y, l1, BlockLaserBeamSource.instance, BlockLaserBeamSource.instance.tickRate(world));
 				}
-				else if (i2 == this.instance) {
+				else if (i2 == instance) {
 					world.setBlockMetadataWithNotify(k1, y, l1, world.getBlockMetadata(k1, y, l1)|1, 3);
 					++j1;
 					continue;

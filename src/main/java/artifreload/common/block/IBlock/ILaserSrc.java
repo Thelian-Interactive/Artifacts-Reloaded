@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 import java.util.Iterator;
@@ -6,29 +6,34 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class ILaserSrc extends Block {
+public class ILaserSrc extends BlockBase {
 
-public static BlockLaserBeamSource instance;
+public static ILaserSrc instance;
 public int renderID;
 
-public BlockLaserBeamSource() {
-	super(Material.rock);
-	setLightOpacity(0);
-	setResistance(2F);
-	setStepSound(Block.soundTypeStone);
-	setHardness(0.5F);
-	setCreativeTab(DragonArtifacts.tabGeneral);
-	setBlockTextureName("artifacts:lasersource_front");
+public ILaserSrc() {
+	super(Material.ROCK, "ilasersrc", 0.5F);
+	this.setLightOpacity(0);
+	this.setResistance(2F);
+	this.setSoundType(SoundType.STONE);
+	setCreativeTab(tab);
+
+
+
+
+// 	setBlockTextureName("artifacts:lasersource_front");
 }
 
 @Override
@@ -111,7 +116,7 @@ public int onBlockPlaced(World world, int x, int y, int z, int meta, float par6,
 @Override
 public void onPostBlockPlaced(World world, int x, int y, int z, int meta)
 {
-	this.updateLaserState(world, x, y, z, this.instance, meta, false, -1, 0);
+	this.updateLaserState(world, x, y, z, instance, meta, false, -1, 0);
 }
 
 public void rebuildLaser(World world, int x, int y, int z, int meta) {
@@ -153,7 +158,7 @@ public void rebuildLaser(World world, int x, int y, int z, int meta) {
 public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 {
 	int i1 = world.getBlockMetadata(x, y, z);
-	if (block != this.instance)
+	if (block != instance)
 	{
 		if (this.canBlockStay(world, x, y, z))
 		{
@@ -237,7 +242,7 @@ public void updateLaserState(World world, int x, int y, int z, Block block, int 
 	if(triggered) {
 		if(shouldbetriggered) {
 			world.setBlockMetadataWithNotify(x, y, z, l1|8, 3);
-			world.scheduleBlockUpdate(x, y, z, this.instance, this.tickRate(world));
+			world.scheduleBlockUpdate(x, y, z, instance, this.tickRate(world));
 			notifyNeighborOfChange(world, x, y, z, l1);
 		}
 	}
@@ -247,34 +252,34 @@ public void updateLaserState(World world, int x, int y, int z, Block block, int 
 public void updateTick(World world, int x, int y, int z, Random rand)
 {
 	int meta = world.getBlockMetadata(x, y, z);
-	this.updateLaserState(world, x, y, z, this.instance, meta, true, -1, 0);
+	this.updateLaserState(world, x, y, z, instance, meta, true, -1, 0);
 	if((meta&8) == 8) {
 		world.setBlockMetadataWithNotify(x, y, z, meta&3, 3);
 		notifyNeighborOfChange(world, x, y, z, meta&3);
-		world.scheduleBlockUpdate(x, y, z, this.instance, this.tickRate(world));
+		world.scheduleBlockUpdate(x, y, z, instance, this.tickRate(world));
 	}
 }
 
 public void notifyNeighborOfChange(World world, int x, int y, int z, int meta)
 {
 	int side = meta&3;
-	world.notifyBlocksOfNeighborChange(x, y, z, this.instance);
+	world.notifyBlocksOfNeighborChange(x, y, z, instance);
 
 	if (side == 3)
 	{
-		world.notifyBlocksOfNeighborChange(x - 1, y, z, this.instance);
+		world.notifyBlocksOfNeighborChange(x - 1, y, z, instance);
 	}
 	else if (side == 1)
 	{
-		world.notifyBlocksOfNeighborChange(x + 1, y, z, this.instance);
+		world.notifyBlocksOfNeighborChange(x + 1, y, z, instance);
 	}
 	else if (side == 0)
 	{
-		world.notifyBlocksOfNeighborChange(x, y, z - 1, this.instance);
+		world.notifyBlocksOfNeighborChange(x, y, z - 1, instance);
 	}
 	else if (side == 2)
 	{
-		world.notifyBlocksOfNeighborChange(x, y, z + 1, this.instance);
+		world.notifyBlocksOfNeighborChange(x, y, z + 1, instance);
 	}
 }
 
@@ -352,24 +357,24 @@ public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	}
 	if (flag1)
 	{
-		world.notifyBlocksOfNeighborChange(x, y, z, this.instance);
+		world.notifyBlocksOfNeighborChange(x, y, z, instance);
 		int j1 = meta & 3;
 
 		if (j1 == 3)
 		{
-			world.notifyBlocksOfNeighborChange(x - 1, y, z, this.instance);
+			world.notifyBlocksOfNeighborChange(x - 1, y, z, instance);
 		}
 		else if (j1 == 1)
 		{
-			world.notifyBlocksOfNeighborChange(x + 1, y, z, this.instance);
+			world.notifyBlocksOfNeighborChange(x + 1, y, z, instance);
 		}
 		else if (j1 == 0)
 		{
-			world.notifyBlocksOfNeighborChange(x, y, z - 1, this.instance);
+			world.notifyBlocksOfNeighborChange(x, y, z - 1, instance);
 		}
 		else if (j1 == 2)
 		{
-			world.notifyBlocksOfNeighborChange(x, y, z + 1, this.instance);
+			world.notifyBlocksOfNeighborChange(x, y, z + 1, instance);
 		}
 	}
 	super.breakBlock(world, x, y, z, block, meta);
@@ -414,7 +419,7 @@ public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int p
 			//}
 			//if (flag1)
 			//{
-			par1World.scheduleBlockUpdate(par2, par3, par4, this.instance, this.tickRate(par1World));
+			par1World.scheduleBlockUpdate(par2, par3, par4, instance, this.tickRate(par1World));
 		}
 	}
 }
@@ -461,7 +466,7 @@ public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer, World
 	if((m&8) != 8) {
 		par2World.setBlockMetadataWithNotify(par3, par4, par5, m|8, 3);
 		notifyNeighborOfChange(par2World, par3, par4, par5, m);
-		par2World.scheduleBlockUpdate(par3, par4, par5, this.instance, this.tickRate(par2World));
+		par2World.scheduleBlockUpdate(par3, par4, par5, instance, this.tickRate(par2World));
 	}
 	return super.getPlayerRelativeBlockHardness(par1EntityPlayer, par2World, par3, par4, par5);
 }

@@ -3,12 +3,14 @@ package artifreload.common.block.IBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class IPseudoIllusionary extends Block {
-public static Block instance;
 
-public PseudoBlockIllusionary() {
-	super(Material.rock);
+public class IPseudoIllusionary extends BlockBase {
+
+
+public IPseudoIllusionary() {
+	super(Material.ROCK,"pseudoillusionary", 0F);
 }
 
 @Override

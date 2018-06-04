@@ -15,18 +15,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.event.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.*;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import artifreload.api.ArtifactAPI;
-import artifreload.common.block.EBlock.*;
 import artifreload.common.block.IBlock.*;
 import artifreload.common.gui.*;
 import artifreload.common.util.artifact.Factory.*;
@@ -74,6 +75,17 @@ public class DragonArtifacts{
 			return new ItemStack(Artifact.instance);
 		}
 	};
+
+@Mod.EventBusSubscriber
+public static class RegistrationHandler {
+
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event) {
+
+	}
+
+}
+
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)

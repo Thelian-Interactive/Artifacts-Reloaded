@@ -16,13 +16,13 @@ public interface IArtifactAPI {
 	* @param componentID the ID to get
 	* @author Draco18s
 	* */
-public IArtifactComp getComponent(int componentID);
+IArtifactComp getComponent(int componentID);
 
 /**
 	* Returns a randomize artifact, up to 5 effects and randomly applied enchantments.
 	* @author Draco18s
 	*/
-public ItemStack generateRandomArtifact();
+ItemStack generateRandomArtifact();
 
 /**
 	* Adds a component to the component list.  Mods should supply their own configs and pass null for any
@@ -30,13 +30,13 @@ public ItemStack generateRandomArtifact();
 	* @param component the component to register
 	* @author Draco18s
 	*/
-public void registerComponent(IArtifactComponent component);
+void registerComponent(IArtifactComponent component);
 
 /**
 	* Gets the total number of components registered
 	* @author Draco18s
 	*/
-public int getComponentCount();
+int getComponentCount();
 
 /**
 	* Takes a blank artifact and applies effects to it
@@ -45,7 +45,7 @@ public int getComponentCount();
 	* @param artifact the artifact to give effects
 	* @author Draco18s
 	*/
-public ItemStack applyRandomEffects(ItemStack artifact);
+ItemStack applyRandomEffects(ItemStack artifact);
 
 /**
 	* For use with debugging new effects (full mod required) or for specific treasure generation.
@@ -55,7 +55,7 @@ public ItemStack applyRandomEffects(ItemStack artifact);
 	* one will be chosen at random from the component.
 	* @return the artifact with the applied effect
 	*/
-public ItemStack applyEffectByID(ItemStack artifact, int id, String trigger);
+ItemStack applyEffectByID(ItemStack artifact, int id, String trigger);
 
 /**
 	* Automatically called by applyEffectByID.  Generates the following tags:
@@ -66,7 +66,7 @@ public ItemStack applyEffectByID(ItemStack artifact, int id, String trigger);
 	* @IntArray "allComponents"
 	* @return default artifact tags
 	*/
-public NBTTagCompound createDefault();
+NBTTagCompound createDefault();
 
 /**
 	* Allows for artifacts to generate in custom treasure gen.  Plugins should provide their own
@@ -76,7 +76,7 @@ public NBTTagCompound createDefault();
 	* @param rarity
 	*/
 @Deprecated
-public void setTreasureGeneration(String treasureString, int rarity);
+void setTreasureGeneration(String treasureString, int rarity);
 
 /**
 	* Allows for artifacts to generate in custom treasure gen.  Plugins should provide their own
@@ -86,7 +86,7 @@ public void setTreasureGeneration(String treasureString, int rarity);
 	* @param type
 	* @param rarity
 	*/
-public void setTreasureGeneration(String treasureString, ArtifactType type, int rarity);
+void setTreasureGeneration(String treasureString, ArtifactType type, int rarity);
 
 /**
 	* Some effects may require some kind of delay; e.g. any right-click trigger has a built-in
@@ -103,27 +103,27 @@ public void setTreasureGeneration(String treasureString, ArtifactType type, int 
 	* "orePingDelay" (used by ore finder effect)<br/>
 	* @param key
 	*/
-public void registerUpdateNBTKey(String key);
+void registerUpdateNBTKey(String key);
 
 /**
 	* Returns a clone of the keys list
 	* @return
 	*/
-public ArrayList<String> getNBTKeys();
+ArrayList<String> getNBTKeys();
 
 /**
 	* These are very generic artifact types.<br/>
 	* Tool refers to the original artifact that comes in sword, trinket, and wand flavors.<br/>
 	* The rest are armors, divided by material type.
 	*/
-public enum ArtifactType
+enum ArtifactType
 {
 	TOOL,
 	ARMOR_CLOTH,
 	ARMOR_CHAIN,
 	ARMOR_IRON,
 	ARMOR_GOLD,
-	ARMOR_DIAMOND;
+	ARMOR_DIAMOND
 }
 }
 

@@ -17,6 +17,6 @@ public interface ITrapAPI {
 	* @Note Probably not advisable to try and create a behavior for Artifacts.  The one
 	* behavior would have to handle all variations.
 	*/
-public void addArrowTrapBehavior(Item item, IBehaviorITrap behavior);
+void addArrowTrapBehavior(Item item, IBehaviorITrap behavior);
 }
 

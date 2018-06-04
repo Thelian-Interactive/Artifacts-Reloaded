@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -28,22 +29,22 @@ public String getRandomTrigger(Random rand, boolean isArmor) {
 @Override
 public float getDigSpeed(ItemStack itemStack, Block block, int meta) {
 	Item.ToolMaterial toolMaterial = Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")];
-	if(toolMaterial == toolMaterial.WOOD) {
+	if(toolMaterial == ToolMaterial.WOOD) {
 		return (Items.wooden_pickaxe.getDigSpeed(itemStack, block, meta) / 2 * Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
 	}
-	else if(toolMaterial == toolMaterial.STONE) {
+	else if(toolMaterial == ToolMaterial.STONE) {
 		return (Items.stone_pickaxe.getDigSpeed(itemStack, block, meta) / 2 * Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
 	}
-	else if(toolMaterial == toolMaterial.GOLD) {
+	else if(toolMaterial == ToolMaterial.GOLD) {
 		return (Items.golden_pickaxe.getDigSpeed(itemStack, block, meta) / 2 * Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
 	}
-	else if(toolMaterial == toolMaterial.IRON) {
+	else if(toolMaterial == ToolMaterial.IRON) {
 		return (Items.iron_pickaxe.getDigSpeed(itemStack, block, meta) / 2 * Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
 	}
 	else if(toolMaterial == toolMaterial.EMERALD) {
 		return (Items.diamond_pickaxe.getDigSpeed(itemStack, block, meta) / 2 * Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
 	}
-	return (toolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
+	return (ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")].getEfficiencyOnProperMaterial());
 }
 
 @Override
@@ -56,10 +57,10 @@ public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block 
 public boolean canHarvestBlock(Block block, ItemStack itemStack) {
 	Item.ToolMaterial toolMaterial = Item.ToolMaterial.values()[itemStack.stackTagCompound.getInteger("material")];
 
-	if(toolMaterial == toolMaterial.WOOD) {
+	if(toolMaterial == ToolMaterial.WOOD) {
 		return Items.wooden_pickaxe.func_150897_b/*canHarvestBlock*/(block);
 	}
-	else if(toolMaterial == toolMaterial.STONE) {
+	else if(toolMaterial == ToolMaterial.STONE) {
 		return Items.stone_pickaxe.func_150897_b(block);
 	}
 	else if(toolMaterial == Item.ToolMaterial.EMERALD) {
@@ -71,7 +72,7 @@ public boolean canHarvestBlock(Block block, ItemStack itemStack) {
 	else if(toolMaterial == Item.ToolMaterial.GOLD) {
 		return Items.golden_pickaxe.func_150897_b(block);
 	}
-	return block == Blocks.obsidian ? toolMaterial.getHarvestLevel() == 3 : (block != Blocks.diamond_block && block != Blocks.diamond_ore ? (block != Blocks.emerald_ore && block != Blocks.emerald_block ? (block != Blocks.gold_block && block != Blocks.gold_ore ? (block != Blocks.iron_block && block != Blocks.iron_ore ? (block != Blocks.lapis_block && block != Blocks.lapis_ore ? (block != Blocks.redstone_ore && block != Blocks.lit_redstone_ore ? (block.getMaterial() == Material.rock ? true : (block.getMaterial() == Material.iron ? true : block.getMaterial() == Material.anvil)) : toolMaterial.getHarvestLevel() >= 2) : toolMaterial.getHarvestLevel() >= 1) : toolMaterial.getHarvestLevel() >= 1) : toolMaterial.getHarvestLevel() >= 2) : toolMaterial.getHarvestLevel() >= 2) : toolMaterial.getHarvestLevel() >= 2);
+	return block == Blocks.obsidian ? toolMaterial.getHarvestLevel() == 3 : (block != Blocks.diamond_block && block != Blocks.diamond_ore ? (block != Blocks.emerald_ore && block != Blocks.emerald_block ? (block != Blocks.gold_block && block != Blocks.gold_ore ? (block != Blocks.iron_block && block != Blocks.iron_ore ? (block != Blocks.lapis_block && block != Blocks.lapis_ore ? (block != Blocks.redstone_ore && block != Blocks.lit_redstone_ore ? (block.getMaterial() == Material.rock || (block.getMaterial() == Material.iron || block.getMaterial() == Material.anvil)) : toolMaterial.getHarvestLevel() >= 2) : toolMaterial.getHarvestLevel() >= 1) : toolMaterial.getHarvestLevel() >= 1) : toolMaterial.getHarvestLevel() >= 2) : toolMaterial.getHarvestLevel() >= 2) : toolMaterial.getHarvestLevel() >= 2);
 }
 
 public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, String trigger, boolean advTooltip) {

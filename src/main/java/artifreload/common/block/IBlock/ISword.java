@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -17,10 +17,8 @@ import artifreload.common.item.FakeSword;
 
 public class ISword extends BlockContainer {
 
-}	public static Block instance;
-
-public BlockSword() {
-	super(Material.rock);
+public ISword() {
+	super(Material.ROCK);
 	this.setBlockBounds(0.4f, 0.0f, 0.4f, 0.6f, 0.5f, 0.6f);
 }
 

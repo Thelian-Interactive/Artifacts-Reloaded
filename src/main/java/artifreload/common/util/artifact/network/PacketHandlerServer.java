@@ -191,7 +191,7 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
 				is.setItemDamage(is.getItemDamage()-5);
 				is = p.inventory.getStackInSlot(buff.readInt());
 				if(is != null)
-					is.damageItem(2, (EntityLivingBase) p);
+					is.damageItem(2, p);
 				break;
 			case EXPLODING_ARROWS:
 				if(buff.readInt() == p.getEntityId()) {

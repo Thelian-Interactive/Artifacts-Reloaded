@@ -1,6 +1,7 @@
 package artifreload.api;
 
 
+import net.minecraft.entity.ai.attributes.BaseAttribute;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 
@@ -11,12 +12,12 @@ public class ArtifactAPI {
 	* Apply these monster attributes with your components to get the event handler to detect that an effect is in effect.
 	* See an example segment in this java file.
 	*/
-public static IAttribute OnDeathAttribute = (new RangedAttribute("artifact.ondeath", 0.0D, 0.0D, 1.0D)).setDescription("Death Event").setShouldWatch(true);
+public static IAttribute OnDeathAttribute = (new RangedAttribute("artifact.ondeath" ,0.0D, 0.0D, 1.0D)).setDescription("Death Event").setShouldWatch(true);
 /**
 	* Apply these monster attributes with your components to get the event handler to detect that an effect is in effect.
 	* See an example segment in this java file.
 	*/
-public static IAttribute OnHurtAttribute = (new RangedAttribute("artifact.onhurt", 0.0D, 0.0D, 1.0D)).setDescription("Hurt Event").setShouldWatch(true);
+public static IAttribute OnHurtAttribute = (new RangedAttribute( ,"artifact.onhurt", 0.0D, 0.0D, 1.0D)).setDescription("Hurt Event").setShouldWatch(true);
 
 /**
 	* API for artifacts

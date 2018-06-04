@@ -74,7 +74,7 @@ public boolean canHarvestBlock(Block par1Block, ItemStack itemStack) {
 	else
 	{
 		Material material = par1Block.getMaterial();
-		return material != Material.plants && material != Material.vine && material != Material.coral && material != Material.leaves && material != Material.gourd ? false : true;
+		return material == Material.plants || material == Material.vine || material == Material.coral || material == Material.leaves || material == Material.gourd;
 	}
 }
 

@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 
@@ -24,6 +24,8 @@ import artifreload.common.entity.TEAntibuilder;
 */
 
 
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.*;
 
 import artifreload.common.block.baseBlock.*;
@@ -31,10 +33,19 @@ import artifreload.common.block.baseBlock.*;
 
 public class IAntibuilder extends BlockBase {
 
-public IAntibuilder(Material material, String name) {
+	protected String name;
 
-	super(material, name);
+public IAntibuilder() {
+
+	super(Material.ROCK, "antibuilder", 1.0F);
+	setUnlocalizedName(name);
+	setRegistryName(name);
+	setCreativeTab(tab);
+	this.setResistance(200.0F);
+	this.setSoundType(SoundType.STONE);
+
 }
+
 
 /*
 public static Block instance;

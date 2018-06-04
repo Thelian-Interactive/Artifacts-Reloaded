@@ -1,16 +1,18 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class IPseudoCoverplate extends Block {
+
+public class IPseudoCoverplate extends BlockBase {
 
 public static Block instance;
 
-public PseudoCoverplate() {
-	super(Material.rock);
+public IPseudoCoverplate() {
+	super(Material.ROCK,"pseudocoverplate", 0.5F);
 }
 
 @Override

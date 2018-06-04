@@ -3,6 +3,7 @@ package artifreload.common.block.IBlock;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,12 +25,12 @@ private static final boolean debug = false;
 
 private int flowDelay = 15;
 
-public IQuickSand()
+public IQuicksand()
 {
-	super(Material.sand);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+	super(Material.SAND,"quicksand",2.0F);
+	setCreativeTab(tab);
 	setResistance(10F);
-	this.setStepSound(Block.soundTypeSand);
+	this.setSoundType(SoundType.SAND);
 	this.setTickRandomly(true);
 	setHardness(2.0F);
 }
@@ -42,7 +43,7 @@ public IQuickSand()
 	* @param metadata
 	* @return
 	*/
-@Override
+
 public boolean isToolEffective(String type, int metadata)
 {
 	if(type.equals("shovel")) {
@@ -72,7 +73,7 @@ public void updateTick(World world, int x, int y, int z, Random rand)
 @Override
 public void onBlockAdded(World world, int x, int y, int z)
 {
-	world.scheduleBlockUpdate(x, y, z, this.instance, flowDelay);
+	world.scheduleBlockUpdate(x, y, z, instance, flowDelay);
 }
 
 /**
@@ -82,7 +83,7 @@ public void onBlockAdded(World world, int x, int y, int z)
 @Override
 public void onNeighborBlockChange(World world, int x, int y, int z, Block blockChanged)
 {
-	world.scheduleBlockUpdate(x, y, z, this.instance, flowDelay);
+	world.scheduleBlockUpdate(x, y, z, instance, flowDelay);
 }
 
 /**

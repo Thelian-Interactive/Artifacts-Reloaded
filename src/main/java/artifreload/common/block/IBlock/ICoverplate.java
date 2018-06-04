@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 import net.minecraft.block.Block;
@@ -26,14 +26,14 @@ public class ICoverplate extends BlockBase {
 public static Block instance;
 public int renderType = 0;
 
-public BlockCoverPlate() {
-	super(Material.rock);
-	setLightOpacity(0);
-	setResistance(2F);
-	setStepSound(Block.soundTypeStone);
-	setHardness(0.5F);
-	//setCreativeTab(CreativeTabs.tabBlock);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+public ICoverplate() {
+
+	super(Material.ROCK, "coverplate", 0.5F);
+	this.setLightOpacity(0);
+	this.setResistance(2F);
+	setUnlocalizedName(name);
+	setRegistryName(name);
+
 }
 
 @Override

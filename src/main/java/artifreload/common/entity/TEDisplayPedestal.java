@@ -25,12 +25,18 @@ public UUID ownerUUID = new UUID(0, 0);
 public String ownerName = "";
 public int rotation = 0;
 
-public TileEntityDisplayPedestal() {
+public TEDisplayPedestal() {
 }
 
 @Override
 public int getSizeInventory() {
 	return 1;
+}
+
+@Override
+public boolean isEmpty() {
+
+	return false;
 }
 
 @Override
@@ -81,6 +87,12 @@ public ItemStack decrStackSize(int i, int j) {
 	{
 		return null;
 	}
+}
+
+@Override
+public ItemStack removeStackFromSlot(int index) {
+
+	return null;
 }
 
 @Override
@@ -187,6 +199,28 @@ public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 }
 
 @Override
+public int getField(int id) {
+
+	return 0;
+}
+
+@Override
+public void setField(int id, int value) {
+
+}
+
+@Override
+public int getFieldCount() {
+
+	return 0;
+}
+
+@Override
+public void clear() {
+
+}
+
+@Override
 public void readFromNBT(NBTTagCompound tag)
 {
 	super.readFromNBT(tag);
@@ -195,7 +229,7 @@ public void readFromNBT(NBTTagCompound tag)
 
 	for (int i = 0; i < nbttaglist.tagCount(); ++i)
 	{
-		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+		NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 		int j = nbttagcompound1.getByte("Slot") & 255;
 
 		this.contents = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -249,6 +283,22 @@ public void markDirty() {
 }
 
 @Override
+public boolean isUsableByPlayer(EntityPlayer player) {
+
+	return false;
+}
+
+@Override
+public void openInventory(EntityPlayer player) {
+
+}
+
+@Override
+public void closeInventory(EntityPlayer player) {
+
+}
+
+@Override
 public Packet getDescriptionPacket() {
 	NBTTagCompound nbtTag = new NBTTagCompound();
 	this.writeToNBT(nbtTag);
@@ -258,6 +308,18 @@ public Packet getDescriptionPacket() {
 @Override
 public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 	readFromNBT(packet.func_148857_g());
+}
+
+@Override
+public String getName() {
+
+	return null;
+}
+
+@Override
+public boolean hasCustomName() {
+
+	return false;
 }
 }
 

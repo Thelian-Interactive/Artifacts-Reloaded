@@ -8,17 +8,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import artifreload.common.block.baseBlock.IInvisibleBlock;
+import artifreload.common.block.baseBlock.ClassAbstract.IInvisibleBlock;
 
 
 public class ILight extends IInvisibleBlock {
 
 public static Block instance;
 
-public BlockLight() {
-	super(Material.air);
+public ILight() {
+	super(Material.AIR,"artifactlight", 0);
 	this.setLightLevel(1);
-	this.setHardness(0);
 	this.setResistance(0);
 	setCreativeTab(null);
 	this.setTickRandomly(true); //So it destroys itself over time.

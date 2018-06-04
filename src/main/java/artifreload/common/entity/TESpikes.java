@@ -11,7 +11,7 @@ public String modelTexture1;
 public String modelTexture2;
 public String modelTexture3;
 
-public TileEntitySpikes() {
+public TESpikes() {
 	isBloody = 0;
 	bloodTime = 0;
 	modelTexture1 = "artifacts:textures/entities/spike.png";

@@ -4,23 +4,26 @@ package artifreload.common.block.IBlock;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class IBlockIllusionary extends Block {
+
+public class IBlockIllusionary extends BlockBase {
 
 public static Block instance;
 public int renderType = 0;
 
 public IBlockIllusionary() {
-	super(Material.rock);
+	super(Material.ROCK,"illusionaryblock",0.5F);
 	setResistance(2F);
-	setStepSound(Block.soundTypeStone);
-	setHardness(0.5F);
-	this.setCreativeTab(DragonArtifacts.tabGeneral);
+	setSoundType(SoundType.STONE);
+	this.setCreativeTab(tab);
 }
 
 @Override
@@ -161,9 +164,8 @@ public boolean renderAsNormalBlock()
 @Override
 public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 {
-	if(world.getBlock(x, y, z) == this || world.getBlock(x, y, z).isOpaqueCube())
-		return false;
-	return true;
+
+	return world.getBlock(x, y, z) != this && !world.getBlock(x, y, z).isOpaqueCube();
 }
 
 @Override

@@ -3,21 +3,23 @@ package artifreload.common.block.IBlock;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class IBlockMoveable extends Block {
 
-public static Block instance;
+public class IBlockMoveable extends BlockBase {
 
-public BlockStoneBrickMovable() {
-	super(Material.rock);
-	setHardness(1.5F);
+
+
+public IBlockMoveable() {
+	super(Material.ROCK,"moveableblock", 1.5F);
 	setResistance(10.0F);
-	setStepSound(Block.soundTypeStone);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+	setSoundType(SoundType.STONE);
+	setCreativeTab(tab);
 }
 
 @Override
@@ -28,6 +30,6 @@ public void registerBlockIcons(IIconRegister par1IconRegister)
 
 public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
 {
-	return Item.getItemFromBlock(Blocks.stonebrick);
+	return Item.getItemFromBlock(Blocks.STONEBRICK);
 }
 }

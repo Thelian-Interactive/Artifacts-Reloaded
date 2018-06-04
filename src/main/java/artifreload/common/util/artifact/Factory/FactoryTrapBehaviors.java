@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 
 import artifreload.api.ITrapAPI;
 import artifreload.api.interfaces.IBehaviorITrap;
-import artifreload.common.block.EBlock.ITrap;
+import artifreload.common.block.IBlock.ITrap;
 
 
 public class FactoryTrapBehaviors implements ITrapAPI {

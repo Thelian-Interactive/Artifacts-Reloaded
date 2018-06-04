@@ -2,6 +2,7 @@ package artifreload.common.block.IBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,19 +11,20 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.BlockBase;
 
 
-public class ISpikes extends BlockContainer {
+public class ISpikes extends BlockBase {
 
 public static Block instance;
 public int renderID = 0;
 
 public BlockSpikes() {
-	super(Material.iron);
+	super(Material.IRON,"ispikes", 2.0F);
 	setResistance(5F);
-	setStepSound(Block.soundTypeMetal);
-	setCreativeTab(DragonArtifacts.tabGeneral);
-	setHardness(2F);
+	setSoundType(SoundType.ANVIL);
+	setCreativeTab(tab);
+
 }
 
 @Override

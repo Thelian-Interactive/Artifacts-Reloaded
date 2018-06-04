@@ -38,12 +38,12 @@ public static boolean doMatName = true;
 public static boolean doAdjName = true;
 
 public Artifact() {
-	super();
+	super("artifact");
 	this.setHasSubtypes(true);
 	setMaxStackSize(1);
 	weaponDamage = 0.0F;
 	setMaxDamage(128);
-	setCreativeTab(DragonArtifacts.tabArtifacts);
+	setCreativeTab(tab);
 }
 
 /**
@@ -572,9 +572,7 @@ public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 		return false;
 	}
 	else if (par2ItemStack.getItem() instanceof ItemOrichalcumDust) {
-		if(par2ItemStack.getItemDamage()-1 == par1ItemStack.stackTagCompound.getInteger("material"))
-			return true;
-		return false;
+		return par2ItemStack.getItemDamage() - 1 == par1ItemStack.stackTagCompound.getInteger("material");
 	}
 	else {
 		return false;

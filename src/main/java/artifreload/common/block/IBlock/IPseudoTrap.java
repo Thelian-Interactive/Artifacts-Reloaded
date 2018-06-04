@@ -1,11 +1,13 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 
+import artifreload.common.block.baseBlock.BlockBase;
 
-public class IPseudoTrap extends Block {
+
+public class IPseudoTrap extends BlockBase {
 
 public static Block instance;
 @SideOnly(Side.CLIENT)
@@ -13,8 +15,8 @@ protected IIcon furnaceTopIcon;
 @SideOnly(Side.CLIENT)
 protected IIcon furnaceFrontIcon;
 
-public PseudoBlockTrap() {
-	super(Material.rock);
+public IPseudoTrap() {
+	super(Material.ROCK,"pseudotrap", 2.0F);
 }
 
 @Override

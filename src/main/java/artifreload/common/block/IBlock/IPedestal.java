@@ -1,41 +1,109 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 import java.util.Iterator;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+
+import artifreload.common.DragonArtifacts;
+import artifreload.common.block.EBlock.TEPedestal;
+import artifreload.common.block.baseBlock.BlockBase;
+import artifreload.common.block.baseBlock.ClassAbstract.BlockTileEntity;
+import artifreload.common.entity.TEDisplayPedestal;
 
 
-public class IPedestal extends BlockContainer {
+public class IPedestal extends BlockTileEntity<TEPedestal> {
 
-public static BlockContainer instance;
+protected String name;
 
-public BlockPedestal() {
-	super(Material.rock);
-	/*setCreativeTab(DragonArtifacts.tabGeneral);
-	setResistance(10F);
-	setStepSound(Block.soundTypeGlass);
-	setHardness(5.0F);
-	setLightOpacity(0);
-	setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);*/
+public IPedestal() {
+	super(Material.ROCK,"pedestal", 5.0F);
+	setCreativeTab(tab);
+	this.setResistance(10F);
+	setSoundType(SoundType.GLASS);
+	this.setLightOpacity(0);
+	//setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
 }
 
+@Override
+public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	if (!world.isRemote) {
+		TEPedestal tile = getTileEntity(world, pos);
+		IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+		if (!player.isSneaking()) {
+			if (heldItem.isEmpty()) {
+				player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
+			} else {
+				player.setHeldItem(hand, itemHandler.insertItem(0, heldItem, false));
+			}
+			tile.markDirty();
+		} else {
+			ItemStack stack = itemHandler.getStackInSlot(0);
+			if (!stack.isEmpty()) {
+				String localized = DragonArtifacts.proxy.localize(stack.getUnlocalizedName() + ".name");
+				player.addChatMessage(new TextComponentString(stack.getCount() + "x " + localized));
+			} else {
+				player.addChatMessage(new TextComponentString("Empty"));
+			}
+		}
+	}
+	return true;
+}
+
+@Override
+public void breakBlock(World world, BlockPos pos, IBlockState state) {
+	TEPedestal tile = getTileEntity(world, pos);
+	IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+	ItemStack stack = itemHandler.getStackInSlot(0);
+	if (!stack.isEmpty()) {
+		EntityItem item = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+		world.spawnEntity(item);
+	}
+	super.breakBlock(world, pos, state);
+}
+
+
+
+
+@Override
+public Class<TEPedestal> getTileEntityClass() {
+	return TEPedestal.class;
+}
+
+@Nullable
+@Override
+public TEPedestal createTileEntity(World world, IBlockState state) {
+	return new TEPedestal();
+}
+
+/*
 @Override
 public void registerBlockIcons(IIconRegister par1IconRegister)
 {
@@ -187,5 +255,5 @@ public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, in
 	else {
 		return 0;
 	}
-}
+}*/
 }

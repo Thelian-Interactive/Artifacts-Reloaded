@@ -9,18 +9,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import artifreload.common.block.baseBlock.IInvisibleBlock;
+import artifreload.common.block.baseBlock.ClassAbstract.IInvisibleBlock;
 
 
 public class ISolidAir extends IInvisibleBlock {
 
 public static Block instance;
 
-public BlockSolidAir() {
-	super(Material.air);
+public ISolidAir() {
+	super(Material.AIR,"solidair", 0F);
 	setResistance(0F);
 	setStepSound(Block.soundTypeStone);
-	setHardness(0F);
 	setCreativeTab(null);
 	this.setTickRandomly(true); //So it destroys itself over time.
 }

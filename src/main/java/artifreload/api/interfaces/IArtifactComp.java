@@ -28,65 +28,65 @@ public interface IArtifactComp {
 /**
 	* When the item is the active one in the hotbar.  Called 20 times a second.  Called on client & server.
 	*/
-public static String TRIGGER_HELD = "onHeld";
+String TRIGGER_HELD = "onHeld";
 /**
 	* When the item is anywhere in the player's inventory.  Called 20 times a second.  Called on client & server.
 	* Also used to call TRIGGER_ENTITY_UPDATE.  Effect is not required to do anything.
 	* (e.g. ComponentLight takes advantage of this)
 	*/
-public static String TRIGGER_UPDATE = "onUpdate";
+String TRIGGER_UPDATE = "onUpdate";
 /**
 	* When the player right-clicks with the item active.  Called on client only.
 	*/
-public static String TRIGGER_RCLICK = "onItemRightClick";
+String TRIGGER_RCLICK = "onItemRightClick";
 /**
 	* When the player hits another entity with the item.  Called on client & server.
 	*/
-public static String TRIGGER_HIT = "hitEntity";
+String TRIGGER_HIT = "hitEntity";
 /**
 	* Indirect used for getStrVsBlock and canHarvestBlock.  Called on client & server.
 	* Used by ComponentMining to make artifacts effective pickaxes, but all effects may use these methods
 	* (e.g. ComponentDamage makes artifacts just as effective against leaves and webs).
 	*/
-public static String TRIGGER_DIG = "onDig";
+String TRIGGER_DIG = "onDig";
 /**
 	* When the player breaks a block holding the item.  Called on client only.
 	*/
-public static String TRIGGER_BREAK = "onBlockDestroyed";
+String TRIGGER_BREAK = "onBlockDestroyed";
 /**
 	* When the player right clicks on a living entity (i.e. shears).  Called on client & server.
 	*/
-public static String TRIGGER_INTERACT = "itemInteractionForEntity";
+String TRIGGER_INTERACT = "itemInteractionForEntity";
 /**
 	* When the item exists in the world; called once per second.  Called on client only.
 	*/
-public static String TRIGGER_ENTITY_UPDATE = "onEntityItemUpdate";
+String TRIGGER_ENTITY_UPDATE = "onEntityItemUpdate";
 /**
 	* Identical to TRIGGER_ENTITY_UPDATE, used for on-dropped effects.
 	* More useful than TRIGGER_DROPPED_PLAYER.  Called on client & server.
 	*/
-public static String TRIGGER_DROPPED = "onDropped";
+String TRIGGER_DROPPED = "onDropped";
 /**
 	* When the player attempts to drop the item (limited usefulness).  Called on client only?
 	* Fires before the item is ejected into the world.
 	* Not used by any default effects.
 	*/
-public static String TRIGGER_DROPPED_PLAYER = "onDroppedByPlayer";
+String TRIGGER_DROPPED_PLAYER = "onDroppedByPlayer";
 /**
 	* Called every tick.  Effect should only trigger if worn is passed as TRUE, otherwise
 	* is identical to {@link #TRIGGER_UPDATE}
 	*/
-public static String TRIGGER_ARMOR_TICK = "onArmorTickUpdate";
+String TRIGGER_ARMOR_TICK = "onArmorTickUpdate";
 /**
 	* Calls onTakeDamage when the event happens.<br/>
 	* Also calls onArmorTickUpdate every tick (both equipped and unequipped) for any delays you need.
 	*/
-public static String TRIGGER_TAKE_DAMAGE = "onTakeDamage";
+String TRIGGER_TAKE_DAMAGE = "onTakeDamage";
 /**
 	* Calls onDeath when the event happens.<br/>
 	* Also calls onArmorTickUpdate every tick (both equipped and unequipped) for any delays you need.
 	*/
-public static String TRIGGER_ON_DEATH = "onDeath";
+String TRIGGER_ON_DEATH = "onDeath";
 
 /**
 	* Any given effect can have multiple triggers that it can work for.  Any given trigger
@@ -99,7 +99,7 @@ public static String TRIGGER_ON_DEATH = "onDeath";
 	* @param rand
 	* @return the trigger string (see static properties)
 	*/
-public String getRandomTrigger(Random rand, boolean isArmor);
+String getRandomTrigger(Random rand, boolean isArmor);
 
 /**
 	* Used to supply some initial setup on some effects.  Currently called for all effects once.
@@ -111,7 +111,7 @@ public String getRandomTrigger(Random rand, boolean isArmor);
 	* @param effects list of all effects on the item (so far).
 	* @return
 	*/
-public ItemStack attached(ItemStack i, Random rand, int[] effects);
+ItemStack attached(ItemStack i, Random rand, int[] effects);
 /**
 	* Called when a player drops the item into the world, returning false from this will prevent the item from
 	* being removed from the players inventory and spawning in the world (with Q, dropping it outside the
@@ -120,41 +120,41 @@ public ItemStack attached(ItemStack i, Random rand, int[] effects);
 	* @param player The player that dropped the item
 	* @param item The item stack, before the item is removed from the player's inventory.
 	*/
-public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player);
+boolean onDroppedByPlayer(ItemStack item, EntityPlayer player);
 /**
 	* Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
 	* True if something happen and false if it don't. This is for ITEMS, not BLOCKS<br/><br/>
 	* Currently unused
 	*/
-public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10);
+boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10);
 /**
 	* Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
 	* sword.  Returning 0 is acceptable, and the default value will be used.<br/>
 	* Called for all effects and the largest value returned will be used.
 	*/
-public float getDigSpeed(ItemStack itemStack, Block block, int meta);
+float getDigSpeed(ItemStack itemStack, Block block, int meta);
 /**
 	* Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	*/
-public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer);
+ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer);
 /**
 	* Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
 	* the damage on the stack.
 	*/
-public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase);
+boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase);
 /**
 	* Called when a block is broken with the ItemStack active
 	*/
-public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase);
+boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, Block par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase);
 /**
 	* Returns if the item (tool) can harvest results from the block type.<br/>
 	* Called for all effects.
 	*/
-public boolean canHarvestBlock(Block par1Block, ItemStack itemStack);
+boolean canHarvestBlock(Block par1Block, ItemStack itemStack);
 /**
 	* Returns true if the item can be used on the given entity, e.g. shears on sheep.
 	*/
-public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase);
+boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase);
 /**
 	* Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner
 	* control over the update of the item without having to write a subclass.
@@ -163,7 +163,7 @@ public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer pa
 	* @param type onUpdate vs. onEntityItemUpdate vs. onDropped
 	* @return Return true to skip any further update code.
 	*/
-public boolean onEntityItemUpdate(EntityItem entityItem, String type);
+boolean onEntityItemUpdate(EntityItem entityItem, String type);
 /**
 	* Called each tick as long the item is in a player inventory.
 	* @param the item stack
@@ -172,7 +172,7 @@ public boolean onEntityItemUpdate(EntityItem entityItem, String type);
 	* @param the inventory slot number
 	* @param true if the item is held (use {@link #onHeld(ItemStack, World, Entity, int, boolean)} for onHeld effects)
 	*/
-public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5);
+void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5);
 /**
 	* Called each tick as long the item is the player's active item.
 	* @param the item stack
@@ -181,24 +181,24 @@ public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity
 	* @param the inventory slot number
 	* @param will always pass true
 	*/
-public void onHeld(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5);
+void onHeld(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5);
 /**
 	* Called each tick as long the item is equipped in one of the player's armor slots.
 	* If it is not equipped, @param worn will be false (to disable 'permanent' effects).
 	*/
-public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack, boolean worn);
+void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack, boolean worn);
 /**
 	* Allows items to add custom lines of information to the mouseover description.  Used for triggers that
 	* don't have or need a string description.  Such as the "effective pickaxe" effect.
 	* @see #addInformation(ItemStack, EntityPlayer, List, String, boolean)
 	*/
-public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean advTooltip);
+void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean advTooltip);
 /**
 	* Allows items to add custom lines of information to the mouseover description, takes a String
 	* for the trigger type.  99% of the time you'll want to use this one.
 	* @param trigger the trigger string (returned by {@link #getRandomTrigger(Random)}
 	*/
-public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, String trigger, boolean advTooltip);
+void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, String trigger, boolean advTooltip);
 
 /**
 	* Should return a non-empty non-null string that would fill in the blank: ______ Wooden Sword<br/><br/>
@@ -206,7 +206,7 @@ public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlaye
 	* @param rand
 	* @return
 	*/
-public String getPreAdj(Random rand);
+String getPreAdj(Random rand);
 
 /**
 	* Should return a non-empty non-null string that would fill in the blank: Wooden Sword ______<br/><br/>
@@ -214,7 +214,7 @@ public String getPreAdj(Random rand);
 	* @param rand
 	* @return
 	*/
-public String getPostAdj(Random rand);
+String getPostAdj(Random rand);
 
 /**
 	* Icons are chosen based on a weighted sum of the returned flags from all effects.  The higher the value the
@@ -227,7 +227,7 @@ public String getPostAdj(Random rand);
 	*
 	* @return bitflag int
 	*/
-public int getTextureBitflags();
+int getTextureBitflags();
 
 /**
 	* Icons are chosen based on a weighted sum of the returned flags from all effects.  The higher the value the
@@ -241,7 +241,7 @@ public int getTextureBitflags();
 	*
 	* @return bitflag int
 	*/
-public int getNegTextureBitflags();
+int getNegTextureBitflags();
 /**
 	* Called from a LivingHurtEvent handler.  Will only fire if the event.entity is of instance EntityPlayer
 	* Using these requires an understanding of Shared Monster Attributes and using {@link ArtifactsAPI#OnHurtAttribute}<br/>
@@ -250,7 +250,7 @@ public int getNegTextureBitflags();
 	* @param event is the LivingHurtEvent
 	* @param isWornArmor true if the item is equipped to the player's armor slots
 	*/
-public void onTakeDamage(ItemStack itemStack, LivingHurtEvent event, boolean isWornArmor);
+void onTakeDamage(ItemStack itemStack, LivingHurtEvent event, boolean isWornArmor);
 /**
 	* Called from a LivingDeathEvent handler.  Will only fire if the event.entity is of instance EntityPlayer
 	* Using these requires an understanding of Shared Monster Attributes and using {@link ArtifactsAPI#OnHurtAttribute}<br/>
@@ -259,7 +259,7 @@ public void onTakeDamage(ItemStack itemStack, LivingHurtEvent event, boolean isW
 	* @param event is the LivingDeathEvent
 	* @param isWornArmor true if the item is equipped to the player's armor slots
 	*/
-public void onDeath(ItemStack itemStack, LivingDeathEvent event, boolean isWornArmor);
+void onDeath(ItemStack itemStack, LivingDeathEvent event, boolean isWornArmor);
 
 /**
 	* Returns the level of block this artifact can harvest.
@@ -272,6 +272,6 @@ public void onDeath(ItemStack itemStack, LivingDeathEvent event, boolean isWornA
 	* @param stack
 	* @param toolClass
 	*/
-public int getHarvestLevel(ItemStack stack, String toolClass);
+int getHarvestLevel(ItemStack stack, String toolClass);
 
 }

@@ -558,9 +558,7 @@ public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 			mat = 2;
 		if(mat == 0)
 			mat = 5;
-		if(dam == mat)
-			return true;
-		return false;
+		return dam == mat;
 	}
 	else {
 		return false;

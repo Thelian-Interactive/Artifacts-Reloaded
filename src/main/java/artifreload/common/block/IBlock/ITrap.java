@@ -1,11 +1,10 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.dispenser.IPosition;
@@ -31,16 +30,9 @@ import artifreload.api.interfaces.Internal.IBlockSource;
 import artifreload.common.trap.behavior.PositionImpl;
 import artifreload.common.trap.registry.IRegistry;
 import artifreload.common.trap.registry.RegistryDefaulted;
-import artifreload.common.trap.behavior.DispenserBehavior;
-import artifreload.common.entity.ESpecialArrow;
-import artifreload.common.entity.TETrap;
 
 
-
-
-
-
-public class ITrap extends BlockContainer {
+public class ITrap extends BlockContainerBase {
 
 public static Block instance;
 /** Registry for all dispense behaviors. */
@@ -55,7 +47,7 @@ protected IIcon furnaceFrontIcon;
 protected IIcon verticalFront;
 public int renderType = 0;
 
-public BlockTrap()
+public ITrap()
 {
 	super(Material.rock);
 	setCreativeTab(DragonArtifacts.tabGeneral);
@@ -308,7 +300,7 @@ public void onNeighborBlockChange(World par1World, int par2, int par3, int par4,
 
 	if (flag && !flag1)
 	{
-		par1World.scheduleBlockUpdate(par2, par3, par4, this.instance, this.tickRate(par1World));
+		par1World.scheduleBlockUpdate(par2, par3, par4, instance, this.tickRate(par1World));
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, i1 | 8, 4);
 	}
 	else if (!flag && flag1)

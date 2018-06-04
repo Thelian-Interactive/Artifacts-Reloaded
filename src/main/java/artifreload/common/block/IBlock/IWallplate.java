@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 import java.util.Iterator;
@@ -7,17 +7,20 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.ClassAbstract.BlockBaseArtifactPlate;
 
 
-public class IWallplate extends BlockPressurePlate {
+public class IWallplate extends BlockBaseArtifactPlate {
 
 public static Block wood;
 public static Block stone;
@@ -29,7 +32,7 @@ private BlockPressurePlate.Sensitivity triggerMobType;
 private boolean camouflage;
 
 public IWallplate(String textureName, Material material, BlockPressurePlate.Sensitivity triggerMob, boolean camo) {
-	super(textureName, material);
+	super(Material.WOOD,"wallplate", 0.5F);
 	this.triggerMobType = triggerMob;
 	this.camouflage = camo;
 	setHardness(0.5F);
@@ -378,5 +381,7 @@ public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int p
 {
 	return this.func_150060_c/*getPowerSupply*/(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 }
+
+
 }
 

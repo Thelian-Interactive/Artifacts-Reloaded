@@ -1,4 +1,4 @@
-package artifreload.common.block.EBlock;
+package artifreload.common.block.IBlock;
 
 
 import java.util.Iterator;
@@ -24,8 +24,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.ClassAbstract.BlockBaseArtifactPlate;
 
-public class IPressureplate extends BlockBasePressurePlate {
+
+public class IPressurePlate extends BlockBaseArtifactPlate {
 
 public static Block invisStone;
 public static Block invisObsidian;
@@ -37,7 +39,7 @@ private BlockPressurePlate.Sensitivity triggerMobType;
 private boolean invisible;
 private boolean camouflaged;
 
-public BlockArtifactsPressurePlate(String name, Material material, BlockPressurePlate.Sensitivity mobType, boolean invis, boolean camo) {
+public IPressurePlate(String name, Material material, BlockPressurePlate.Sensitivity mobType, boolean invis, boolean camo) {
 	super(name, material);
 	this.invisible = invis;
 	this.camouflaged = camo;

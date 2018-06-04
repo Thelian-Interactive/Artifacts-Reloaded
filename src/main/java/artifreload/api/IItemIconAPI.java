@@ -12,14 +12,14 @@ public interface IItemIconAPI {
 	* @see #registerArtifactIcon(String icon, String type)
 	* @see #registerArtifactIcon(String icon, String overlay, String type)
 	*/
-public HashMap icons = new HashMap();
+HashMap icons = new HashMap();
 
 /**
 	* Internal use only.
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture)
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelOverlay)
 	*/
-public HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>> armorModels = new HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>>();
+HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>> armorModels = new HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>>();
 
 /**
 	* Registers a single, flat, icon to be used by the artifact factory
@@ -29,7 +29,7 @@ public HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>> armorModels = n
 	* @see #registerArtifactIcon(String icon, String overlay, String type)
 	* @Note Dagger, Sword, Staff, and Wand icons should be diagonal, pointing up to the right.
 	*/
-public void registerArtifactIcon(String type, String icon) throws Exception;
+void registerArtifactIcon(String type, String icon) throws Exception;
 
 /**
 	* Registers two icons to be used by the artifact factory.  The overlay is grayscale
@@ -41,7 +41,7 @@ public void registerArtifactIcon(String type, String icon) throws Exception;
 	* @see #registerArtifactIcon(String icon, String type)
 	* @Note Dagger, Sword, Staff, and Wand icons should be diagonal, pointing up to the right.
 	*/
-public void registerArtifactIcon(String type, String icon, String overlay) throws Exception;
+void registerArtifactIcon(String type, String icon, String overlay) throws Exception;
 
 /**
 	* Registers an armor model texture to be used by the artifact factory.
@@ -51,7 +51,7 @@ public void registerArtifactIcon(String type, String icon, String overlay) throw
 	* @param modelTexture The model texture. It should be the filepath to the texture from your mod's assets/textures folder.
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelColor)
 	*/
-public void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture);
+void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture);
 
 /**
 	* Registers an armor model texture to be used by the artifact factory, with a coloured layer as well.
@@ -63,11 +63,12 @@ public void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, 
 	* It should have the same type of filepath as the modelTexture.
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture)
 	*/
-public void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelColor);
+void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelColor);
 
 /**
 	* Internal use only
 	*/
-public IIcon registerIcons(IIconRegister iconReg);
+
+
 }
 

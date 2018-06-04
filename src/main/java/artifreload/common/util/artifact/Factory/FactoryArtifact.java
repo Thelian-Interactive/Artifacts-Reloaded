@@ -527,7 +527,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 	r = rand.nextInt(t);
 	artifact.stackTagCompound.setString("name", artiName);
 	artifact.stackTagCompound.setString("icon", iconType+(r+1));
-	int col = Color.HSBtoRGB((float)(rand.nextInt(360) / 360F), .8f, 1);
+	int col = Color.HSBtoRGB(rand.nextInt(360) / 360F, .8f, 1);
 	artifact.stackTagCompound.setLong("overlay_color", col);
 	artiName = "";
 	artifact.stackTagCompound.setInteger("material", r4);
@@ -777,7 +777,7 @@ private ItemStack applyRandomArmorEffects(ItemStack artifact) {
 	r = rand.nextInt(t);
 	artifact.stackTagCompound.setString("name", artiName);
 	artifact.stackTagCompound.setString("icon", iconType+(r+1));
-	int col = Color.HSBtoRGB((float)(rand.nextInt(360) / 360F), .8f, 1);
+	int col = Color.HSBtoRGB(rand.nextInt(360) / 360F, .8f, 1);
 	artifact.stackTagCompound.setLong("overlay_color", col);
 	artiName = "";
 	artifact.stackTagCompound.setInteger("material", r4);
@@ -905,8 +905,8 @@ private ItemStack enchantArtifactArmor(ItemStack artifact, Vector effectsOnItem,
 	if(stack.stackTagCompound != null) {
 		artifact.stackTagCompound.setTag("ench", stack.stackTagCompound.getTag("ench").copy());
 		NBTTagList tags = artifact.getEnchantmentTagList();
-		int firstID = ((NBTTagCompound)tags.getCompoundTagAt(0)).getShort("id");
-		String enchName = Enchantment.enchantmentsList[firstID].getName();;
+		int firstID = tags.getCompoundTagAt(0).getShort("id");
+		String enchName = Enchantment.enchantmentsList[firstID].getName();
 			/*switch(firstID) {
 				case 0:
 					enchName = "Protecting ";
@@ -977,7 +977,7 @@ public NBTTagCompound createDefault()
 	nbt.setInteger("material",0);
 	nbt.setString("name", "Blank Artifact");
 	nbt.setString("icon", "Artifact");
-	int col = Color.HSBtoRGB((float)(rand.nextInt(360) / 360F), .8f, 1);
+	int col = Color.HSBtoRGB(rand.nextInt(360) / 360F, .8f, 1);
 	nbt.setLong("overlay_color", col);
 	nbt.setIntArray("allComponents", new int[] {0,0,0,0,0});
 	//does setting the name fix repair costs to some value?
@@ -1046,7 +1046,7 @@ private ItemStack enchantArtifact(ItemStack artifact, Vector effectsOnItem, bool
 	if(stack.stackTagCompound != null) {
 		artifact.stackTagCompound.setTag("ench", stack.stackTagCompound.getTag("ench").copy());
 		NBTTagList tags = artifact.getEnchantmentTagList();
-		int firstID = ((NBTTagCompound)tags.getCompoundTagAt(0)).getShort("id");
+		int firstID = tags.getCompoundTagAt(0).getShort("id");
 		String enchName = Enchantment.enchantmentsList[firstID].getName();
 		//System.out.println("Enchanted with: " + firstID + ":" + enchName);
 			/*switch(firstID) {

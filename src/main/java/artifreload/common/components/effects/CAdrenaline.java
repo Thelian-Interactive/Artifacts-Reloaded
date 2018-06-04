@@ -25,11 +25,11 @@ public String getRandomTrigger(Random rand, boolean isArmor) {
 
 @Override
 public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack, boolean worn) {
-	int delay = itemStack.stackTagCompound.getInteger("adrenDelay_armor");
+	int delay =  ;
 	if(!world.isRemote && delay > 0) {
 		if(delay == 198) {
 			//System.out.println("Crashing!");
-			player.addPotionEffect(new PotionEffect(4, 200, 1));
+			player.addPotionEffect(new PotionEffect(, 200, 1));
 			player.addPotionEffect(new PotionEffect(17, 200, 0));
 		}
 	}

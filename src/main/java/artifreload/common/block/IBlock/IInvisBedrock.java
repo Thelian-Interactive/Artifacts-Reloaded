@@ -23,9 +23,11 @@ public IInvisBedrock() {
 
 }
 
-@Override
-public void registerBlockIcons(IIconRegister iconRegister)
-{
-	blockIcon = iconRegister.registerIcon("artifacts:adainvisible");
-}
+
+
+
+
+
+
+
 }

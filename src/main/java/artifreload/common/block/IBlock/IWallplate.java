@@ -28,18 +28,15 @@ public static Block obsidian;
 public static Block camoWood;
 public static Block camoStone;
 public static Block camoObsidian;
-private BlockPressurePlate.Sensitivity triggerMobType;
-private boolean camouflage;
 
-public IWallplate(String textureName, Material material, BlockPressurePlate.Sensitivity triggerMob, boolean camo) {
-	super(Material.WOOD,"wallplate", 0.5F);
-	this.triggerMobType = triggerMob;
-	this.camouflage = camo;
-	setHardness(0.5F);
-	setStepSound(triggerMob == BlockPressurePlate.Sensitivity.everything ? Block.soundTypeWood : Block.soundTypeStone);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+public IWallplate() {
+	super(Material.WOOD,"wallplate", 0.5F, false, false);
+	//this.triggerMobType = triggerMob;
+	//this.camouflage = camo;
+	//setStepSound(triggerMob == BlockPressurePlate.Sensitivity.everything ? Block.soundTypeWood : Block.soundTypeStone);
+	setCreativeTab(tab);
 }
-
+/*
 @Override
 //getMetaFromWeight
 protected int func_150066_d(int weight)
@@ -142,13 +139,13 @@ protected void func_150064_a_(World world, int x, int y, int z)
 //setStateIfMobInteractsWithPlate
 protected void func_150062_a(World world, int x, int y, int z, int meta)
 {
-	int i1 = this.func_150065_e/*getPlateState*/(world, x, y, z);
+	int i1 = this.func_150065_e/*getPlateState(world, x, y, z);
 	boolean flag = meta > 0;
 	boolean flag1 = (i1 > 0);
 	if (meta != i1)
 	{
 		int side = world.getBlockMetadata(x, y, z)&7;
-		int m = this.func_150060_c/*getMetaFromWeight*/(i1)*8 + side;
+		int m = this.func_150060_c/*getMetaFromWeight(i1)*8 + side;
 		world.setBlockMetadataWithNotify(x, y, z, m, 2);
 		this.func_150064_a_(world, x, y, z);
 		world.markBlockRangeForRenderUpdate(x, y, z, x, y, z);
@@ -373,15 +370,15 @@ public void setBlockBoundsForItemRender()
 @Override
 public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 {
-	return this.func_150060_c/*getPowerSupply*/(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
+	return this.func_150060_c//getPowerSupply(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 }
 
 @Override
 public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 {
-	return this.func_150060_c/*getPowerSupply*/(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
+	return this.func_150060_c//getPowerSupply(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 }
-
+*/
 
 }
 

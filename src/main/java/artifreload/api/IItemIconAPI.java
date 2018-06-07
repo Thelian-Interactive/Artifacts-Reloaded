@@ -8,17 +8,24 @@ import net.minecraft.item.ItemArmor;
 public interface IItemIconAPI {
 
 /**
+ * Minecraft Now uses Json scripts and Files for Item Block and Entity Model Loading
+ * @Deprecated
+ *
+ *
+ */
+	 /*
+/**
 	* Internal use only.
 	* @see #registerArtifactIcon(String icon, String type)
 	* @see #registerArtifactIcon(String icon, String overlay, String type)
-	*/
+
 HashMap icons = new HashMap();
 
 /**
 	* Internal use only.
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture)
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelOverlay)
-	*/
+
 HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>> armorModels = new HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>>();
 
 /**
@@ -28,7 +35,7 @@ HashMap<String, HashMap<ItemArmor.ArmorMaterial, String>> armorModels = new Hash
 	* @param icon the icon registration string (to be passed to the IconRegister)
 	* @see #registerArtifactIcon(String icon, String overlay, String type)
 	* @Note Dagger, Sword, Staff, and Wand icons should be diagonal, pointing up to the right.
-	*/
+
 void registerArtifactIcon(String type, String icon) throws Exception;
 
 /**
@@ -40,7 +47,7 @@ void registerArtifactIcon(String type, String icon) throws Exception;
 	* @param overlay the overlay icon registration string
 	* @see #registerArtifactIcon(String icon, String type)
 	* @Note Dagger, Sword, Staff, and Wand icons should be diagonal, pointing up to the right.
-	*/
+
 void registerArtifactIcon(String type, String icon, String overlay) throws Exception;
 
 /**
@@ -50,7 +57,7 @@ void registerArtifactIcon(String type, String icon, String overlay) throws Excep
 	* not the overlay).
 	* @param modelTexture The model texture. It should be the filepath to the texture from your mod's assets/textures folder.
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelColor)
-	*/
+
 void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture);
 
 /**
@@ -62,7 +69,7 @@ void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String 
 	* @param modelColor A second model texture that renders under the first, and is coloured based on the artifact's overlay colour.
 	* It should have the same type of filepath as the modelTexture.
 	* @see #registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture)
-	*/
+
 void registerModelTexture(String icon, ItemArmor.ArmorMaterial material, String modelTexture, String modelColor);
 
 /**

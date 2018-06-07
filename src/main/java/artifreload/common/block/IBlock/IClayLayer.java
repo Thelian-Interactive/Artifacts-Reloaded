@@ -94,7 +94,7 @@ public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 
 	if (block != Blocks.ICE && block != Blocks.PACKED_ICE && block != Blocks.BARRIER)
 	{
-		BlockFaceShape blockfaceshape = iblockstate.func_193401_d(worldIn, pos.down(), EnumFacing.UP);
+		BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos.down(), EnumFacing.UP);
 		return blockfaceshape == BlockFaceShape.SOLID || iblockstate.getMaterial() == Material.LEAVES || block == this && ((Integer)iblockstate.getValue(LAYERS)).intValue() == 8;
 	}
 	else

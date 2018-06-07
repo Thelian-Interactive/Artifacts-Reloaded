@@ -5,6 +5,8 @@ import net.minecraft.entity.ai.attributes.BaseAttribute;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 
+import artifreload.api.trap.ITrapAPI;
+
 
 public class ArtifactAPI {
 
@@ -12,7 +14,7 @@ public class ArtifactAPI {
 	* Apply these monster attributes with your components to get the event handler to detect that an effect is in effect.
 	* See an example segment in this java file.
 	*/
-public static IAttribute OnDeathAttribute = (new RangedAttribute("artifact.ondeath" ,0.0D, 0.0D, 1.0D)).setDescription("Death Event").setShouldWatch(true);
+public static IAttribute OnDeathAttribute = (new RangedAttribute(,"artifact.ondeath" ,0.0D, 0.0D, 1.0D)).setDescription("Death Event").setShouldWatch(true);
 /**
 	* Apply these monster attributes with your components to get the event handler to detect that an effect is in effect.
 	* See an example segment in this java file.
@@ -22,21 +24,21 @@ public static IAttribute OnHurtAttribute = (new RangedAttribute( ,"artifact.onhu
 /**
 	* API for artifacts
 	*/
-public static IArtifactAPI				artifacts				= null;
+public static IArtifactAPI	artifacts = null;
 /**
 	* API for item icons
 	*/
-public static IItemIconAPI				itemicons				= null;
+public static IItemIconAPI     itemicons	= null;
 /**
 	* API for trap components
 	*/
-public static ITrapAPI					traps					= null;
+public static ITrapAPI      traps	= null;
 
 /**
 	* Static variable to hold this API usage example.  It will always be null.<br/>
 	* You will probably want to open up this file to read it in a clean manner.<br/><br/>
 	* This is an example usage of an attribute modifier.  NBT tag keys are probably not named well, this is merely an example.
-	* In this case, this would cause the {@link draco18s.artifacts.api.interfaces.IArtifactComponent#onDeath} function to trigger.<br/>
+	* In this case, this would cause the { draco18s.artifacts.api.interfaces.IArtifactComponent#onDeath} function to trigger.<br/>
 	*
 	* public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 	*     String uu = par1ItemStack.stackTagCompound.getString("HealthUUID");

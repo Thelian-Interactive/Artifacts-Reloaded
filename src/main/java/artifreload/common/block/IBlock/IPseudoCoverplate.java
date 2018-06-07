@@ -15,6 +15,7 @@ public IPseudoCoverplate() {
 	super(Material.ROCK,"pseudocoverplate", 0.5F);
 }
 
+/*
 @Override
 public IIcon getIcon(int par1, int par2)
 {
@@ -34,5 +35,5 @@ public void setBlockBoundsForItemRender()
 {
 	float f1 = 0.125F;
 	this.setBlockBounds(0.5F, 0, 0, 0.5F + f1, 1, 1);
-}
+}*/
 }

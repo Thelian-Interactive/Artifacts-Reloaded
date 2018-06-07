@@ -2,6 +2,7 @@ package artifreload.common.block.baseBlock.ClassAbstract;
 
 
 import net.minecraft.block.BlockBasePressurePlate;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,14 +17,16 @@ public abstract class BlockBaseArtifactPlate extends BlockBasePressurePlate {
 
 public static final CreativeTabs tab = DragonArtifacts.ArtifactBlocksTab;
 	protected String name;
-
-
-	public BlockBaseArtifactPlate(Material material, String name, float hardness, boolean camo) {
+ protected boolean camouflaged;
+ protected boolean invisible;
+	public BlockBaseArtifactPlate(Material material, String name, float hardness, boolean camo, boolean invis, boolean wall) {
 		super(material);
 		this.name = name;
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(tab);
+		invisible = invis;
+		camouflaged =  camo;
 }
 
 @Override

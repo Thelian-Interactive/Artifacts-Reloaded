@@ -3,6 +3,7 @@ package artifreload.common.block.EBlock;
 import javax.annotation.Nullable;
 
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

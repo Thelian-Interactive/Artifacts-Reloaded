@@ -25,7 +25,7 @@ public IBlockIllusionary() {
 	setSoundType(SoundType.STONE);
 	this.setCreativeTab(tab);
 }
-
+/*
 @Override
 public void registerBlockIcons(IIconRegister iconRegister)
 {
@@ -87,7 +87,7 @@ public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
 		/*}
 		else {
 			return blockIcon;
-		}*/
+		}
 }
 
 public IIcon getBlockTextureDirectional(IBlockAccess world, int x, int y, int z, int side, int direction) {
@@ -150,7 +150,7 @@ public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int pa
 
 /**
 	* Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-	*/
+
 public int getRenderBlockPass()
 {
 	return 1;
@@ -177,6 +177,6 @@ public int getRenderType() {
 public int quantityDropped(Random par1Random)
 {
 	return 0;
-}
+}*/
 }
 

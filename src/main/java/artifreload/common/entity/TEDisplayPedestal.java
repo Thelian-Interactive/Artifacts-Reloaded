@@ -109,7 +109,6 @@ public ItemStack getStackInSlotOnClosing(int i) {
 	}
 }
 
-@Override
 public void setInventorySlotContents(int i, ItemStack itemstack) {
 	this.contents = itemstack;
 

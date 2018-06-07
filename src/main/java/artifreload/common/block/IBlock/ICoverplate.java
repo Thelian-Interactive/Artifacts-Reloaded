@@ -3,19 +3,7 @@ package artifreload.common.block.IBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
 
 import artifreload.common.DragonArtifacts;
 import artifreload.common.block.baseBlock.*;
@@ -35,7 +23,7 @@ public ICoverplate() {
 	setRegistryName(name);
 
 }
-
+/*
 @Override
 public int getRenderType() {
 	return renderType;
@@ -217,7 +205,7 @@ public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int
 	if(side == 0 || side == 1)
 		solid = true;
 	return !solid;
-}
+}*/
 }
 
 

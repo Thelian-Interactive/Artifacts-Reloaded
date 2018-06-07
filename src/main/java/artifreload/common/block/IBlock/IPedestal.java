@@ -37,6 +37,7 @@ import artifreload.common.block.EBlock.TEPedestal;
 import artifreload.common.block.baseBlock.BlockBase;
 import artifreload.common.block.baseBlock.ClassAbstract.BlockTileEntity;
 import artifreload.common.entity.TEDisplayPedestal;
+import artifreload.common.gui.GuiHandler;
 
 
 public class IPedestal extends BlockTileEntity<TEPedestal> {
@@ -52,6 +53,21 @@ public IPedestal() {
 	//setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
 }
 
+@Override
+public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+	if (!world.isRemote) {
+		// ...
+		if (!player.isSneaking()) {
+			// ...
+		} else {
+			player.openGui(DragonArtifacts.instance, GuiHandler.PEDESTAL, world, pos.getX(), pos.getY(), pos.getZ());
+		}
+	}
+	return true;
+
+}
+
+/*
 @Override
 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 	if (!world.isRemote) {
@@ -76,6 +92,7 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
 	}
 	return true;
 }
+*/
 
 @Override
 public void breakBlock(World world, BlockPos pos, IBlockState state) {
@@ -102,6 +119,7 @@ public Class<TEPedestal> getTileEntityClass() {
 public TEPedestal createTileEntity(World world, IBlockState state) {
 	return new TEPedestal();
 }
+
 
 /*
 @Override

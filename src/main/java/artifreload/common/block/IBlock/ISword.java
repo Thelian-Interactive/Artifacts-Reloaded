@@ -19,9 +19,9 @@ public class ISword extends BlockContainer {
 
 public ISword() {
 	super(Material.ROCK);
-	this.setBlockBounds(0.4f, 0.0f, 0.4f, 0.6f, 0.5f, 0.6f);
+	/*this.setBlockBounds(0.4f, 0.0f, 0.4f, 0.6f, 0.5f, 0.6f);*/
 }
-
+/*
 @Override
 public TileEntity createNewTileEntity(World world, int meta) {
 	return new TileEntitySword();
@@ -56,6 +56,6 @@ public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par
 public void registerBlockIcons(IIconRegister iconReg)
 {
 	blockIcon = ItemFakeSwordRenderable.wood.getIcon(new ItemStack(ItemFakeSwordRenderable.wood), 0);
-}
+}*/
 }
 

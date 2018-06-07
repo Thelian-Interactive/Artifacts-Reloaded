@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,8 +15,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -24,7 +22,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 
 public interface IArtifactComp {
-
+//TODO Figure out if this is best, if not Create New ones more Modernized.
 /**
 	* When the item is the active one in the hotbar.  Called 20 times a second.  Called on client & server.
 	*/
@@ -166,20 +164,20 @@ boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2Entit
 boolean onEntityItemUpdate(EntityItem entityItem, String type);
 /**
 	* Called each tick as long the item is in a player inventory.
-	* @param the item stack
-	* @param the world
-	* @param the player
-	* @param the inventory slot number
-	* @param true if the item is held (use {@link #onHeld(ItemStack, World, Entity, int, boolean)} for onHeld effects)
+	* the item stack
+	*  the world
+	*  the player
+	*  the inventory slot number
+	* true if the item is held (use {@link #onHeld(ItemStack, World, Entity, int, boolean)} for onHeld effects)
 	*/
 void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5);
 /**
 	* Called each tick as long the item is the player's active item.
-	* @param the item stack
-	* @param the world
-	* @param the player
-	* @param the inventory slot number
-	* @param will always pass true
+	* the item stack
+	* the world
+	* the player
+	* the inventory slot number
+	* will always pass true
 	*/
 void onHeld(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5);
 /**
@@ -196,7 +194,7 @@ void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List
 /**
 	* Allows items to add custom lines of information to the mouseover description, takes a String
 	* for the trigger type.  99% of the time you'll want to use this one.
-	* @param trigger the trigger string (returned by {@link #getRandomTrigger(Random)}
+	* @param trigger the trigger string (returned by { #getRandomTrigger(Random)}
 	*/
 void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, String trigger, boolean advTooltip);
 
@@ -244,7 +242,7 @@ int getTextureBitflags();
 int getNegTextureBitflags();
 /**
 	* Called from a LivingHurtEvent handler.  Will only fire if the event.entity is of instance EntityPlayer
-	* Using these requires an understanding of Shared Monster Attributes and using {@link ArtifactsAPI#OnHurtAttribute}<br/>
+	* Using these requires an understanding of Shared Monster Attributes and using { ArtifactsAPI#OnHurtAttribute}<br/>
 	* You will likely want to create unique components for behaviors that use this.
 	* @param itemStack is the stack associated with the effect
 	* @param event is the LivingHurtEvent
@@ -253,7 +251,7 @@ int getNegTextureBitflags();
 void onTakeDamage(ItemStack itemStack, LivingHurtEvent event, boolean isWornArmor);
 /**
 	* Called from a LivingDeathEvent handler.  Will only fire if the event.entity is of instance EntityPlayer
-	* Using these requires an understanding of Shared Monster Attributes and using {@link ArtifactsAPI#OnHurtAttribute}<br/>
+	* Using these requires an understanding of Shared Monster Attributes and using { ArtifactsAPI#OnHurtAttribute}<br/>
 	* You will likely want to create unique components for behaviors that use this.
 	* @param itemStack is the stack associated with the effect
 	* @param event is the LivingDeathEvent

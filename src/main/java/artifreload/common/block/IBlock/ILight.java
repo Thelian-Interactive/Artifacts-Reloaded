@@ -22,7 +22,7 @@ public ILight() {
 	setCreativeTab(null);
 	this.setTickRandomly(true); //So it destroys itself over time.
 }
-
+/*
 @Override
 public void updateTick(World world, int x, int y, int z, Random rand) {
 	world.setBlockToAir(x, y, z);
@@ -68,7 +68,7 @@ public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
 public int quantityDropped(Random par1Random)
 {
 	return 0;
-}
+}*/
 }
 
 

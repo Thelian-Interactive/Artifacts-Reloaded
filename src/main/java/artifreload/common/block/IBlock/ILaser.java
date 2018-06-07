@@ -33,7 +33,7 @@ public ILaser() {
 
 //	this.setBlockTextureName("artifacts:laser");
 }
-
+/*
 public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
 {
 	return null;
@@ -370,5 +370,5 @@ public boolean isBlockReplaceable(World world, int x, int y, int z) {
 	}
 
 	return true;
-}
+}*/
 }

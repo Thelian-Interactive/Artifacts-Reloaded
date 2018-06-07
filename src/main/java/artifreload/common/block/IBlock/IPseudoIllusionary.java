@@ -13,6 +13,7 @@ public IPseudoIllusionary() {
 	super(Material.ROCK,"pseudoillusionary", 0F);
 }
 
+/*
 @Override
 public IIcon getIcon(int par1, int par2)
 {
@@ -23,5 +24,5 @@ public IIcon getIcon(int par1, int par2)
 public void registerBlockIcons(IIconRegister iconRegister)
 {
 	this.blockIcon = iconRegister.registerIcon("artifacts:invisible");
-}
+}*/
 }

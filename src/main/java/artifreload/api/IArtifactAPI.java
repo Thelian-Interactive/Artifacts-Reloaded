@@ -30,7 +30,7 @@ ItemStack generateRandomArtifact();
 	* @param component the component to register
 	* @author Draco18s
 	*/
-void registerComponent(IArtifactComponent component);
+void registerComponent(IArtifactComp component);
 
 /**
 	* Gets the total number of components registered
@@ -81,7 +81,7 @@ void setTreasureGeneration(String treasureString, int rarity);
 /**
 	* Allows for artifacts to generate in custom treasure gen.  Plugins should provide their own
 	* configuration options for enabling/disabling and altering the rarity.
-	* @see {@link WeightedRandomArtifact}
+	* @see { WeightedRandomArtifact}
 	* @param treasureString
 	* @param type
 	* @param rarity
@@ -127,13 +127,3 @@ enum ArtifactType
 }
 }
 
-
-
-
-
-
-
-
-
-
-}

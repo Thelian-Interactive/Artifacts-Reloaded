@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.*;
 
 import artifreload.common.block.EBlock.TEPedestal;
+import artifreload.common.block.EBlock.TETrap;
 import artifreload.common.block.IBlock.*;
 import artifreload.common.block.baseBlock.BlockBase;
 import artifreload.common.util.artifact.ModInfo;
@@ -41,37 +42,52 @@ public final class ModRegistry {
 	public static final Block solidair = new ISolidAir();
 	public static final Block Bspikes = new ISpikes();
 	public static final TileEntity tepedestal = new TEPedestal();
+	public static final TileEntity tetrap = new TETrap();
 
 
 public static void register(IForgeRegistry<Block> evt) {
 
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
+               evt.register(antibuilder);
+               evt.register(coverplate);
+               evt.register(laser);
+               evt.register(lasersrc);
                evt.register(ipedestal);
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
-               evt.register();
+               evt.register(pressureplate);
+               evt.register(pseudocoverplate);
+               evt.register(pseudotrap);
+               evt.register(fakesword);
+               evt.register(atrap);
+               evt.register(wallplate);
+               evt.register(illusionary);
+               evt.register(moveable);
+               evt.register(invisbedrock);
+               evt.register(invisblock);
+               evt.register(Blight);
+               evt.register(pseudoillusionary);
+               evt.register(Bquicksand);
+               evt.register(solidair);
+               evt.register(Bspikes);
+           GameRegistry.registerTileEntity(TEPedestal.class, "tepedestal");
+           GameRegistry.registerTileEntity(TETrap.class, "tetrap");
 
-	GameRegistry.registerTileEntity(tepedestal.getTileEntityClass(), tepedestal.getRegistryName().toString())
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
+
+
+
+
 
 public static void registerItemBlocks(IForgeRegistry<Item> evt) {
 

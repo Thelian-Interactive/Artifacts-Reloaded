@@ -4,9 +4,13 @@ package artifreload.common.block.IBlock;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -24,19 +28,21 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import artifreload.api.interfaces.Internal.BlockSourceImpl;
+import artifreload.api.trap.IBehaviorITrap;
 import artifreload.common.DragonArtifacts;
-import artifreload.api.interfaces.Internal.IBlockSource;
+import artifreload.common.block.EBlock.TEPedestal;
+import artifreload.common.block.EBlock.TETrap;
+import artifreload.common.block.baseBlock.ClassAbstract.BlockTileEntity;
 import artifreload.common.trap.behavior.PositionImpl;
 import artifreload.common.trap.registry.IRegistry;
 import artifreload.common.trap.registry.RegistryDefaulted;
 
 
-public class ITrap extends BlockContainerBase {
-
+public class ITrap extends BlockTileEntity<TETrap> {
+/*
 public static Block instance;
-/** Registry for all dispense behaviors. */
-private static IBehaviorTrapItem defaultBehavior = new BehaviorDefaultDispenseItem();
+/** Registry for all dispense behaviors.
+private static IBehaviorITrap defaultBehavior = new BehaviorDefaultDispenseItem();
 public static final IRegistry dispenseBehaviorRegistry = new RegistryDefaulted(defaultBehavior);
 protected Random random = new Random();
 @SideOnly(Side.CLIENT)
@@ -46,28 +52,45 @@ protected IIcon furnaceFrontIcon;
 @SideOnly(Side.CLIENT)
 protected IIcon verticalFront;
 public int renderType = 0;
+*/
+public ITrap() {
 
-public ITrap()
-{
-	super(Material.rock);
-	setCreativeTab(DragonArtifacts.tabGeneral);
-	setResistance(10F);
-	setStepSound(Block.soundTypeStone);
-	setHardness(2.0F);
+	super(Material.ROCK, "trap", 2.0F);
+	setCreativeTab(tab);
+	this.setResistance(10F);
+	setSoundType(SoundType.STONE);
+
 }
 
-/**
+@Override
+public Class<TETrap> getTileEntityClass() {
+	return TETrap.class;
+}
+
+@Nullable
+@Override
+public TETrap createTileEntity(World world, IBlockState state) {
+	return new TETrap();
+}
+
+
+
+
+
+
+/*
+
 	* How many world ticks before ticking
-	*/
+
 @Override
 public int tickRate(World par1World)
 {
 	return 4;
 }
 
-/**
+
 	* Called whenever the block is added into the world. Args: world, x, y, z
-	*/
+
 @Override
 public void onBlockAdded(World par1World, int par2, int par3, int par4)
 {
@@ -75,10 +98,10 @@ public void onBlockAdded(World par1World, int par2, int par3, int par4)
 	this.setDispenserDefaultDirection(par1World, par2, par3, par4);
 }
 
-/**
+
 	* sets Dispenser block direction so that the front faces an non-opaque block; chooses west to be direction if all
 	* surrounding blocks are opaque.
-	*/
+
 private void setDispenserDefaultDirection(World par1World, int par2, int par3, int par4)
 {
 	if (!par1World.isRemote)
@@ -115,9 +138,9 @@ private void setDispenserDefaultDirection(World par1World, int par2, int par3, i
 
 @SideOnly(Side.CLIENT)
 
-/**
+
 	* From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	*/
+
 @Override
 public IIcon getIcon(int par1, int par2)
 {
@@ -210,10 +233,10 @@ public static int[] getNeighbourBlockPosition(IBlockAccess world, int x, int y, 
 
 @SideOnly(Side.CLIENT)
 
-/**
+
 	* When this method is called, your block should register all the icons it needs with the given IconRegister. This
 	* is the only chance you get to register icons.
-	*/
+
 @Override
 public void registerBlockIcons(IIconRegister par1IconRegister)
 {
@@ -221,9 +244,11 @@ public void registerBlockIcons(IIconRegister par1IconRegister)
 	this.verticalFront = par1IconRegister.registerIcon("artifacts:arrow_trap_front_vertical");
 }
 
-/**
+
 	* Called upon block activation (right click on the block.)
 	*/
+
+/*
 @Override
 public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 {
@@ -237,7 +262,7 @@ public boolean onBlockActivated(World par1World, int par2, int par3, int par4, E
 
 		if (tileentitydispenser != null)
 		{
-			par5EntityPlayer.func_146102_a/*displayGUIDispenser*/(tileentitydispenser);
+			par5EntityPlayer.func_146102_adisplayGUIDispenser(tileentitydispenser);
 		}
 
 		return true;
@@ -279,9 +304,9 @@ protected void dispense(World par1World, int par2, int par3, int par4, int i)
 	}
 }
 
-/**
+
 	* Returns the behavior for the given ItemStack.
-	*/
+
 protected IBehaviorTrapItem getBehaviorForItemStack(ItemStack par1ItemStack)
 {
 	return (IBehaviorTrapItem)dispenseBehaviorRegistry.func_82594_a(par1ItemStack.getItem());
@@ -290,7 +315,7 @@ protected IBehaviorTrapItem getBehaviorForItemStack(ItemStack par1ItemStack)
 /**
 	* Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
 	* their own) Args: x, y, z, neighbor blockID
-	*/
+
 @Override
 public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block block)
 {
@@ -314,7 +339,7 @@ public void onNeighborBlockChange(World par1World, int par2, int par3, int par4,
 
 /**
 	* Ticks the block if it's been scheduled
-	*/
+
 @Override
 public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 {
@@ -353,7 +378,7 @@ public void updateTick(World par1World, int par2, int par3, int par4, Random par
 
 /**
 	* Returns a new instance of a block's tile entity class. Called on placing the block.
-	*/
+
 @Override
 public TileEntity createNewTileEntity(World par1World, int meta)
 {
@@ -362,7 +387,7 @@ public TileEntity createNewTileEntity(World par1World, int meta)
 
 /**
 	* Called when the block is placed in the world.
-	*/
+
 @Override
 public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 {
@@ -371,13 +396,13 @@ public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, Entit
 
 	if (par6ItemStack.hasDisplayName())
 	{
-		((TileEntityDispenser)par1World.getTileEntity(par2, par3, par4)).func_146018_a/*setCustomName*/(par6ItemStack.getDisplayName());
+		((TileEntityDispenser)par1World.getTileEntity(par2, par3, par4)).func_146018_a/*setCustomName(getDisplayName());
 	}
 }
 
 /**
 	* ejects contained items into the world, and notifies neighbours of an update, as appropriate
-	*/
+
 @Override
 public void breakBlock(World par1World, int par2, int par3, int par4, Block block, int par6)
 {
@@ -445,7 +470,7 @@ public static EnumFacing getFacing(int par0)
 /**
 	* If this returns true, then comparators facing away from this block will use the value from
 	* getComparatorInputOverride instead of the actual redstone signal strength.
-	*/
+
 @Override
 public boolean hasComparatorInputOverride()
 {
@@ -455,7 +480,7 @@ public boolean hasComparatorInputOverride()
 /**
 	* If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
 	* strength when this block inputs to a comparator.
-	*/
+
 @Override
 public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
 {
@@ -482,7 +507,7 @@ public int getRenderBlockPass()
 
     /*public boolean shouldSideBeRendered(World world, int x, int y, int z, int side) {
     	return true;
-    }*/
+    }
 
 @Override
 public boolean isOpaqueCube()
@@ -494,6 +519,6 @@ public boolean isOpaqueCube()
 public boolean renderAsNormalBlock()
 {
 	return true;
-}
+}*/
 }
 

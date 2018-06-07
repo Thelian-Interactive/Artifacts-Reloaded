@@ -1,24 +1,21 @@
 package artifreload.common.block.IBlock;
 
-import net.minecraft.block.Block;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 
 import artifreload.common.block.baseBlock.BlockBase;
 
 
 public class IPseudoTrap extends BlockBase {
 
-public static Block instance;
-@SideOnly(Side.CLIENT)
-protected IIcon furnaceTopIcon;
-@SideOnly(Side.CLIENT)
-protected IIcon furnaceFrontIcon;
 
 public IPseudoTrap() {
 	super(Material.ROCK,"pseudotrap", 2.0F);
 }
 
+
+
+/*
 @Override
 public IIcon getIcon(int par1, int par2)
 {
@@ -32,6 +29,6 @@ public void registerBlockIcons(IIconRegister par1IconRegister)
 	this.furnaceFrontIcon = Blocks.furnace.getBlockTextureFromSide(2);
 	this.furnaceTopIcon = Blocks.furnace.getBlockTextureFromSide(0);
 	this.blockIcon = par1IconRegister.registerIcon("artifacts:pseudo_trap_front");
-}
+}*/
 }
 

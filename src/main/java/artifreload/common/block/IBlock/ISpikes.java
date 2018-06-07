@@ -19,14 +19,14 @@ public class ISpikes extends BlockBase {
 public static Block instance;
 public int renderID = 0;
 
-public BlockSpikes() {
+public ISpikes() {
 	super(Material.IRON,"ispikes", 2.0F);
 	setResistance(5F);
 	setSoundType(SoundType.ANVIL);
 	setCreativeTab(tab);
 
 }
-
+/*
 @Override
 public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 {
@@ -44,7 +44,7 @@ public void onNeighborBlockChange(World par1World, int par2, int par3, int par4,
 {
 	if (!this.canBlockStay(par1World, par2, par3, par4))
 	{
-		par1World.func_147480_a/*destroyBlock*/(par2, par3, par4, true);
+		par1World.func_147480_a/*destroyBlock(par2, par3, par4, true);
 	}
 }
 
@@ -103,5 +103,5 @@ public boolean isOpaqueCube()
 @Override
 public TileEntity createNewTileEntity(World world, int meta) {
 	return new TileEntitySpikes();
-}
+}*/
 }

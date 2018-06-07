@@ -32,9 +32,7 @@ public abstract class IInvisibleBlock extends BlockBase {
 
 }
 
-public void registerItemModel(Item itemBlock) {
-						DragonArtifacts.proxy.registerItemRenderer(itemBlock,0, name);
-}
+
 
 public Item createItemBlock(Item itemBlock) {
 						return new ItemBlock(this).setRegistryName(getRegistryName());

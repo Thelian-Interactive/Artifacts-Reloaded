@@ -35,7 +35,7 @@ public ILaserSrc() {
 
 // 	setBlockTextureName("artifacts:lasersource_front");
 }
-
+/*
 @Override
 public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 {
@@ -151,7 +151,7 @@ public void rebuildLaser(World world, int x, int y, int z, int meta) {
         	System.out.println("trigger?" + shouldbetriggered);
     		world.setBlockMetadataWithNotify(x, y, z, l1|8, 3);
     		notifyNeighborOfChange(world, x, y, z, l1);
-    	}*/
+    	}
 }
 
 @Override
@@ -353,7 +353,7 @@ public void breakBlock(World world, int x, int y, int z, Block block, int meta)
             }
             else {
 
-            }*/
+            }
 	}
 	if (flag1)
 	{
@@ -390,7 +390,7 @@ public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int p
             if ((m & 8) != 8)
             {
             	par1World.setBlockMetadataWithNotify(par2, par3, par4, m, 3);
-            }*/
+            }
 		int l = par1World.getBlockMetadata(par2, par3, par4);
 		boolean flag = (l & 8) == 8;
 		boolean flag1 = false;
@@ -469,7 +469,7 @@ public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer, World
 		par2World.scheduleBlockUpdate(par3, par4, par5, instance, this.tickRate(par2World));
 	}
 	return super.getPlayerRelativeBlockHardness(par1EntityPlayer, par2World, par3, par4, par5);
-}
+}*/
 }
 
 

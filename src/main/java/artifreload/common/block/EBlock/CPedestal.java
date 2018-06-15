@@ -11,9 +11,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import artifreload.common.util.artifact.Pedestal.SlotArtifact;
+
 
 public class CPedestal extends Container {
-
+ protected TEPedestal pedestal;
 
 @Override
 public boolean canInteractWith(EntityPlayer player) {
@@ -22,11 +24,12 @@ public boolean canInteractWith(EntityPlayer player) {
 
 public CPedestal(InventoryPlayer playerInv, final TEPedestal pedestal) {
 	IItemHandler inventory = pedestal.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-	addSlotToContainer(new SlotItemHandler(inventory, 0, 80, 35) {
+	addSlotToContainer(new SlotArtifact(inventory, 0, 80, 35) {
 		@Override
 		public void onSlotChanged() {
 			pedestal.markDirty();
 		}
+
 	});
 
 	for (int i = 0; i < 3; i++) {

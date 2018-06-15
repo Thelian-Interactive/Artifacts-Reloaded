@@ -56,7 +56,7 @@ public void getSubItems(Item item, CreativeTabs tabs, List list)
 	list.add(new ItemStack(instance));
 	for (int i = 0; i < 8; ++i)
 	{
-		list.add(ArtifactsAPI.artifacts.generateRandomArtifact());
+		list.add(ArtifactAPI.artifacts.generateRandomArtifact());
 	}
 }
 

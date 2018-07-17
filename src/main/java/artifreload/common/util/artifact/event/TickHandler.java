@@ -1,6 +1,5 @@
 package artifreload.common.util.artifact.event;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -10,7 +9,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -21,10 +19,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 import artifreload.common.DragonArtifacts;
-import artifreload.common.entity.TEAntibuilder.AntibuilderLocation;
 import artifreload.common.item.Artifact;
 import artifreload.common.item.ArtifactArmour;
-import artifreload.common.item.OrichalcumDust;
+import artifreload.common.item.dusts.OrichalcumDust;
 import artifreload.common.util.artifact.ComponentUtils;
 
 

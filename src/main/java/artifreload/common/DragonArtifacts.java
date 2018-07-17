@@ -30,6 +30,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import artifreload.api.ArtifactAPI;
 import artifreload.common.block.IBlock.*;
 import artifreload.common.gui.*;
+import artifreload.common.item.dusts.OrichalcumDust;
 import artifreload.common.util.artifact.Factory.*;
 import artifreload.common.item.*;
 import artifreload.common.item.ArtifactArmour;
@@ -69,7 +70,7 @@ public class DragonArtifacts{
 		}
 	};
 
-	public static CreativeTabs ArtifactItemTab = new CreativeTabs("Artifact Items") {
+	public static CreativeTabs ArtifactItemsTab = new CreativeTabs("Artifact Items") {
 		@Override
 		public ItemStack getTabIconItem() {
 			return new ItemStack(Artifact.instance);

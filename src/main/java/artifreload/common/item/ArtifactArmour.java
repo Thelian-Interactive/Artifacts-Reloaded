@@ -64,7 +64,7 @@ public static Item[] diamondArray;// = {hdiamond, cdiamond, ldiamond, bdiamond};
 public ArtifactArmour(ItemArmor.ArmorMaterial armorMaterial, int renderID, int iconNum, int damageIndex) {
 	super(armorMaterial, renderID, damageIndex);
 	iconn = iconNum;
-	this.setCreativeTab(DragonArtifacts.tabArtifacts);
+	this.setCreativeTab(tab);
 	this.setHasSubtypes(true);
 	this.setMaxDamage(armorMaterial.getDurability(damageIndex)*2);
 }

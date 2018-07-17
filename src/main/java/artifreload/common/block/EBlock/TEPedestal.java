@@ -32,23 +32,6 @@ private ItemStackHandler inventory = new ItemStackHandler(1);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @Override
 public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 	compound.setTag("inventory", inventory.serializeNBT());

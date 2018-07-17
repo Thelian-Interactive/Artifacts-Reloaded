@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 import net.minecraft.item.ItemArmor;
 
-
+@Deprecated
 public interface IItemIconAPI {
 
 /**
- * Minecraft Now uses Json scripts and Files for Item Block and Entity Model Loading
+ * Minecraft uses json now.
  * @Deprecated
  *
  *

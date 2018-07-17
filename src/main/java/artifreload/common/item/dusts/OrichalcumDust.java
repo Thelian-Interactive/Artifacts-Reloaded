@@ -1,4 +1,4 @@
-package artifreload.common.item;
+package artifreload.common.item.dusts;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ public static Item instance;
 public static final String[] matName = new String[] {"Raw", "Wood", "Stone", "Iron", "Diamond", "Gold", "Leather"};
 private static IIcon[] icons;
 
-public ItemOrichalcumDust() {
+public OrichalcumDust() {
 	super();
 	//repairMaterial = material;
 	setNoRepair();
 	setMaxDamage(0);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+	setCreativeTab(tab);
 	setHasSubtypes(true);
 //		setTextureName("artifacts:orichalcum_dust");
 }

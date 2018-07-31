@@ -18,17 +18,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
-import static net.minecraft.inventory.EntityEquipmentSlot.CHEST;
-import static net.minecraft.inventory.EntityEquipmentSlot.FEET;
-import static net.minecraft.inventory.EntityEquipmentSlot.LEGS;
-
 import net.minecraftforge.common.ISpecialArmor;
 
-import artifreload.api.ArtifactAPI;
 import artifreload.api.IArmourMaterial;
 import artifreload.common.DragonArtifacts;
 import artifreload.common.util.artifact.ModInfo;
-import artifreload.common.util.registry.interfaces.IModelRegister;
 import com.google.common.collect.Multimap;
 
 
@@ -36,12 +30,12 @@ public class ArmourBase extends ItemArmor implements ISpecialArmor, IModelRegist
 
 protected Map<EntityEquipmentSlot, ModelBiped> models = null;
 public static final CreativeTabs tab = DragonArtifacts.ArtifactItemsTab;
-public final EntityEquipmentSlot type;
+public EntityEquipmentSlot type;
 private String name;
 
-public ArmourBase(EntityEquipmentSlot type, String name,) {
+public ArmourBase(EntityEquipmentSlot type, String name) {
 
-	this(IArmourMaterial.ORICHALCUM_RAW, type, name);
+	this(IArmourMaterial.GENERIC, type, name);
 
 }
 

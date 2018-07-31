@@ -1,18 +1,7 @@
 package artifreload.common.proxy;
 
 
-import net.minecraft.block.*;
-import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.item.*;
 import net.minecraft.client.resources.I18n;
-
-import net.minecraftforge.client.model.*;
-import net.minecraftforge.event.*;
-import net.minecraftforge.fml.common.eventhandler.*;
-
-import artifreload.common.proxy.CommonProxy;
-import artifreload.common.util.registry.ModRegistry;
-import artifreload.common.util.artifact.ModInfo;
 
 
 public class ClientProxy extends CommonProxy {
@@ -47,7 +36,7 @@ public void registerItemRenderer(Item item, int meta, String id) {
 
 @SubscribeEvent
 public static void registerBlocks(RegistryEvent.Register<Block> event) {
-	ModRegistry.register(event.getRegistry());
+	ModBlocks.register(event.getRegistry());
 }
 
 

@@ -19,7 +19,7 @@ import artifreload.common.util.artifact.ModInfo;
 
 
 @Mod.EventBusSubscriber(modid = ModInfo.MOD_ID)
-public final class ModRegistry {
+public final class ModBlocks {
 
 	public static final Block antibuilder = new IAntibuilder();
 	public static final Block coverplate = new ICoverplate();
@@ -44,8 +44,12 @@ public final class ModRegistry {
 	public static final TileEntity tepedestal = new TEPedestal();
 	public static final TileEntity tetrap = new TETrap();
 
+    public static void registerItemBlocks(IForgeRegistry<Item> evt) {
 
-public static void register(IForgeRegistry<Block> evt) {
+    }
+
+
+    public static void register(IForgeRegistry<Block> evt) {
 
                evt.register(antibuilder);
                evt.register(coverplate);
@@ -85,13 +89,6 @@ public static void register(IForgeRegistry<Block> evt) {
 
 }
 
-
-
-
-
-public static void registerItemBlocks(IForgeRegistry<Item> evt) {
-
-}
 
 public static void registerModels() {
 

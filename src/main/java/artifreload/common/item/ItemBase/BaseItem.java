@@ -8,7 +8,7 @@ import artifreload.common.DragonArtifacts;
 
 public class BaseItem extends Item {
 
-	public static final CreativeTabs tab = DragonArtifacts.ArtifactItemTab;
+	public static final CreativeTabs tab = DragonArtifacts.ArtifactItemsTab;
 	protected String name;
 
 

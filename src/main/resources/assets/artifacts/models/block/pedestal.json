@@ -1,0 +1,33 @@
+{
+  "textures": {
+    "pedestal":"artifacts:blocks/pedestal",
+    "particle": "blocks/stonebrick"
+  },
+  "elements": [
+    {
+      "from": [, , ],
+      "to": [, , ],
+      "faces": {
+        "down": {
+          "uv": [ , , , ],
+          "texture": "#pedestal",
+          "cullface": "down"
+        },
+        "north": {
+          "uv": [ , , , ],
+          "texture": "#pedestal"
+        },
+        "south"{
+          "uv": [ , , , ],
+          "texture": "#pedestal"
+        },
+        "west" {
+          "uv": [ , , , ],
+          ""
+        }
+      }
+    }
+  ]
+
+
+}

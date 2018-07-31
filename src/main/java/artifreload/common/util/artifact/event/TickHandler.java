@@ -21,7 +21,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import artifreload.common.DragonArtifacts;
 import artifreload.common.item.Artifact;
 import artifreload.common.item.ArtifactArmour;
-import artifreload.common.item.dusts.OrichalcumDust;
 import artifreload.common.util.artifact.ComponentUtils;
 
 

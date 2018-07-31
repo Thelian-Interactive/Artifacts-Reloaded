@@ -15,25 +15,28 @@ public class ArtifactAPI {
 /**
 	* Apply these monster attributes with your components to get the event handler to detect that an effect is in effect.
 	* See an example segment in this java file.
-
+**/
 public static IAttribute OnDeathAttribute = (new RangedAttribute(,"artifact.ondeath" ,0.0D, 0.0D, 1.0D)).setDescription("Death Event").setShouldWatch(true);
 /**
 	* Apply these monster attributes with your components to get the event handler to detect that an effect is in effect.
 	* See an example segment in this java file.
-
+**/
 public static IAttribute OnHurtAttribute = (new RangedAttribute( ,"artifact.onhurt", 0.0D, 0.0D, 1.0D)).setDescription("Hurt Event").setShouldWatch(true);
 
 /**
 	* API for artifacts
 	*
+ **/
 public static IArtifactAPI	artifacts = null;
 /**
 	* API for item icons
 	*
+ * */
 public static IItemIconAPI     itemicons	= null;
 /**
 	* API for trap components
 	*
+ * */
 public static ITrapAPI      traps	= null;
 
 /**

@@ -47,7 +47,7 @@ public ItemStack getStackInSlot(int i) {
 		return contents;
 }
 
-@Override
+
 public void updateEntity() {
 	super.updateEntity();
 	if(itemEnt != null) {

@@ -1,6 +1,7 @@
 package artifreload.common.gui.model;
 
 
+import artifreload.common.block.EBlock.TEPedestal;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,7 @@ ModelRenderer pillar;
 ModelRenderer platform;
 ModelRenderer base;
 
-public ModelPedestal()
+public MPedestal()
 {
 	textureWidth = 64;
 	textureHeight = 32;
@@ -51,7 +52,7 @@ public ModelPedestal()
 }
 
 public void render(TileEntity te, double x, double y, double z) {
-	TileEntityDisplayPedestal es = (TileEntityDisplayPedestal)te;
+	TEPedestal es = (TEPedestal)te;
 
 	if(es.itemEnt != null) {
 		GL11.glPushMatrix();

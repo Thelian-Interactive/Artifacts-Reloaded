@@ -3,6 +3,7 @@ package artifreload.common.block.IBlock;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,12 +25,12 @@ private static final boolean debug = false;
 
 private int flowDelay = 15;
 
-public IQuickSand()
+public IQuicksand()
 {
-	super(Material.sand);
-	setCreativeTab(DragonArtifacts.tabGeneral);
+	super(Material.SAND,"quicksand",2.0F);
+	setCreativeTab(tab);
 	setResistance(10F);
-	this.setStepSound(Block.soundTypeSand);
+	this.setSoundType(SoundType.SAND);
 	this.setTickRandomly(true);
 	setHardness(2.0F);
 }
@@ -42,7 +43,7 @@ public IQuickSand()
 	* @param metadata
 	* @return
 	*/
-@Override
+/*
 public boolean isToolEffective(String type, int metadata)
 {
 	if(type.equals("shovel")) {
@@ -59,7 +60,7 @@ public int getRenderType() {
 
 /**
 	* Ticks the block if it's been scheduled
-	*/
+
 @Override
 public void updateTick(World world, int x, int y, int z, Random rand)
 {
@@ -68,27 +69,27 @@ public void updateTick(World world, int x, int y, int z, Random rand)
 
 /**
 	* Called whenever the block is added into the world. Args: world, x, y, z
-	*/
+
 @Override
 public void onBlockAdded(World world, int x, int y, int z)
 {
-	world.scheduleBlockUpdate(x, y, z, this.instance, flowDelay);
+	world.scheduleBlockUpdate(x, y, z, instance, flowDelay);
 }
 
 /**
 	* Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
 	* their own) Args: x, y, z, neighbor Block
-	*/
+
 @Override
 public void onNeighborBlockChange(World world, int x, int y, int z, Block blockChanged)
 {
-	world.scheduleBlockUpdate(x, y, z, this.instance, flowDelay);
+	world.scheduleBlockUpdate(x, y, z, instance, flowDelay);
 }
 
 /**
 	* Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	* cleared to be reused)
-	*/
+
 @Override
 public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 {
@@ -97,7 +98,7 @@ public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, 
 
 /**
 	* Returns the bounding box of the wired rectangular prism to render.
-	*/
+
 @SideOnly(Side.CLIENT)
 @Override
 public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
@@ -113,7 +114,7 @@ public void setBlockBoundsForItemRender() {
 
 /**
 	* Updates the blocks bounds based on its current state. Args: world, x, y, z
-	*/
+
 public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 {
 	this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0F + (float)(((double)getQuicksandLevel(world, x, y, z)) * 0.0625), 1.0F);
@@ -150,7 +151,7 @@ public boolean renderAsNormalBlock()
 
 /**
 	* Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-	*/
+
 @Override
 public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 {
@@ -308,7 +309,7 @@ private boolean flowSideways(World world, int x, int y, int z, int xOffset, int 
 	* @param z Z of the block to flow into.
 	* @param flowAmount Amount of quicksand that should try to flow into this block.
 	* @return True if the quicksand can flow into this block.
-	*/
+
 public int flowIntoBlock(World world, int x, int y, int z, int flowAmount)
 {
 	Block toFlowInto = world.getBlock(x, y, z);
@@ -364,6 +365,6 @@ public static int getQuicksandLevelFromMeta(int meta) {
 
 public static int getMetaFromQuicksandLevel(int level) {
 	return 16 - level;
-}
+}*/
 }
 

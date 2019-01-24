@@ -2,6 +2,7 @@ package artifreload.common.block.IBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,21 +11,22 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import artifreload.common.DragonArtifacts;
+import artifreload.common.block.baseBlock.BlockBase;
 
 
-public class ISpikes extends BlockContainer {
+public class ISpikes extends BlockBase {
 
 public static Block instance;
 public int renderID = 0;
 
-public BlockSpikes() {
-	super(Material.iron);
+public ISpikes() {
+	super(Material.IRON,"ispikes", 2.0F);
 	setResistance(5F);
-	setStepSound(Block.soundTypeMetal);
-	setCreativeTab(DragonArtifacts.tabGeneral);
-	setHardness(2F);
-}
+	setSoundType(SoundType.ANVIL);
+	setCreativeTab(tab);
 
+}
+/*
 @Override
 public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 {
@@ -42,7 +44,7 @@ public void onNeighborBlockChange(World par1World, int par2, int par3, int par4,
 {
 	if (!this.canBlockStay(par1World, par2, par3, par4))
 	{
-		par1World.func_147480_a/*destroyBlock*/(par2, par3, par4, true);
+		par1World.func_147480_a/*destroyBlock(par2, par3, par4, true);
 	}
 }
 
@@ -101,5 +103,5 @@ public boolean isOpaqueCube()
 @Override
 public TileEntity createNewTileEntity(World world, int meta) {
 	return new TileEntitySpikes();
-}
+}*/
 }

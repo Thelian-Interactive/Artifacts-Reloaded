@@ -46,7 +46,7 @@ public void updateAnimation()
 		{
 			//System.out.println("Moon: " + i + "," + minecraft.theWorld.getCurrentMoonPhaseFactor());
 			this.frameCounter = i;
-			TextureUtil.uploadTextureMipmap((int[][])this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
+			TextureUtil.uploadTextureMipmap(this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
 			//TextureUtil.uploadTextureSub((int[])this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
 		}
 	}

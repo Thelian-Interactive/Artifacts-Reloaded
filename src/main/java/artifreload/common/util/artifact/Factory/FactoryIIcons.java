@@ -406,7 +406,7 @@ public IIcon registerIcons(IIconRegister iconReg) {
 
 	AbstractIcon a;
 	for(int i=0; i < iconList.size(); ++i) {
-		a = (AbstractIcon)iconList.get(i);
+		a = iconList.get(i);
 		IIcon ico, ico2;
 		if(a.overlay != null) {
 			ico2 = iconReg.registerIcon(a.overlay);

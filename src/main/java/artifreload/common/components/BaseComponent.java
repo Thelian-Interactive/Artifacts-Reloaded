@@ -39,9 +39,7 @@ public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
 }
 
 @Override
-public boolean onItemUse(ItemStack itemStack,
-																									EntityPlayer player, World world, int x, int y,
-																									int z, int side, float hitX, float hitY, float hitZ) {
+public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 
 	return false;
 }
@@ -53,24 +51,19 @@ public float getDigSpeed(ItemStack itemStack, Block block, int meta) {
 }
 
 @Override
-public ItemStack onItemRightClick(ItemStack itemStack, World world,
-																																		EntityPlayer player) {
+public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
 
 	return itemStack;
 }
 
 @Override
-public boolean hitEntity(ItemStack itemStack,
-																									EntityLivingBase entityVictim,
-																									EntityLivingBase entityAttacker) {
+public boolean hitEntity(ItemStack itemStack, EntityLivingBase entityVictim, EntityLivingBase entityAttacker) {
 
 	return false;
 }
 
 @Override
-public boolean onBlockDestroyed(ItemStack itemStack, World world,
-																																Block block, int x, int y, int z,
-																																EntityLivingBase entity) {
+public boolean onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entity) {
 
 	return false;
 }
@@ -82,8 +75,7 @@ public boolean canHarvestBlock(Block block, ItemStack itemStack) {
 }
 
 @Override
-public boolean itemInteractionForEntity(ItemStack itemStack,
-																																								EntityPlayer player, EntityLivingBase entity) {
+public boolean itemInteractionForEntity(ItemStack itemStack, EntityPlayer player, EntityLivingBase entity) {
 
 	return false;
 }
@@ -95,14 +87,12 @@ public boolean onEntityItemUpdate(EntityItem entityItem, String type) {
 }
 
 @Override
-public void onUpdate(ItemStack itemStack, World world,
-																					Entity entity, int slot, boolean held) {
+public void onUpdate(ItemStack itemStack, World world, Entity entity, int slot, boolean held) {
 
 }
 
 @Override
-public void onHeld(ItemStack itemStack, World world,
-																			Entity entity, int slot, boolean held) {
+public void onHeld(ItemStack itemStack, World world, Entity entity, int slot, boolean held) {
 
 }
 

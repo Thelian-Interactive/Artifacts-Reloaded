@@ -1,37 +1,22 @@
 package artifreload.common;
 
-import java.util.Arrays;
-
-import net.minecraft.block.BlockPressurePlate;
-import net.minecraft.block.material.Material;
+import artifreload.common.util.registry.ModBlocks;
+import artifreload.common.util.registry.ModItems;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
 
-import net.minecraftforge.common.config.ConfigCategory;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.event.*;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.*;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import artifreload.api.ArtifactAPI;
-import artifreload.common.block.EBlock.*;
-import artifreload.common.block.IBlock.*;
-import artifreload.common.gui.*;
-import artifreload.common.util.artifact.Factory.*;
 import artifreload.common.item.*;
-import artifreload.common.item.ArtifactArmour;
 import artifreload.common.proxy.CommonProxy;
 import artifreload.common.util.artifact.ModInfo;
 import artifreload.common.world.structure.PlaceTraps;
@@ -68,12 +53,51 @@ public class DragonArtifacts{
 		}
 	};
 
-	public static CreativeTabs ArtifactItemTab = new CreativeTabs("Artifact Items") {
+	public static CreativeTabs ArtifactItemsTab = new CreativeTabs("Artifact Items") {
 		@Override
 		public ItemStack getTabIconItem() {
 			return new ItemStack(Artifact.instance);
 		}
 	};
+
+	@Mod.EventBusSubscriber
+    public static class RegistrationHandler{
+
+        @SubscribeEvent
+        public static void registerItems(RegistryEvent.Register<Item> event) {
+            ModItems.register(event.getRegistry());
+        }
+
+        @SubscribeEvent
+        public static void registerBlocks(RegistryEvent.Register<Block> event) {
+            ModBlocks.register(event.getRegistry());
+        }
+
+        @SubscribeEvent
+        public static void registerItems(ModelRegistryEvent event) {
+            ModItems.registerModels();
+            ModBlocks.registerModels();
+        }
+
+    }
+
+
+
+
+
+
+
+	/*
+@Mod.EventBusSubscriber
+public static class RegistrationHandler {
+
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event) {
+
+	}
+
+}
+
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -496,7 +520,7 @@ public class DragonArtifacts{
 		/*GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemOrichalcumDust.instance, 1, 2), "ingotIron", new ItemStack(ItemOrichalcumDust.instance, 1, 0), Item.goldNugget));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemOrichalcumDust.instance, 1, 3), "gemDiamond", new ItemStack(ItemOrichalcumDust.instance, 1, 0), Item.goldNugget));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemOrichalcumDust.instance, 1, 4), "ingotGold", new ItemStack(ItemOrichalcumDust.instance, 1, 0), Item.goldNugget));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemOrichalcumDust.instance, 1, 5), "leather", new ItemStack(ItemOrichalcumDust.instance, 1, 0), Item.goldNugget));*/
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemOrichalcumDust.instance, 1, 5), "leather", new ItemStack(ItemOrichalcumDust.instance, 1, 0), Item.goldNugget));*//*
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemOrichalcumDust.instance, 2, 6), new ItemStack(Items.leather), new ItemStack(ItemOrichalcumDust.instance, 1, 0), Items.gold_nugget);
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemOrichalcumDust.instance, 2, 3), new ItemStack(Items.iron_ingot), new ItemStack(ItemOrichalcumDust.instance, 1, 0), Items.gold_nugget);
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemOrichalcumDust.instance, 2, 5), new ItemStack(Items.gold_ingot), new ItemStack(ItemOrichalcumDust.instance, 1, 0), Items.gold_nugget);
@@ -565,5 +589,5 @@ public class DragonArtifacts{
 		mystcraftLoaded = Loader.isModLoaded("Mystcraft");
 		//System.out.println("[Artifacts] Is Baubles Loaded? " + baublesLoaded);
 		//System.out.println("[Artifacts] Is Mystcraft Loaded? " + mystcraftLoaded);
-	}
+	}*/
 }

@@ -17,7 +17,7 @@ public EntityItem itemEnt = null;
 public int metadata = 0;
 private ItemStack[] contents = new ItemStack[1];
 
-public TileEntitySword() {
+public TESword() {
 	itemEnt = new EntityItem(worldObj);
 	contents[0] = new ItemStack(ItemFakeSwordRenderable.wood);
 	itemEnt.setEntityItemStack(contents[0]);
@@ -80,7 +80,7 @@ public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 
 	for (int i = 0; i < nbttaglist.tagCount(); ++i)
 	{
-		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+		NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 		int j = nbttagcompound1.getByte("Slot") & 255;
 
 		if (j >= 0 && j < this.contents.length)

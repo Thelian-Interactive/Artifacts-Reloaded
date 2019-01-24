@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "artifacts",
+  "name": "Artifacts Reloaded",
+  "description": "Uniquely Ancient Artifacts in Minecraft.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Draco18s ,Thelian Interactive"],
+  "credits": "Draco18s as the Original Mod Author and Thelian Interactive Maintaining the Mod Past 1.7.10",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

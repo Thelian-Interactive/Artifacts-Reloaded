@@ -22,7 +22,6 @@ protected StructureApprenticeTower() {
 public boolean generate(World world, Random random, int x, int y, int z) {
 	for (z -= 8; y > 5 && (!world.getBlock(x, y, z).isOpaqueCube() || world.getBlock(x, y, z) == Blocks.leaves); --y)
 	{
-		;
 	}
 
 	if (y <= 61)

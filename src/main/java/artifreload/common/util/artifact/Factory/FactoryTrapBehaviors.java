@@ -2,9 +2,9 @@ package artifreload.common.util.artifact.Factory;
 
 import net.minecraft.item.Item;
 
-import artifreload.api.ITrapAPI;
-import artifreload.api.interfaces.IBehaviorITrap;
-import artifreload.common.block.EBlock.ITrap;
+import artifreload.api.trap.IBehaviorITrap;
+import artifreload.api.trap.ITrapAPI;
+import artifreload.common.block.IBlock.ITrap;
 
 
 public class FactoryTrapBehaviors implements ITrapAPI {

@@ -57,13 +57,8 @@ public boolean onBlockDestroyed(ItemStack itemStack, World world, Block block, i
 
 @Override
 public boolean canHarvestBlock(Block block, ItemStack itemStack) {
-	if (block != Blocks.coal_ore && block != Blocks.iron_ore && block != Blocks.emerald_ore && block != Blocks.gold_ore && block != Blocks.diamond_ore && block != Blocks.quartz_ore && block != Blocks.lapis_ore && block != Blocks.redstone_ore && block != Blocks.lit_redstone_ore)
-	{
-		return false;
-	}
-	else {
-		return true;
-	}
+
+	return block == Blocks.coal_ore || block == Blocks.iron_ore || block == Blocks.emerald_ore || block == Blocks.gold_ore || block == Blocks.diamond_ore || block == Blocks.quartz_ore || block == Blocks.lapis_ore || block == Blocks.redstone_ore || block == Blocks.lit_redstone_ore;
 }
 
 public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, String trigger, boolean advTooltip) {

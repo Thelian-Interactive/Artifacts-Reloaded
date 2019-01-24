@@ -1,6 +1,5 @@
 package artifreload.common.util.artifact.event;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -10,18 +9,26 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+
+import artifreload.common.DragonArtifacts;
+import artifreload.common.item.Artifact;
+import artifreload.common.item.ArtifactArmour;
+import artifreload.common.util.artifact.ComponentUtils;
 
 
 public class TickHandler {
 
 private World world;
 private EntityPlayer eobj;
-public static ArtifactTickHandler instance;
+public static TickHandler instance;
 private boolean shouldRun = false;
 private int lastLevel = 0;
 private int trigger1 = 0;
@@ -33,7 +40,7 @@ private boolean randomized = false;
 private int healthTick = 0;
 public static int repairCount = 0;
 
-public ArtifactTickHandler() {
+public TickHandler() {
 	instance = this;
 }
 
@@ -53,8 +60,8 @@ public void onTick(ServerTickEvent event) {
 				if(eobj.experienceLevel >= trigger4 && lastLevel > eobj.experienceLevel) {
 					int m = Math.min((eobj.experienceLevel+1)/3, 4);
 					eobj.addExperienceLevel(-1*m);
-					EntityItem ent = new EntityItem(world, eobj.posX, eobj.posY, eobj.posZ, new ItemStack(ItemOrichalcumDust.instance, m));
-					world.spawnEntityInWorld(ent);
+					EntityItem ent = new EntityItem(world, eobj.posX, eobj.posY, eobj.posZ, new ItemStack(OrichalcumDust.instance, m));
+					world.spawnEntity(ent);
 				}
 			}
 		}
@@ -76,13 +83,13 @@ public void onTick(ServerTickEvent event) {
 				int artifactSpeedBoostCount = 0;
 
 				//Loop through main inventory.
-				for(int i = 0; i < player.inventory.mainInventory.length; i++) {
-					ItemStack current = player.inventory.mainInventory[i];
+				for(int i = 0; i < player.inventory.mainInventory.size(); i++) {
+					ItemStack current = player.inventory.mainInventory.get(i);
 
 
-					if(current != null && current.getTagCompound() != null && current.getItem() instanceof ItemArtifact) {
+					if(current != null && current.getTagCompound() != null && current.getItem() instanceof Artifact) {
 						if( !(DragonArtifacts.baublesLoaded && DragonArtifacts.baublesMustBeEquipped &&
-														UtilsForComponents.equipableByBaubles(current.stackTagCompound.getString("iconName")))){
+														ComponentUtils.equipableByBaubles(current.stackTagCompound.getString("iconName")))){
 							int effectID = current.getTagCompound().getInteger("onUpdate");
 							if(effectID == 16) { //ComponentHealth
 								artifactHealthBoostCount++;
@@ -92,9 +99,9 @@ public void onTick(ServerTickEvent event) {
 				}
 
 				//Loop through equipped armour slots.
-				for(int i = 0; i < player.inventory.armorInventory.length; i++) {
-					ItemStack current = player.inventory.armorInventory[i];
-					if(current != null && current.getTagCompound() != null && current.getItem() instanceof ItemArtifactArmor) {
+				for(int i = 0; i < player.inventory.armorInventory.size(); i++) {
+					ItemStack current = player.inventory.armorInventory.get(i);
+					if(current != null && current.getTagCompound() != null && current.getItem() instanceof ArtifactArmour) {
 						int effectID = current.getTagCompound().getInteger("onArmorTickUpdate");
 						int effectID2 = current.getTagCompound().getInteger("onArmorTickUpdate2");
 						//ComponentHealth
@@ -112,7 +119,7 @@ public void onTick(ServerTickEvent event) {
 					}
 				}
 
-				//Look through Baubles slots if Baubles is loaded.
+				/**Look through Baubles slots if Baubles is loaded.
 				if(DragonArtifacts.baublesLoaded) {
 					IInventory baublesSlots = BaublesApi.getBaubles(player);
 
@@ -126,7 +133,7 @@ public void onTick(ServerTickEvent event) {
 							}
 						}
 					}
-				}
+				}*/
 
 				//Update health boost attributes
 				updateHealthBoost(artifactHealthBoostCount, player);
@@ -145,7 +152,7 @@ public void onTick(ServerTickEvent event) {
 			repairCount = 0;
 		}
 
-		//Update antibuilders present
+		/**Update antibuilders present
 		ArrayList<AntibuilderLocation> toRemove = new ArrayList<AntibuilderLocation>();
 		for(AntibuilderLocation location : TileEntityAntibuilder.antibuilders.keySet()) {
 			int strength = TileEntityAntibuilder.antibuilders.get(location);
@@ -157,7 +164,7 @@ public void onTick(ServerTickEvent event) {
 
 		for(AntibuilderLocation location : toRemove) {
 			TileEntityAntibuilder.antibuilders.remove(location);
-		}
+		}*/
 	}
 }
 
@@ -177,7 +184,7 @@ private void updateHealthBoost(int artifactHealthBoostCount, EntityPlayer player
 			healthID = UUID.fromString(uu);
 		}
 
-		IAttributeInstance atinst = player.getEntityAttribute(SharedMonsterAttributes.maxHealth);
+		IAttributeInstance atinst = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 
 		atinst.removeModifier(new AttributeModifier(healthID, "HealthBoostComponent", 5F * oldHealthBoostCount, 0));
 		atinst.applyModifier(new AttributeModifier(healthID, "HealthBoostComponent", 5F * artifactHealthBoostCount, 0));
@@ -210,7 +217,7 @@ private void updateKnockbackResistance(int artifactKnockbackCount, EntityPlayer 
 			knockbackID = UUID.fromString(uu);
 		}
 
-		IAttributeInstance atinst = player.getEntityAttribute(SharedMonsterAttributes.knockbackResistance);
+		IAttributeInstance atinst = player.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 
 		atinst.removeModifier(new AttributeModifier(knockbackID, "KnockbackComponent", 0.2F * oldKnockbackCount, 0));
 		atinst.applyModifier(new AttributeModifier(knockbackID, "KnockbackComponent", 0.2F * artifactKnockbackCount, 0));
@@ -235,7 +242,7 @@ private void updateSpeedBoost(int artifactSpeedBoostCount, EntityPlayer player) 
 			speedID = UUID.fromString(uu);
 		}
 
-		IAttributeInstance atinst = player.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
+		IAttributeInstance atinst = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 
 		atinst.removeModifier(new AttributeModifier(speedID, "SpeedBoostComponent", 0.05F * oldSpeedBoostCount, 2));
 		atinst.applyModifier(new AttributeModifier(speedID, "SpeedBoostComponent", 0.05F * artifactSpeedBoostCount, 2));

@@ -1,17 +1,60 @@
 package artifreload.common.proxy;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
-
-import artifreload.common.proxy.CommonProxy;
+import net.minecraft.client.resources.I18n;
 
 
 public class ClientProxy extends CommonProxy {
 
+@Override
+public String localize(String unlocalized, Object... args) {
+	return I18n.format(unlocalized, args);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
+@Override
+public void registerItemRenderer(Item item, int meta, String id) {
+	ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(ModInfo.MOD_ID + ":" + id, "inventory"));
+}
+
+@SubscribeEvent
+public static void registerBlocks(RegistryEvent.Register<Block> event) {
+	ModBlocks.register(event.getRegistry());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
 public static TextureAtlasSprite calendar;
 
 @Override
@@ -70,5 +113,5 @@ public void registerRenders() {
 public void registerEventHandlers() {
 	super.registerEventHandlers();
 	MinecraftForge.EVENT_BUS.register(new ArtifactClientEventHandler());
-}
+}*/
 }

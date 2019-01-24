@@ -8,12 +8,17 @@ import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import artifreload.common.DragonArtifacts;
+import artifreload.common.entity.ArrowEffect;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
@@ -51,14 +56,14 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
 	{
 		int effectID = buff.readInt();
 
-		EntityPlayerMP p = context.getServerHandler().playerEntity;
+		EntityPlayerMP p = context.getServerHandler().player;
 
 		if(p == null) {
 			System.out.println("Couldn't find the player.");
 			return null;
 		}
 
-		World world = p.worldObj;
+		World world = p.world;
 		ItemStack is;
 
 		switch(effectID) {
@@ -68,7 +73,7 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
 				break;
 			case FIREBALLS:
 				if(buff.readInt() == p.getEntityId()) {
-					Vec3 vec3 = p.getLook(1.0F);
+					Vec3d vec3 = p.getLook(1.0F);
 					double d8 = 4.0D;
 					//System.out.println(vec3);
 					//EntityLargeFireball entitylargefireball = new EntityLargeFireball(world, p.posX + vec3.xCoord * d8, p.posY, p.posZ + vec3.zCoord * d8, vec3.xCoord, vec3.yCoord, vec3.zCoord);
@@ -83,7 +88,7 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
                         entitylargefireball.posY = p.posY + (double)(p.height / 2.0F);
                         entitylargefireball.posZ = p.posZ;// + vec3.zCoord * d8;*/
 					//System.out.println(entitylargefireball.posX + "," + entitylargefireball.posY + "," + entitylargefireball.posZ);
-					world.spawnEntityInWorld(entitylargefireball);
+					world.spawnEntity(entitylargefireball);
 					is = p.inventory.getStackInSlot(buff.readInt());
 					if(is != null)
 						is.damageItem(1, p);
@@ -183,7 +188,7 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
 				int aug = buff.readInt();
 				if(ent instanceof EntityLivingBase) {
 					EntityLivingBase living = (EntityLivingBase) ent;
-					living.addPotionEffect(new PotionEffect(pid, dur, aug));
+					living.addPotionEffect(new PotionEffect(Potion.getPotionById(pid), dur, aug));
 				}
 				break;
 			case REPAIRING:
@@ -191,7 +196,7 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
 				is.setItemDamage(is.getItemDamage()-5);
 				is = p.inventory.getStackInSlot(buff.readInt());
 				if(is != null)
-					is.damageItem(2, (EntityLivingBase) p);
+					is.damageItem(2, p);
 				break;
 			case EXPLODING_ARROWS:
 				if(buff.readInt() == p.getEntityId()) {
@@ -304,7 +309,7 @@ public IMessage onMessage(CToSMessage packet, MessageContext context)
 					}
 				}
 				SToCMessage recordPacket = new SToCMessage(out);
-				DragonArtifacts.artifactNetworkWrapper.sendToDimension(recordPacket, world.provider.dimensionId);
+				DragonArtifacts.artifactNetworkWrapper.sendToDimension(recordPacket, world.provider.getDimension());
 				break;
 //			case PLACE_STRUCTURE:
 //				//System.out.println("Placing Structure!");

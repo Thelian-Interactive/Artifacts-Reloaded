@@ -42,7 +42,7 @@ public static class Flags {
 	* @param entity The handler expects a player.
 	*/
 public static void sendPotionPacket(int potionID, int duration, int level, Entity entity) {
-	if(entity.worldObj.isRemote && entity instanceof EntityPlayer) {
+	if(entity.world.isRemote && entity instanceof EntityPlayer) {
 		PacketBuffer out =  new PacketBuffer(Unpooled.buffer());
 
 		out.writeInt(PacketHandlerServer.POTIONS);
@@ -56,7 +56,7 @@ public static void sendPotionPacket(int potionID, int duration, int level, Entit
 }
 
 public static void sendItemDamagePacket(EntityPlayer player, int inventorySlot, int damageToDeal) {
-	if(player.worldObj.isRemote) {
+	if(player.world.isRemote) {
 		PacketBuffer out =  new PacketBuffer(Unpooled.buffer());
 
 		out.writeInt(PacketHandlerServer.DAMAGE_ITEM);

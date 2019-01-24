@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;

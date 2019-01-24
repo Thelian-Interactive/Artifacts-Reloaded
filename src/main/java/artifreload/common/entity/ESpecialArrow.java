@@ -32,54 +32,54 @@ private int ticksInAir = 0;
 private float knockbackStrength = 0;
 public ArrowEffect effect = ArrowEffect.DEFAULT;
 
-public EntitySpecialArrow(World world) {
+public ESpecialArrow(World world) {
 	super(world);
 }
 
-public EntitySpecialArrow(World world, double x, double y, double z) {
+public ESpecialArrow(World world, double x, double y, double z) {
 	super(world, x, y, z);
 }
-public EntitySpecialArrow(World world, double x, double y, double z, double damage) {
+public ESpecialArrow(World world, double x, double y, double z, double damage) {
 	super(world, x, y, z);
 	setDamage(damage);
 }
 
-public EntitySpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance) {
+public ESpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance) {
 	super(world, shooter, target, power, variance);
 }
 
-public EntitySpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance, double damage) {
+public ESpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance, double damage) {
 	super(world, shooter, target, power, variance);
 	setDamage(damage);
 }
 
-public EntitySpecialArrow(World world, EntityLivingBase shooter, float power) {
+public ESpecialArrow(World world, EntityLivingBase shooter, float power) {
 	super(world, shooter, power);
 }
 
-public EntitySpecialArrow(World world, EntityLivingBase shooter, float power, double damage) {
+public ESpecialArrow(World world, EntityLivingBase shooter, float power, double damage) {
 	super(world, shooter, power);
 	setDamage(damage);
 }
 
-public EntitySpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance, ArrowEffect fx) {
+public ESpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance, ArrowEffect fx) {
 	super(world, shooter, target, power, variance);
 	this.effect = fx;
 	setStatsByEffect();
 }
-public EntitySpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance, double damage, ArrowEffect fx) {
+public ESpecialArrow(World world, EntityLivingBase shooter, EntityLivingBase target, float power, float variance, double damage, ArrowEffect fx) {
 	super(world, shooter, target, power, variance);
 	setDamage(damage);
 	this.effect = fx;
 	setStatsByEffect();
 }
 
-public EntitySpecialArrow(World world, EntityLivingBase shooter, float power, ArrowEffect fx) {
+public ESpecialArrow(World world, EntityLivingBase shooter, float power, ArrowEffect fx) {
 	super(world, shooter, power);
 	this.effect = fx;
 	setStatsByEffect();
 }
-public EntitySpecialArrow(World world, EntityLivingBase shooter, float power, double damage, ArrowEffect fx) {
+public ESpecialArrow(World world, EntityLivingBase shooter, float power, double damage, ArrowEffect fx) {
 	super(world, shooter, power);
 	setDamage(damage);
 	this.effect = fx;

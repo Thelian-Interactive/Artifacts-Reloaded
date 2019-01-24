@@ -6,6 +6,9 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 @SideOnly(Side.CLIENT)
 public class MClayGolem extends ModelBase {
@@ -28,17 +31,17 @@ public ModelRenderer ironGolemLeftLeg;
 /** The right leg model for the Iron Golem. */
 public ModelRenderer ironGolemRightLeg;
 
-public ModelClayGolem()
+public MClayGolem()
 {
 	this(0.0F);
 }
 
-public ModelClayGolem(float par1)
+public MClayGolem(float par1)
 {
 	this(par1, -7.0F);
 }
 
-public ModelClayGolem(float par1, float par2)
+public MClayGolem(float par1, float par2)
 {
 	short short1 = 128;
 	short short2 = 128;

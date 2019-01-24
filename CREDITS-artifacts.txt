@@ -1,0 +1,23 @@
+This is Forge Mod Loader.
+
+You can find the source code at all times at https://github.com/Thelian-Interactive/Artifacts-Reloaded
+
+This minecraft mod is a clean open source Minecraft Mod that adds Unique Artifacts to the Game.
+
+
+The code is authored by Draco18s, and Maintained By Thelian Interactive. (Post MC 1.7.10)
+
+It began by adding the ability to have  approximately 32 different combinations of trigger and effect, 
+with up to 5 effects possible per item, for an astounding 24,165,120 (approx) different items before enchantments are applied!
+
+It also contains the ability for an artifact to have its own unique name 
+(generated based on its effects) and Model
+ (chosen from a pool of 36 with a randomized color).
+
+Additionally, it contains 
+
+It also contains 
+
+It also contains 
+
+

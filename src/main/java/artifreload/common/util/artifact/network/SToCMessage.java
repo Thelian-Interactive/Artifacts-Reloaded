@@ -33,7 +33,7 @@ public SToCMessage(byte[] dataToSet)
 
 /**
 	* Deconstruct your message into the supplied byte buffer
-	* @param buf
+	* @param buffer where you call the buffer from
 	*/
 @Override
 public void toBytes(ByteBuf buffer) {

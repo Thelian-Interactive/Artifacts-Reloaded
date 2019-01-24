@@ -198,7 +198,7 @@ public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 
 	for (int i = 0; i < nbttaglist.tagCount(); ++i)
 	{
-		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+		NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 		int j = nbttagcompound1.getByte("Slot") & 255;
 
 		if (j >= 0 && j < this.dispenserContents.length)
@@ -266,7 +266,7 @@ public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
 			}
 		}
 	}
-	return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+	return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 }
 
 @Override

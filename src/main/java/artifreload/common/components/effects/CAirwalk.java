@@ -14,7 +14,7 @@ import artifreload.common.components.BaseComponent;
 public class CAirwalk extends BaseComponent {
 
 
-public ComponentAirWalk() {
+public CAirWalk() {
 }
 
 public String getRandomTrigger(Random rand, boolean isArmor) {

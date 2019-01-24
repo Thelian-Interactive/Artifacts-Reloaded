@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.IShearable;
@@ -69,13 +70,13 @@ private Random rand = new Random();
 private int maxTNT = 3;
 private int expTNT = 0;
 
-@Override
+
 public void updateEntity() {
 	if(active) {
 		antibuilders.put(new AntibuilderLocation(this.xCoord, this.yCoord, this.zCoord, this.worldObj.provider.dimensionId), 10);
 
 		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(xCoord-32, yCoord-32, zCoord-32, xCoord+32, yCoord+32, zCoord+32);
-		List w = worldObj.getEntitiesWithinAABB(EntityPlayer.class, aabb);
+		List w = world.getEntitiesWithinAABB(EntityPlayer.class, aabb);
 		if(w.size() == 0) {
 			expTNT = 0;
 			return;
@@ -88,7 +89,7 @@ public void updateEntity() {
 			for(int ox = 0; ox <= 10; ox++) {
 				for(int oy = 0; oy <= 10; oy++) {
 					for(int oz = 0; oz <= 10; oz++) {
-						blocks[ox*121+oy*11+oz] = (short)Block.getIdFromBlock(worldObj.getBlock(xCoord+ox-5, yCoord+oy-5, zCoord+oz-5));
+						blocks[ox*121+oy*11+oz] = (short)Block.getIdFromBlock(world.getBlock(xCoord+ox-5, yCoord+oy-5, zCoord+oz-5));
 						metas[ox*121+oy*11+oz] = (byte)worldObj.getBlockMetadata(xCoord+ox-5, yCoord+oy-5, zCoord+oz-5);
 						if(blocks[ox*121+oy*11+oz] == Block.getIdFromBlock(BlockTrap.instance)) {
 							TileEntityTrap te = (TileEntityTrap)worldObj.getTileEntity(xCoord+ox-5, yCoord+oy-5, zCoord+oz-5);

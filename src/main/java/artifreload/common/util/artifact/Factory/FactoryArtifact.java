@@ -18,8 +18,13 @@ import net.minecraft.nbt.NBTTagList;
 
 import net.minecraftforge.common.config.Configuration;
 
+import artifreload.api.ArtifactAPI;
 import artifreload.api.IArtifactAPI;
 import artifreload.api.interfaces.IArtifactComp;
+import artifreload.common.components.ComponentNull;
+import artifreload.common.components.effects.*;
+import artifreload.common.item.Artifact;
+import artifreload.common.item.ArtifactArmour;
 
 
 public class FactoryArtifact implements IArtifactAPI {
@@ -44,7 +49,7 @@ private int Leggings;    //4096
 
 private int Belt;        //8192
 
-private final IArtifactComponent baseDamage = new ComponentNormalDamage();
+private final IArtifactComp baseDamage = new CNormDamage();
 private ArrayList<String> nbtkeys = new ArrayList<String>();
 
 //private int allHelms = 0;
@@ -58,152 +63,152 @@ public FactoryArtifact() {
 
 	ComponentNull nullComponent = new ComponentNull();
 	if(config.get("Effects", "Healing", true).getBoolean(true)) {
-		registerComponent(new ComponentHeal());
+		registerComponent(new CHeal());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "ExtraDamage", true).getBoolean(true)) {
-		registerComponent(new ComponentDamage());
+		registerComponent(new CDamage());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Fireballs", true).getBoolean(true)) {
-		registerComponent(new ComponentFireball());
+		registerComponent(new CFireBall());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Harvesting", true).getBoolean(true)) {
-		registerComponent(new ComponentHarvesting());
+		registerComponent(new CHarvest());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Lightning", true).getBoolean(true)) {
-		registerComponent(new ComponentLightning());
+		registerComponent(new CLighting());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Mining", true).getBoolean(true)) {
-		registerComponent(new ComponentMining());
+		registerComponent(new CMining());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Exploding", true).getBoolean(true)) {
-		registerComponent(new ComponentExplosive());
+		registerComponent(new CExplosive());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Illumination", true).getBoolean(true)) {
-		registerComponent(new ComponentLight());
+		registerComponent(new CLight());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Value", true).getBoolean(true)) {
-		registerComponent(new ComponentCashout());
+		registerComponent(new CCashout());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Resistance", true).getBoolean(true)) { //#10
-		registerComponent(new ComponentResistance());
+		registerComponent(new CResistance());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "JumpBoost", true).getBoolean(true)) {
-		registerComponent(new ComponentJumping());
+		registerComponent(new CJumping());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "NightVision", true).getBoolean(true)) {
-		registerComponent(new ComponentVision());
+		registerComponent(new CVision());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "WaterBreathing", true).getBoolean(true)) {
-		registerComponent(new ComponentBreathing());
+		registerComponent(new CBreathing());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "FoodSaturation", true).getBoolean(true)) {
-		registerComponent(new ComponentFoodie());
+		registerComponent(new CFoodie());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "MoveSpeed", true).getBoolean(true)) {
-		registerComponent(new ComponentSpeed());
+		registerComponent(new CSpeed());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "MaxHealth", true).getBoolean(true)) {
-		registerComponent(new ComponentHealth());
+		registerComponent(new CHealth());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "ToolRepair", true).getBoolean(true)) {
-		registerComponent(new ComponentRepair());
+		registerComponent(new CRepair());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "MassWeb", true).getBoolean(true)) {
-		registerComponent(new ComponentMassWeb());
+		registerComponent(new CMassWeb());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "AirWalking", true).getBoolean(true)) {
-		registerComponent(new ComponentAirWalk());
+		registerComponent(new CAirwalk());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Excavation", true).getBoolean(true)) { //#20
-		registerComponent(new ComponentExcavation());
+		registerComponent(new CExcavation());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "KnockbackResist", true).getBoolean(true)) {
-		registerComponent(new ComponentKnockbackResist());
+		registerComponent(new CKnockbackResist());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Resurrection", true).getBoolean(true)) {
-		registerComponent(new ComponentResurrect());
+		registerComponent(new CResurect());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "OreFinder", true).getBoolean(true)) {
-		registerComponent(new ComponentOreRadar());
+		registerComponent(new COreRadar());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "FirstAidKit", true).getBoolean(true)) {
-		registerComponent(new ComponentMedkit());
+		registerComponent(new CMedKit());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "AdrenalinePump", true).getBoolean(true)) {
-		registerComponent(new ComponentAdrenaline());
+		registerComponent(new CAdrenaline());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "RepairOther", true).getBoolean(true)) {
-		registerComponent(new ComponentRepairOther());
+		registerComponent(new CRepairOther());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "ExplodingArrows", true).getBoolean(true)) {
-		registerComponent(new ComponentExplodingArrows());
+		registerComponent(new CExplodeArrow());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Obscurity", true).getBoolean(true)) {
-		registerComponent(new ComponentObscurity());
+		registerComponent(new CObscurity());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "Baking", true).getBoolean(true)) {
-		registerComponent(new ComponentBaking());
+		registerComponent(new CBaking());
 	}else {
 		registerComponent(nullComponent);
 	}
 	if(config.get("Effects", "MusicPlayer", true).getBoolean(true)) { //#30
-		registerComponent(new ComponentMusicPlayer());
+		registerComponent(new CMusicPlayer());
 	}
 	else {
 		registerComponent(nullComponent);
@@ -213,7 +218,7 @@ public FactoryArtifact() {
 
 @Override
 public IArtifactComp getComponent(int componentID) {
-	IArtifactComponent eff = (IArtifactComponent)effects.get(componentID);
+	IArtifactComp eff = (IArtifactComp)effects.get(componentID);
 	if(eff == null) {
 		if(componentID <= 0) {
 			Thread.dumpStack();
@@ -225,12 +230,12 @@ public IArtifactComp getComponent(int componentID) {
 
 @Override
 public ItemStack generateRandomArtifact() {
-	ItemStack artifact = new ItemStack(ItemArtifact.instance, 1, 0);
+	ItemStack artifact = new ItemStack(Artifact.instance, 1, 0);
 	return applyRandomEffects(artifact);
 }
 
 @Override
-public void registerComponent(IArtifactComponent component) {
+public void registerComponent(IArtifactComp component) {
 	effects.put(effects.size()+1, component);
 }
 
@@ -256,13 +261,13 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 	Helm = 1;
 	Leggings = 1;
 	Belt = 1;
-	if(artifact.getItem() instanceof ItemArtifactArmor) {
+	if(artifact.getItem() instanceof ArtifactArmour) {
 		return applyRandomArmorEffects(artifact);
 	}
 	int flags,effID;
 	String artiName = "";
 	Vector effectsOnItem = new Vector();
-	IArtifactComponent c;
+	IArtifactComp c;
 	int count = 0, a[];
 	int numEff = rand.nextInt(5)+1;
 	a = new int[numEff];
@@ -273,7 +278,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 			c = getComponent(effID);
 			//System.out.println("Adding effect #" + effID + (c == null?" (disabled)":""));
 		} while(c == null);
-		if(c instanceof ComponentRepair && a.length < 3) {
+		if(c instanceof CRepair && a.length < 3) {
 			numEff++;
 			int[]b = a.clone();
 			a = new int[numEff];
@@ -408,45 +413,45 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 		r = rand.nextInt(t);
 		if((r -= Amulet) <= 0) {
 			iconType = "Amulet";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberAmulets;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberAmulets;
 		}
 		else if((r -= Dagger) <= 0) {
 			iconType = "Dagger";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberDaggers;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberDaggers;
 			if(!effectsOnItem.contains(2)) {
 				artifact = baseDamage.attached(artifact, rand, a);
 			}
 		}
 		else if((r -= Figurine) <= 0) {
 			iconType = "Figurine";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberFigurines;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberFigurines;
 		}
 		else if((r -= Ring) <= 0) {
 			iconType = "Ring";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberRings;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberRings;
 		}
 		else if((r -= Staff) <= 0) {
 			iconType = "Staff";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberStaffs;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberStaffs;
 		}
 		else if((r -= Sword) <= 0) {
 			iconType = "Sword";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberSwords;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberSwords;
 			if(!effectsOnItem.contains(2)) {
 				artifact = baseDamage.attached(artifact, rand, a);
 			}
 		}
 		else if((r -= Trinket) <= 0) {
 			iconType = "Trinket";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberTrinkets;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberTrinkets;
 		}
 		else if((r -= Wand) <= 0) {
 			iconType = "Wand";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberWands;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberWands;
 		}
 		else if((r -= Belt) <= 0) {
 			iconType = "Belt";
-			t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberBelts;
+			t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberBelts;
 		}
 		else {
 			iconType = "Artifact";
@@ -491,7 +496,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 	artifact.stackTagCompound.setString("matName", matName);
 	if(effectsOnItem.size() > 1) {
 		r2 = rand.nextInt(effectsOnItem.size());
-		c = (IArtifactComponent) effectsOnItem.get(r2);
+		c = (IArtifactComp) effectsOnItem.get(r2);
 		//System.out.println("Pre: " + c.getPreAdj(rand));
 		nameChunk = c.getPreAdj(rand);
 		artifact.stackTagCompound.setString("preadj", nameChunk);
@@ -500,7 +505,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 		do {
 			r3 = rand.nextInt(effectsOnItem.size());
 		} while(r2 == r3);
-		c = (IArtifactComponent) effectsOnItem.get(r3);
+		c = (IArtifactComp) effectsOnItem.get(r3);
 		nameChunk = c.getPostAdj(rand);
 		artifact.stackTagCompound.setString("postadj", nameChunk);
 		artiName += " " + nameChunk;
@@ -509,7 +514,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 		//System.out.println("Singular");
 		if(rand.nextBoolean()) {
 			r2 = rand.nextInt(effectsOnItem.size());
-			c = (IArtifactComponent) effectsOnItem.get(r2);
+			c = (IArtifactComp) effectsOnItem.get(r2);
 			nameChunk = c.getPreAdj(rand);
 			artifact.stackTagCompound.setString("preadj", nameChunk);
 			artifact.stackTagCompound.setString("postadj", "");
@@ -517,7 +522,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 		}
 		else {
 			r3 = rand.nextInt(effectsOnItem.size());
-			c = (IArtifactComponent) effectsOnItem.get(r3);
+			c = (IArtifactComp) effectsOnItem.get(r3);
 			nameChunk = c.getPostAdj(rand);
 			artifact.stackTagCompound.setString("preadj", "");
 			artifact.stackTagCompound.setString("postadj", nameChunk);
@@ -527,7 +532,7 @@ public ItemStack applyRandomEffects(ItemStack artifact) {
 	r = rand.nextInt(t);
 	artifact.stackTagCompound.setString("name", artiName);
 	artifact.stackTagCompound.setString("icon", iconType+(r+1));
-	int col = Color.HSBtoRGB((float)(rand.nextInt(360) / 360F), .8f, 1);
+	int col = Color.HSBtoRGB(rand.nextInt(360) / 360F, .8f, 1);
 	artifact.stackTagCompound.setLong("overlay_color", col);
 	artiName = "";
 	artifact.stackTagCompound.setInteger("material", r4);
@@ -549,7 +554,7 @@ private ItemStack applyRandomArmorEffects(ItemStack artifact) {
 	int flags,effID;
 	String artiName = "";
 	Vector effectsOnItem = new Vector();
-	IArtifactComponent c;
+	IArtifactComp c;
 	int count = 0, a[];
 	int numEff = rand.nextInt(3)+1;
 	a = new int[numEff];
@@ -680,19 +685,19 @@ private ItemStack applyRandomArmorEffects(ItemStack artifact) {
 	//System.out.println("r: " + r);
 	if((r -= Boots) <= 0) {
 		iconType = "Boots";
-		t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberBoots;
+		t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberBoots;
 		artifact.stackTagCompound.setInteger("armorType", 3);
 		//allBoots++;
 	}
 	else if((r -= Chestplate) <= 0) {
 		iconType = "Chestplate";
-		t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberChestplates;
+		t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberChestplates;
 		artifact.stackTagCompound.setInteger("armorType", 1);
 		//allChest++;
 	}
 	else if((r -= Helm) <= 0) {
 		iconType = "Helm";
-		t = ((FactoryItemIcons)(ArtifactsAPI.itemicons)).numberHelms;
+		t = ((FactoryItemIcons)(ArtifactAPI.itemicons)).numberHelms;
 		artifact.stackTagCompound.setInteger("armorType", 0);
 		//allHelms++;
 	}
@@ -777,7 +782,7 @@ private ItemStack applyRandomArmorEffects(ItemStack artifact) {
 	r = rand.nextInt(t);
 	artifact.stackTagCompound.setString("name", artiName);
 	artifact.stackTagCompound.setString("icon", iconType+(r+1));
-	int col = Color.HSBtoRGB((float)(rand.nextInt(360) / 360F), .8f, 1);
+	int col = Color.HSBtoRGB(rand.nextInt(360) / 360F, .8f, 1);
 	artifact.stackTagCompound.setLong("overlay_color", col);
 	artiName = "";
 	artifact.stackTagCompound.setInteger("material", r4);
@@ -905,8 +910,8 @@ private ItemStack enchantArtifactArmor(ItemStack artifact, Vector effectsOnItem,
 	if(stack.stackTagCompound != null) {
 		artifact.stackTagCompound.setTag("ench", stack.stackTagCompound.getTag("ench").copy());
 		NBTTagList tags = artifact.getEnchantmentTagList();
-		int firstID = ((NBTTagCompound)tags.getCompoundTagAt(0)).getShort("id");
-		String enchName = Enchantment.enchantmentsList[firstID].getName();;
+		int firstID = tags.getCompoundTagAt(0).getShort("id");
+		String enchName = Enchantment.enchantmentsList[firstID].getName();
 			/*switch(firstID) {
 				case 0:
 					enchName = "Protecting ";
@@ -977,7 +982,7 @@ public NBTTagCompound createDefault()
 	nbt.setInteger("material",0);
 	nbt.setString("name", "Blank Artifact");
 	nbt.setString("icon", "Artifact");
-	int col = Color.HSBtoRGB((float)(rand.nextInt(360) / 360F), .8f, 1);
+	int col = Color.HSBtoRGB(rand.nextInt(360) / 360F, .8f, 1);
 	nbt.setLong("overlay_color", col);
 	nbt.setIntArray("allComponents", new int[] {0,0,0,0,0});
 	//does setting the name fix repair costs to some value?
@@ -1046,7 +1051,7 @@ private ItemStack enchantArtifact(ItemStack artifact, Vector effectsOnItem, bool
 	if(stack.stackTagCompound != null) {
 		artifact.stackTagCompound.setTag("ench", stack.stackTagCompound.getTag("ench").copy());
 		NBTTagList tags = artifact.getEnchantmentTagList();
-		int firstID = ((NBTTagCompound)tags.getCompoundTagAt(0)).getShort("id");
+		int firstID = tags.getCompoundTagAt(0).getShort("id");
 		String enchName = Enchantment.enchantmentsList[firstID].getName();
 		//System.out.println("Enchanted with: " + firstID + ":" + enchName);
 			/*switch(firstID) {

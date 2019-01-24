@@ -64,7 +64,7 @@ public static Item[] diamondArray;// = {hdiamond, cdiamond, ldiamond, bdiamond};
 public ArtifactArmour(ItemArmor.ArmorMaterial armorMaterial, int renderID, int iconNum, int damageIndex) {
 	super(armorMaterial, renderID, damageIndex);
 	iconn = iconNum;
-	this.setCreativeTab(DragonArtifacts.tabArtifacts);
+	this.setCreativeTab(tab);
 	this.setHasSubtypes(true);
 	this.setMaxDamage(armorMaterial.getDurability(damageIndex)*2);
 }
@@ -558,9 +558,7 @@ public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
 			mat = 2;
 		if(mat == 0)
 			mat = 5;
-		if(dam == mat)
-			return true;
-		return false;
+		return dam == mat;
 	}
 	else {
 		return false;

@@ -1,9 +1,6 @@
-package artifreload.api.trap.internal;
+package artifreload.api.main.trap.internal;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 
 
 public interface ITrapBlockSource extends IBlockSource {

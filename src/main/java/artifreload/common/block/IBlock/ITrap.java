@@ -1,41 +1,15 @@
 package artifreload.common.block.IBlock;
 
 
-import java.util.List;
-import java.util.Random;
-
 import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityDispenser;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import artifreload.api.trap.IBehaviorITrap;
-import artifreload.common.DragonArtifacts;
-import artifreload.common.block.EBlock.TEPedestal;
 import artifreload.common.block.EBlock.TETrap;
 import artifreload.common.block.baseBlock.ClassAbstract.BlockTileEntity;
-import artifreload.common.trap.behavior.PositionImpl;
-import artifreload.common.trap.registry.IRegistry;
-import artifreload.common.trap.registry.RegistryDefaulted;
 
 
 public class ITrap extends BlockTileEntity<TETrap> {

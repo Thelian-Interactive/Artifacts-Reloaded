@@ -1,18 +1,11 @@
 package artifreload.common.block.IBlock;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 //forge
 
 //artifacts
-import artifreload.api.ArtifactAPI;
-import artifreload.common.entity.TESword;
-import artifreload.common.item.FakeSword;
 
 
 public class ISword extends BlockContainer {

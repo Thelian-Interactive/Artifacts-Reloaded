@@ -1,10 +1,9 @@
-package artifreload.api.trap;
+package artifreload.api.main.trap;
 
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.item.ItemStack;
 
-import artifreload.api.trap.internal.ITrapBehaviorProvider;
-import artifreload.api.trap.internal.ITrapBlockSource;
+import artifreload.api.main.trap.internal.ITrapBehaviorProvider;
 
 
 public interface IBehaviorITrap {

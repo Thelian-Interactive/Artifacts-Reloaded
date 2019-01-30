@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import artifreload.api.interfaces.IArtifactComp;
+import artifreload.api.main.interfaces.IArtifactComp;
 
 //Base component class with all the defaults, which other components can extend
 public abstract class BaseComponent implements IArtifactComp {

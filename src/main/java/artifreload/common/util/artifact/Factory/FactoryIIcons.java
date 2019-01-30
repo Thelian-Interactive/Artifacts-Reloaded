@@ -5,10 +5,8 @@ import java.util.HashMap;
 
 import net.minecraft.item.ItemArmor;
 
-import artifreload.api.IItemIconAPI;
 
-
-public class FactoryIIcons implements IItemIconAPI {
+public class FactoryIIcons {
 
 public int numberAmulets = 0;
 public int numberDaggers = 0;

@@ -20,9 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import artifreload.api.ArtifactAPI;
-import artifreload.api.interfaces.IArtifactComp;
-import artifreload.common.DragonArtifacts;
+import artifreload.api.main.interfaces.IArtifactComp;
 import artifreload.common.components.effects.CBreathing;
 import com.google.common.collect.Multimap;
 

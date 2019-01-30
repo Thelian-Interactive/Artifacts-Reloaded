@@ -1,4 +1,4 @@
-package artifreload.api.interfaces;
+package artifreload.api.main.interfaces;
 
 
 import java.util.List;
@@ -8,14 +8,9 @@ import net.minecraft.block.Block;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import net.minecraftforge.event.entity.living.LivingDeathEvent;

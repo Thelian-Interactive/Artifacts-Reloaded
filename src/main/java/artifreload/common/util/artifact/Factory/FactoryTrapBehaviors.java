@@ -2,8 +2,8 @@ package artifreload.common.util.artifact.Factory;
 
 import net.minecraft.item.Item;
 
-import artifreload.api.trap.IBehaviorITrap;
-import artifreload.api.trap.ITrapAPI;
+import artifreload.api.main.trap.IBehaviorITrap;
+import artifreload.api.main.trap.ITrapAPI;
 import artifreload.common.block.IBlock.ITrap;
 
 

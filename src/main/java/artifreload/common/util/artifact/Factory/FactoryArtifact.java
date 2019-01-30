@@ -18,9 +18,8 @@ import net.minecraft.nbt.NBTTagList;
 
 import net.minecraftforge.common.config.Configuration;
 
-import artifreload.api.ArtifactAPI;
-import artifreload.api.IArtifactAPI;
-import artifreload.api.interfaces.IArtifactComp;
+import artifreload.api.main.interfaces.IArtifactAPI;
+import artifreload.api.main.interfaces.IArtifactComp;
 import artifreload.common.components.ComponentNull;
 import artifreload.common.components.effects.*;
 import artifreload.common.item.Artifact;

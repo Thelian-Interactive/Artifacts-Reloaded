@@ -1,4 +1,4 @@
-package artifreload.api.trap;
+package artifreload.api.main.trap;
 
 import net.minecraft.item.Item;
 

@@ -1,4 +1,4 @@
-package artifreload.api;
+package artifreload.api.main.interfaces;
 
 
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import artifreload.api.interfaces.IArtifactComp;
+import artifreload.api.main.interfaces.IArtifactComp;
 
 
 public interface IArtifactAPI {

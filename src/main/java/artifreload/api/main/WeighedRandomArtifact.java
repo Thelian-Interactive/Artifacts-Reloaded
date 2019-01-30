@@ -1,4 +1,4 @@
-package artifreload.api;
+package artifreload.api.main;
 
 
 import java.util.Random;

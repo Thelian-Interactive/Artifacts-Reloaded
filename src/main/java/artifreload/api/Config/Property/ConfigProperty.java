@@ -3,7 +3,7 @@ package artifreload.api.Config.Property;
 import net.minecraftforge.common.config.Configuration;
 
 
-public class ConfigProperty {
+public abstract class ConfigProperty {
 
 
 public Type type;
@@ -28,8 +28,11 @@ public void formatDescription() {
 
 public enum Type {
 	INTEGER,
+	INTEGER_ARRAY,
 	FLOAT,
+	DOUBLE_ARRAY,
 	BOOLEAN,
-	STRING
+	STRING,
+	STRING_ARRAY
 }
 }

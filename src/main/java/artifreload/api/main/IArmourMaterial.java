@@ -1,4 +1,4 @@
-package artifreload.api;
+package artifreload.api.main;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor.ArmorMaterial;

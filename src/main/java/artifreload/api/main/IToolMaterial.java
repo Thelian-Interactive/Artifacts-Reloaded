@@ -1,4 +1,4 @@
-package artifreload.api;
+package artifreload.api.main;
 
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;

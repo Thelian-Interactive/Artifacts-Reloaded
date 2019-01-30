@@ -20,7 +20,7 @@ import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.common.ISpecialArmor;
 
-import artifreload.api.IArmourMaterial;
+import artifreload.api.main.IArmourMaterial;
 import artifreload.common.DragonArtifacts;
 import artifreload.common.util.artifact.ModInfo;
 import com.google.common.collect.Multimap;
